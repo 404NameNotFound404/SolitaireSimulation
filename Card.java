@@ -1,3 +1,5 @@
+package SolitaireSimulation;
+
 /**
  * 
  * @author mnguyen001
@@ -95,6 +97,7 @@ public class Card {
 		}
 
 		description += " " + rank[this.getValue()];
+		return description;
 	}
 	
 }
