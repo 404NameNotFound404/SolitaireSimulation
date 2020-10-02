@@ -20,8 +20,8 @@ public class CardCollectionTest {
 	public void testOverloadConstructor() {
 		Stack<Card> s = new Stack<Card>();
 		
-		CardCollection c = new CardCollection(s,4);
-		assertEquals(4, c.getSize());
+		CardCollection c = new CardCollection(s);
+		assertEquals(0, c.getSize());
 		
 	}
 	
@@ -29,7 +29,7 @@ public class CardCollectionTest {
 	public void testSetCardStack() {
 		Stack<Card> olds = new Stack<Card>();
 		Stack<Card> news = new Stack<Card>();
-		CardCollection c = new CardCollection(olds,4);
+		CardCollection c = new CardCollection(olds);
 		c.setCardStack(news);
 		
 		assertEquals(news, c.getCardStack());
@@ -38,14 +38,14 @@ public class CardCollectionTest {
 	@Test
 	public void testGetCardStack() {
 		Stack<Card> s = new Stack<Card>();
-		CardCollection c = new CardCollection(s,0);
+		CardCollection c = new CardCollection(s);
 		assertEquals(s, c.getCardStack());
 		
 	}
 	@Test
 	public void testFlipTopCard() {
 		Stack<Card> s = new Stack<Card>();
-		CardCollection c = new CardCollection(s,4);
+		CardCollection c = new CardCollection(s);
 		Card card = new Card(2,4);
 		c.addToStack(card);
 		c.flipTopCard();
@@ -54,22 +54,18 @@ public class CardCollectionTest {
 	}
 	@Test
 	public void testIsStackEmpty() {
-		CardCollection c = new CardCollection();
-		assertTrue(c.isStackEmpty());
-		
-		Stack<Card> s1 = new Stack<Card>();
-		CardCollection c1 = new CardCollection(s1,0);
+		CardCollection c1 = new CardCollection();
 		assertTrue(c1.isStackEmpty());
 				
 		Stack<Card> s2 = new Stack<Card>();
-		CardCollection c2 = new CardCollection(s2,4);		
-		assertFalse(c2.isStackEmpty());
+		CardCollection c2 = new CardCollection(s2);		
+		assertTrue(c2.isStackEmpty());
 		
 	}
 	@Test
 	public void testGetSize() {
 		Stack<Card> s = new Stack<Card>();
-		CardCollection c = new CardCollection(s,0);
+		CardCollection c = new CardCollection(s);
 		CardCollection c1 = new CardCollection();
 		assertTrue(c.isStackEmpty());
 		assertTrue(c1.isStackEmpty());
@@ -79,10 +75,10 @@ public class CardCollectionTest {
 	@Test
 	public void testAddToStack() {
 		Stack<Card> s = new Stack<Card>();
-		CardCollection c = new CardCollection(s,4);
+		CardCollection c = new CardCollection(s);
 		Card card = new Card(1,2);
 		c.addToStack(card);
-		assertEquals(5,c.getSize());
+		assertEquals(1,c.getSize());
 	
 		
 	}

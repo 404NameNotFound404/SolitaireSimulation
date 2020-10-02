@@ -15,9 +15,9 @@ public class CardCollection {
         cards = new Stack<Card>();
     }
 
-    public CardCollection(Stack<Card> s, int size){
+    public CardCollection(Stack<Card> s){
         cards = s;
-        s.setSize(size);
+    
     }
 	
     /**
