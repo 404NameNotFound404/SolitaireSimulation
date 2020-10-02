@@ -3,16 +3,18 @@
  * @author katmendy
  *
  */
+import java.util.*;
+
 public class CardCollection {
 
 	private Stack<Card> cards;
 
     public CardCollection(){
-        s = new Stack<Card>();
+        cards = new Stack<Card>();
     }
 
-    public CardCollection(int size){
-        s = new Stack<Card>(size);
+    public CardCollection(Stack<Card> s, int size){
+        cards = s;
     }
 	
     /**
@@ -47,8 +49,12 @@ public class CardCollection {
     /**
      * @return size of the collection
 	 */
-    public boolean getSize(){
+    public int getSize(){
         return cards.size();
+    }
+
+    public void addToStack(Card c) {
+        cards.push(c);
     }
 
 }
