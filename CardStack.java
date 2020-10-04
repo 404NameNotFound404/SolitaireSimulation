@@ -26,11 +26,14 @@ public class CardStack extends CardCollection
 		}
 		return reslut;
 	}
-	
+
+	/*
 	public void addToStack(Card c)
 	{
 		super.cards.push(c);
 	}
+	*/
+	
 	
 	public void removeTopCard()
 	{
