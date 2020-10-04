@@ -21,36 +21,45 @@ public class CardStack extends CardCollection
 	
 	public boolean checkOrder()
 	{
-		boolean result = true;
+		boolean result = false;
 		int i = 1;
 		int j = 0;
-		while((super.getCards().elementAt(i)).isFaceUp() && (super.getCards().elementAt(j).isFaceUp()))
+		if(i <= super.getCards().size())
 		{
-			Card card1 = super.getCards().elementAt(i);
-			Card card2 = super.getCards().elementAt(j);
-			int value1 = card1.getValue();
-			int value2 = card2.getValue();
-			if (value1 < value2)
+			Stack<Card> cards = super.getCards();
+			Card cardOne = cards.elementAt(i);
+			Card cardTwo = cards.elementAt(j);
+			if(cardOne.isFaceUp() && cardTwo.isFaceUp())
 			{
-				result = false;
-				i++;
-				j++;
+				Card card1 = super.getCards().elementAt(i);
+				Card card2 = super.getCards().elementAt(j);
+				int value1 = card1.getValue();
+				int value2 = card2.getValue();
+				if (value1 < value2)
+				{
+					result = true;
+				}
 			}
+			i++;
+			j++;
 		}
 		return result;
 	}
 
-/*
+
 	public void addToStack(Card c)
 	{
-		super.getCards().push(c);
+		Stack<Card> cards = super.getCards();
+		cards.push(c);
+		super.setCards(cards);
 	}
-*/
 	
 	
 	public void removeTopCard()
 	{
-		super.getCards().pop();
+		Stack<Card> cards = super.getCards();
+		cards.pop();
+		super.setCards(cards);	
 	}
 	
 }
