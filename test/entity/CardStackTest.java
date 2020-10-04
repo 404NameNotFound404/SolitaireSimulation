@@ -1,4 +1,4 @@
-package SolitaireSimulation;
+package entity;
 
 import static org.junit.Assert.*;
 

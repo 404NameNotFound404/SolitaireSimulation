@@ -1,8 +1,8 @@
-package SolitaireSimulation;
+package entity;
 
 /**
  * 
- * @author katmendy
+ * @author katmendy 
  *
  */
 import java.util.*;
