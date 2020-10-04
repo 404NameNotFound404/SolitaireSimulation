@@ -10,7 +10,7 @@ public class Card {
 	private final static int heart = 0;
 	private final static int diamond = 1;
 	private final static int club = 2;
-	private static int spade = 3;
+	private final static int spade = 3;
 	
 	private static String rank[] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 	private int suit;
