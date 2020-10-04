@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.Stack;
+
 /*
  * 
  * @Author Nathan Drees
@@ -7,37 +9,48 @@ package entity;
  */
 public class CardStack extends CardCollection
 {
-	super();
-	super(Stack<Card> s);
+	public CardStack()
+	{
+		super();
+	}
 	
-	public boolean CheckOrder()
+	public CardStack(Stack<Card> s)
+	{
+		super(s);
+	}
+	
+	public boolean checkOrder()
 	{
 		boolean result = true;
 		int i = 1;
 		int j = 0;
-		while((super.cards.elementAt(i)).isFaceUp())
+		while((super.getCards().elementAt(i)).isFaceUp() && (super.getCards().elementAt(j).isFaceUp()))
 		{
-			if ((super.cards.elementAt(i)).getValue() < (super.cards.elementAt(j)).getValue())
+			Card card1 = super.getCards().elementAt(i);
+			Card card2 = super.getCards().elementAt(j);
+			int value1 = card1.getValue();
+			int value2 = card2.getValue();
+			if (value1 < value2)
 			{
-				results = false;
+				result = false;
 				i++;
 				j++;
 			}
 		}
-		return reslut;
+		return result;
 	}
 
-	/*
+/*
 	public void addToStack(Card c)
 	{
-		super.cards.push(c);
+		super.getCards().push(c);
 	}
-	*/
+*/
 	
 	
 	public void removeTopCard()
 	{
-		super.cards.pop();
+		super.getCards().pop();
 	}
 	
 }

@@ -12,11 +12,11 @@ public class CardCollection {
 	private Stack<Card> cards;
 
     public CardCollection(){
-        cards = new Stack<Card>();
+        setCards(new Stack<Card>());
     }
 
     public CardCollection(Stack<Card> s){
-        cards = s;
+        setCards(s);
     
     }
 	
@@ -24,21 +24,21 @@ public class CardCollection {
 	 * @param e collection of cards to put into instance variable
 	 */
     public void setCardStack(Stack<Card> e){
-        this.cards = e;
+        this.setCards(e);
     }
 
     /**
 	 * @return collection of cards
 	 */
     public Stack<Card> getCardStack(){
-        return cards;
+        return getCards();
     }
 
     /**
 	 * Flip the top card in the stack
 	 */
     public void flipTopCard(){
-        cards.peek().flip();
+        getCards().peek().flip();
     }
 
     /**
@@ -46,18 +46,26 @@ public class CardCollection {
      * @return true if the stack is empty
 	 */
     public boolean isStackEmpty(){
-        return cards.isEmpty();
+        return getCards().isEmpty();
     }
 
     /**
      * @return size of the collection
 	 */
     public int getSize(){
-        return cards.size();
+        return getCards().size();
     }
 
     public void addToStack(Card c) {
-        cards.push(c);
+        getCards().push(c);
     }
+
+	public Stack<Card> getCards() {
+		return cards;
+	}
+
+	public void setCards(Stack<Card> cards) {
+		this.cards = cards;
+	}
 
 }
