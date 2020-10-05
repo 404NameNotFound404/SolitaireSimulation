@@ -20,7 +20,7 @@ public class DeckTest {
 		boolean match = false;
 		for (int i = 0; i <= 51; i++) {
 			for (int j = 0; j <= 51; j++) {
-				if (testDeck.cards.get(i).equals(testDeck.cards.get(j)) && !(j == i)) {
+				if (testDeck.getCardStack().get(i).equals(testDeck.getCardStack().get(j)) && !(j == i)) {
 					match = true;
 				}
 			}

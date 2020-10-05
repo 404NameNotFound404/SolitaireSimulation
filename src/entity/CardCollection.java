@@ -9,7 +9,7 @@ import java.util.*;
 
 public class CardCollection {
 
-	protected Stack<Card> cards;
+	private Stack<Card> cards;
 
     public CardCollection(){
         setCards(new Stack<Card>());
