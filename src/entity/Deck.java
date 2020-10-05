@@ -2,6 +2,7 @@ package entity;
 
 import java.util.Stack;
 import java.util.Collections;
+import java.util.Random;
 
 public class Deck extends CardCollection{
 	
@@ -23,11 +24,19 @@ public class Deck extends CardCollection{
 	}
 	
 	public Card drawCard() {
-		return this.cards.pop();
+		return this.getCardStack().pop();
 	}
 	
 	public void shuffleDeck() {
-		Collections.shuffle(this.cards);
+		Stack<Card> deck = this.getCardStack();
+        int numCards = deck.size();
+        Random random = new Random();
+        for (int i = 0; i < numCards; i++) {
+            int randomIndex = i + random.nextInt(numCards - i);
+            Card randomElement = deck.get(randomIndex);
+            deck.set(randomIndex, deck.get(i));
+            deck.set(i, randomElement);
+        }
 	}
 	
 }
