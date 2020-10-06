@@ -29,7 +29,18 @@ public class CardTest {
 		assertEquals(1, c1.compareTo(c6));
 	}
 	
-
+	@Test
+	public void testIsRed() {
+		Card testCard0 = new Card(0,1);
+		Card testCard1 = new Card(1,1);
+		Card testCard2 = new Card(2,1);
+		Card testCard3 = new Card(3,1);
+		
+		assertTrue(testCard0.isRed());
+		assertTrue(testCard1.isRed());
+		assertFalse(testCard2.isRed());
+		assertFalse(testCard3.isRed());
+	}
 	
 	@Test
 	public void testFlip() {
