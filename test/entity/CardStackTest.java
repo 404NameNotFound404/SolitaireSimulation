@@ -1,14 +1,14 @@
 package entity;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class CardStackTest 
+public class CardStackTest 
 {
 
 	@Test
-	void testCheckOrder() 
+	public void testCheckOrder() 
 	{
 		CardStack inOrder = new CardStack();
 		Card one = new Card(0,0);
@@ -26,7 +26,7 @@ class CardStackTest
 		assertTrue(inOrder.checkOrder());
 	}
 	@Test
-	void testCheckOrderFail() 
+	public void testCheckOrderFail() 
 	{
 		CardStack inOrder = new CardStack();
 		CardStack outOfOrder = new CardStack();
@@ -59,7 +59,7 @@ class CardStackTest
 		assertFalse(faceDown.checkOrder());
 	}
 	@Test
-	void testremoveTopCard() 
+	public void testremoveTopCard() 
 	{
 		CardStack inOrder = new CardStack();
 		Card one = new Card(0,0);
