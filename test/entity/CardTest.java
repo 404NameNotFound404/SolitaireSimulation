@@ -22,11 +22,11 @@ public class CardTest {
 		Card c5 = new Card(0,2);
 		Card c6 = new Card(0,1);
 		
-		assertEquals(-1, c1.compareTo(c2));
+		assertEquals(0, c1.compareTo(c2));
 		assertEquals(1,  c1.compareTo(c6));
-		assertEquals(-1, c1.compareTo(c1));
-		assertEquals(-1, c1.compareTo(c5));
-		assertEquals(-1, c1.compareTo(c6));
+		assertEquals(1, c1.compareTo(c3));
+		assertEquals(0, c1.compareTo(c5));
+		assertEquals(1, c1.compareTo(c6));
 	}
 	
 

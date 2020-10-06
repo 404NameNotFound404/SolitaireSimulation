@@ -26,17 +26,11 @@ public class Card {
 	/**
 	 * Compare two cards method
 	 * @param c the card compared to
-	 * @return -1 if this card is wrong suit or bigger than the card
-	 * compared to. Return 0 if the card is same suit and smaller.
+	 * @return the difference of  the card
 	 * 
 	 */
 	public int compareTo(Card c) {
-		if(this.suit == c.getSuit()) {
-			if (this.value < c.getValue()) {
-				return 0;
-			}
-		}
-		return -1;
+		return (this.getValue() - c.getValue());
 	}
 	/**
 	 * Flip the card

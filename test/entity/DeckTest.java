@@ -3,9 +3,26 @@ package entity;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import java.util.Random;
+import java.util.Stack;
 
 public class DeckTest {
 	
+	@Test 
+	public void testMakeDeck() {
+		Deck d = new Deck();
+		
+		Stack<Card> newDeck = new Stack<Card>();
+		for (int suit = 0; suit <= 3; suit++) {
+			for (int value = 0; value <= 12; value++) {
+				newDeck.push(new Card(suit, value));
+			}
+		}
+		
+		for(int i = 0; i < newDeck.size(); i++) {
+			assertEquals(newDeck.get(i).getValue(), d.getCardStack().get(i).getValue());
+			assertEquals(newDeck.get(i).getSuit(), d.getCardStack().get(i).getSuit());
+		}
+	}
 	
 	@Test
 	public void testIsEmpty() {
@@ -26,7 +43,7 @@ public class DeckTest {
 	@Test
 	public void testDeckSize() {
 		Deck testDeck = new Deck();
-		assertTrue(testDeck.getCardStack().size() == 52);
+		assertTrue(testDeck.getSize() == 52);
 	}
 	
 	@Test
