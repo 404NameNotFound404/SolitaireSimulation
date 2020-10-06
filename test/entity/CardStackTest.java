@@ -25,6 +25,7 @@ public class CardStackTest
 		inOrder.addToStack(one);
 		assertTrue(inOrder.checkOrder());
 	}
+	
 	@Test
 	public void testCheckOrderFail() 
 	{
@@ -58,6 +59,7 @@ public class CardStackTest
 		faceDown.addToStack(four);
 		assertFalse(faceDown.checkOrder());
 	}
+	
 	@Test
 	public void testremoveTopCard() 
 	{
@@ -77,5 +79,16 @@ public class CardStackTest
 		assertEquals(4, inOrder.getSize());
 		inOrder.removeTopCard();
 		assertEquals(3, inOrder.getSize());
+	}
+	
+	@Test
+	public void testAddToStack() 
+	{
+		CardStack stack = new CardStack();
+		assertTrue(stack.isStackEmpty());
+		Card c = new Card(0, 2);
+		stack.addToStack(c);
+		assertFalse(stack.isStackEmpty());
+		assertEquals(1, stack.getSize());
 	}
 }
