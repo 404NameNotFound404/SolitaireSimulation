@@ -52,7 +52,6 @@ public class CardStack extends CardCollection
 		super.addToStack(c);
 	}
 	
-	
 	public void removeTopCard()
 	{
 		Stack<Card> cards = super.getCards();
