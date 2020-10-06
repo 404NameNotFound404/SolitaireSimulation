@@ -45,13 +45,6 @@ public class CardStack extends CardCollection
 		}
 		return result;
 	}
-
-
-	public void addToStack(Card c)
-	{
-		super.addToStack(c);
-	}
-	
 	
 	public void removeTopCard()
 	{
