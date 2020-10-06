@@ -49,9 +49,7 @@ public class CardStack extends CardCollection
 
 	public void addToStack(Card c)
 	{
-		Stack<Card> cards = super.getCards();
-		cards.push(c);
-		super.setCards(cards);
+		super.addToStack(c);
 	}
 	
 	
