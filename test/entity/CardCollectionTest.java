@@ -62,6 +62,15 @@ public class CardCollectionTest {
 		assertTrue(c2.isStackEmpty());
 		
 	}
+	
+	@Test
+	public void testIsNotStackEmpty() {
+		CardCollection c1 = new CardCollection();
+		Card c = new Card(0, 3);
+		c1.addToStack(c);
+		assertFalse(c1.isStackEmpty());
+	}
+	
 	@Test
 	public void testGetSize() {
 		Stack<Card> s = new Stack<Card>();
