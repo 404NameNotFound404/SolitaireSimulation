@@ -48,10 +48,12 @@ public class CardCollectionTest {
 		CardCollection c = new CardCollection(s);
 		Card card = new Card(2,4);
 		c.addToStack(card);
+		assertTrue(!s.peek().isFaceUp());
 		c.flipTopCard();
 		assertTrue(s.peek().isFaceUp());
 		
 	}
+
 	@Test
 	public void testIsStackEmpty() {
 		CardCollection c1 = new CardCollection();
@@ -76,8 +78,10 @@ public class CardCollectionTest {
 		Stack<Card> s = new Stack<Card>();
 		CardCollection c = new CardCollection(s);
 		CardCollection c1 = new CardCollection();
-		assertTrue(c.isStackEmpty());
-		assertTrue(c1.isStackEmpty());
+		Card card = new Card(0, 3);
+		c.addToStack(card);
+		assertEquals(1, c.getSize());
+		assertEquals(0, c1.getSize());
 		
 	}
 	
@@ -85,6 +89,7 @@ public class CardCollectionTest {
 	public void testAddToStack() {
 		Stack<Card> s = new Stack<Card>();
 		CardCollection c = new CardCollection(s);
+		assertTrue(c.isStackEmpty());
 		Card card = new Card(1,2);
 		c.addToStack(card);
 		assertEquals(1,c.getSize());
