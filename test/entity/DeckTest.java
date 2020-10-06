@@ -7,6 +7,21 @@ import java.util.Random;
 public class DeckTest {
 	
 	
+	@Test
+	public void testIsEmpty() {
+		Deck testDeck = new Deck();
+		for (int i = 0; i < 52; i++) {
+			testDeck.drawCard();
+		}
+		assertTrue(testDeck.isStackEmpty());
+	}
+	
+	@Test
+	public void testIsEmptyForNotEmptyDeck() {
+		Deck testDeck = new Deck();
+		assertFalse(testDeck.isStackEmpty());
+	}
+	
 	
 	@Test
 	public void testDeckSize() {
@@ -19,7 +34,7 @@ public class DeckTest {
 		Deck testDeck = new Deck();
 		boolean match = false;
 		for (int i = 0; i <= 51; i++) {
-			for (int j = 0; j <= 51; j++) {
+			for (int j = 0; j < 52; j++) {
 				if (testDeck.getCardStack().get(i).equals(testDeck.getCardStack().get(j)) && !(j == i)) {
 					match = true;
 				}
