@@ -56,6 +56,11 @@ public class Card {
 	public void setSuit(int suit) {
 		this.suit = suit;
 	}
+	
+	public boolean isRed() {
+		return (this.getSuit() == 0 || this.getSuit() == 1);
+	}
+	
 	/**
 	 * @return the value
 	 */
