@@ -79,6 +79,13 @@ public class Card {
 	public void setFaceUp(boolean faceUp) {
 		this.faceUp = faceUp;
 	}
+	
+	/**
+	 * @return true if the card is the same suit
+	 */
+	public boolean isSameSuit(Card c) {
+		return this.suit == c.getSuit();
+	}
 
 	public String toString() {
 		String description;

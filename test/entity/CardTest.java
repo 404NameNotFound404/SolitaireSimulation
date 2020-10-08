@@ -96,4 +96,20 @@ public class CardTest {
 		assertEquals("heart 3", c.toString());
 				
 	}
+	
+	@Test
+	public void testIsNotSameSuit() {
+		Card c1 = new Card(0,2);
+		Card c2 = new Card(0, 5);
+		assertTrue(c1.isSameSuit(c2));
+				
+	}
+	
+	@Test
+	public void testIsSameSuit() {
+		Card c1 = new Card(0,2);
+		Card c2 = new Card(1, 5);
+		assertFalse(c1.isSameSuit(c2));
+				
+	}
 }
