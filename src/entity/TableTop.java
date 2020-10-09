@@ -5,11 +5,27 @@ import java.util.Stack;
 
 public class TableTop {
 	
-	private ArrayList<CardStack> tableaus; 
+	private ArrayList<CardStack> tableaus; //change data types here to match class diagram
 	private ArrayList<CardStack> foundation;
 	private Deck deck;
 	private CardCollection talon;
 	int deckPasses = 0;
+	
+	public void getTableaus() {
+		//TODO
+	}
+	
+	public void getFoundation() {
+		//TODO
+	}
+	
+	public Deck getDrawPile() {
+		return deck;
+	}
+	
+	public CardCollection getTalon() {
+		return talon;
+	}
 	
 	public void resetDrawPile() {
 		if (deck.isStackEmpty()) {
