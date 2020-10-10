@@ -52,6 +52,10 @@ public class CardStack extends CardCollection
 		return result;
 	}
 	
+	/**
+	 * Remove the top card from the stack
+	 * @return the card it remove 
+	 */
 	public Card removeTopCard()
 	{
 		Stack<Card> cards = super.getCardStack();

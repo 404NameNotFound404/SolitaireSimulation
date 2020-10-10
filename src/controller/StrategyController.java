@@ -27,7 +27,7 @@ public class StrategyController {
 			gameBoard.generateBoard();
 
 
-			while(gameBoard.checkForWin()== false || turns == 3) {
+			while(gameBoard.checkForWin()== false || turns < 3) {
 				
 				//Check if the Deck is empty to reset the Deck
 				if (gameBoard.getDrawPile().getSize() != 0) {

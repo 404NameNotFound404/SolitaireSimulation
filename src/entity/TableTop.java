@@ -37,7 +37,9 @@ public class TableTop {
 		tableaus[index] = c;
 	}
 	
-	
+	/**
+	 * Reset the deck of card 
+	 */
 	public void resetDrawPile() { 
 		if (deck.isStackEmpty()) {
 			deck.setCards(talon.getCardStack());
@@ -53,6 +55,11 @@ public class TableTop {
 		}
 	}
 	
+	/**
+	 * Check to see if the game win
+	 * @return True if it wins
+	 * False if it lose. 
+	 */
 	public boolean checkForWin() {
 		boolean isWin = true;
 		for (CardStack cards : foundations) {

@@ -12,6 +12,10 @@ public class Deck extends CardCollection{
 		}
 		
 	
+	/**
+	 * Generate the deck of card
+	 * @return Stack<Card> deck of card 
+	 */
 	private static Stack<Card> makeDeck(){
 		Stack<Card> newDeck = new Stack<Card>();
 		for (int suit = 0; suit <= 3; suit++) {
@@ -22,12 +26,19 @@ public class Deck extends CardCollection{
 		return newDeck;	
 	}
 	
+	/**
+	 * Draw card from deck of card
+	 * @return the card it removes from the Deck 
+	 */
 	public Card drawCard() {
 		Card c = this.getCardStack().pop();
 		super.setCards(this.getCardStack());
 		return c;
 	}
 	
+	/**
+	 * Shuffle the deck of card 
+	 */
 	public void shuffleDeck() {
 		Stack<Card> deck = this.getCardStack();
         int numCards = deck.size();
