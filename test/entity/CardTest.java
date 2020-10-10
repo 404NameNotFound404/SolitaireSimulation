@@ -18,7 +18,7 @@ public class CardTest {
 		Card c1 = new Card(0,2);
 		Card c2 = new Card(1,2);
 		Card c3 = new Card(0,1);
-		Card c4 = new Card(1,3);
+		//Card c4 = new Card(1,3);
 		Card c5 = new Card(0,2);
 		Card c6 = new Card(0,1);
 		
