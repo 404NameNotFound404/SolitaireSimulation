@@ -11,6 +11,13 @@ public class TableTop {
 	private CardCollection talon;
 	int deckPasses = 0;
 	
+	public TableTop() {
+		tableaus = new CardStack[7];
+		foundations = new CardStack[4];
+		deck = new Deck();
+		talon = new CardCollection();
+	}
+	
 	public CardStack[] getTableaus() {
 		return this.tableaus;
 	}
@@ -27,9 +34,14 @@ public class TableTop {
 		return talon;
 	}
 	
-	public void resetDrawPile() {
+	public void setTableau(int index, CardStack c) {
+		tableaus[index] = c;
+	}
+	
+	
+	public void resetDrawPile() { //forgot to flip
 		if (deck.isStackEmpty()) {
-			deck.setCards(talon.getCards());
+			deck.setCards(talon.getCardStack());
 			talon.setCards(new Stack<Card>());
 			this.deckPasses += 1;
 		}
@@ -45,21 +57,29 @@ public class TableTop {
 		return isWin;
 	}
 	
-	public void setUpBoard() {
-		Deck deck = new Deck();
+	public void setFoundation(int index, CardStack c) {
+		foundations[index] = c;
+	}
+	
+	public void generateBoard() {
 		deck.shuffleDeck();
+		int count = 0;
 		
 		for (int i = 0; i < 7; i++) {
 			tableaus[i] = new CardStack();
 		}
+		
 		for (int i = 0; i < 7; i++) {
-			for (int j = i; j < 7; j++) {
+			for (int j = 0; j <= i; j++) {
+				
 				Card cardToAdd = deck.drawCard();
-				if (i == j) {
-					cardToAdd.flip();
-				}
+								
 				tableaus[i].addToStack(cardToAdd);
+				count++;
 			}
+			tableaus[i].getCardStack().peek().flip();
+			
+			//System.out.println(i);
 		}
 		
 		for (int i = 0; i < 4; i++) {
@@ -70,44 +90,90 @@ public class TableTop {
 			
 	}
 	
-	public boolean moveCardTableau() {
+//	public boolean moveCardTableau() {
+//		
+//		Card topCard = deck.getCardStack().get(0);
+//		
+//		for (int i = 0; i < 7; i++) {
+//			
+//			CardStack tableau = tableaus[i];
+//			Card tableauCard = tableau.getCardStack().get(0);
+//			if (topCard.getValue() - 1 == tableauCard.getValue() && topCard.isRed() != tableauCard.isRed()) {
+//				tableau.addToStack(deck.drawCard());
+//				return true;
+//			}
+//			else if(tableau.isStackEmpty() && topCard.getValue() == 13) {
+//				tableau.addToStack(deck.drawCard());
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+	
+	public void moveToTalon() {
+		talon.addToStack(deck.drawCard());
+		talon.flipTopCard();
 		
-		Card topCard = deck.getCards().get(0);
-		
-		for (int i = 0; i < 7; i++) {
-			
-			CardStack tableau = tableaus[i];
-			Card tableauCard = tableau.getCards().get(0);
-			if (topCard.getValue() - 1 == tableauCard.getValue() && topCard.isRed() != tableauCard.isRed()) {
-				tableau.addToStack(deck.drawCard());
-				return true;
+	}
+	
+	public void setTalon(CardStack s) {
+		talon = s;
+	}
+	
+	public boolean moveCardTableau(Card c) {
+		//check moves in tableau
+		for(CardStack s: tableaus) {
+			if(!s.isStackEmpty()) {
+				Card card = s.getCardStack().peek();
+				if(card.compareTo(c) == -1 && card.isRed() != c.isRed()) {
+					s.addToStack(talon.removeTopCard());
+					return true;
+				}
 			}
-			else if(tableau.isStackEmpty() && topCard.getValue() == 13) {
-				tableau.addToStack(deck.drawCard());
-				return true;
+			else {
+				System.out.println("STACK EMPTY");
 			}
 		}
+
 		return false;
 	}
+	
 
 	
-	public boolean moveFoundation() {
+//	public boolean moveFoundation() {
+//		
+//		Card topCard = deck.getCardStack().get(0);
+//		
+//		for (int i = 0; i < 4; i++) {
+//			
+//			CardStack foundation = foundations[i];
+//			Card foundationCard = foundation.getCardStack().get(0);
+//			if (topCard.getValue() + 1 == foundationCard.getValue() && topCard.isSameSuit(foundationCard)) {
+//				foundation.addToStack(deck.drawCard());
+//				return true;
+//			}
+//			else if(foundation.isStackEmpty() && topCard.getValue() == 0) {
+//				foundation.addToStack(deck.drawCard());
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+	
+	public boolean moveFoundation(Card c) {
+		//check moves in tableau
 		
-		Card topCard = deck.getCards().get(0);
-		
-for (int i = 0; i < 4; i++) {
-			
-			CardStack foundation = foundations[i];
-			Card foundationCard = foundation.getCards().get(0);
-			if (topCard.getValue() + 1 == foundationCard.getValue() && topCard.isSameSuit(foundationCard)) {
-				foundation.addToStack(deck.drawCard());
-				return true;
-			}
-			else if(foundation.isStackEmpty() && topCard.getValue() == 0) {
-				foundation.addToStack(deck.drawCard());
-				return true;
-			}
+		if(foundations[c.getSuit()].getCardStack().peek() == null && c.getValue() == 0) {
+			foundations[c.getSuit()].getCardStack().add(c);
+			return true;
 		}
-		return false;
+		else if(foundations[c.getSuit()].getCardStack().peek().compareTo(c) == 1) {
+			foundations[c.getSuit()].getCardStack().add(c);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
+	
 }

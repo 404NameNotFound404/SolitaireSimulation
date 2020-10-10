@@ -24,15 +24,15 @@ public class CardStack extends CardCollection
 		boolean result = false;
 		int i = 1;
 		int j = 0;
-		if(i <= super.getCards().size())
+		if(i <= super.getCardStack().size())
 		{
-			Stack<Card> cards = super.getCards();
+			Stack<Card> cards = super.getCardStack();
 			Card cardOne = cards.elementAt(i);
 			Card cardTwo = cards.elementAt(j);
 			if(cardOne.isFaceUp() && cardTwo.isFaceUp())
 			{
-				Card card1 = super.getCards().elementAt(i);
-				Card card2 = super.getCards().elementAt(j);
+				Card card1 = super.getCardStack().elementAt(i);
+				Card card2 = super.getCardStack().elementAt(j);
 				int value1 = card1.getValue();
 				int value2 = card2.getValue();
 				if (value1 < value2)
@@ -46,11 +46,13 @@ public class CardStack extends CardCollection
 		return result;
 	}
 	
-	public void removeTopCard()
+	public Card removeTopCard()
 	{
-		Stack<Card> cards = super.getCards();
-		cards.pop();
-		super.setCards(cards);	
+		Stack<Card> cards = super.getCardStack();
+		Card c = cards.pop();
+		super.setCards(cards);
+		return c;
+		
 	}
 	
 }

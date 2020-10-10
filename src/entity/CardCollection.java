@@ -21,24 +21,25 @@ public class CardCollection {
     }
 	
     /**
-	 * @param e collection of cards to put into instance variable
+	 * @return the card removed from the top of the collection
 	 */
-    public void setCardStack(Stack<Card> e){
-        this.setCards(e);
+    public Card removeTopCard(){
+    	return cards.pop();
     }
 
+    
     /**
 	 * @return collection of cards
 	 */
     public Stack<Card> getCardStack(){
-        return getCards();
+        return cards;
     }
 
     /**
 	 * Flip the top card in the stack
 	 */
     public void flipTopCard(){
-        getCards().peek().flip();
+        cards.peek().flip();
     }
 
     /**
@@ -46,23 +47,20 @@ public class CardCollection {
      * @return true if the stack is empty
 	 */
     public boolean isStackEmpty(){
-        return getCards().isEmpty();
+        return cards.isEmpty();
     }
 
     /**
      * @return size of the collection
 	 */
     public int getSize(){
-        return getCards().size();
+        return cards.size();
     }
 
     public void addToStack(Card c) {
-        getCards().push(c);
+        cards.push(c);
     }
 
-	public Stack<Card> getCards() {
-		return cards;
-	}
 
 	public void setCards(Stack<Card> cards) {
 		this.cards = cards;

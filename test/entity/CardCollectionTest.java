@@ -30,7 +30,7 @@ public class CardCollectionTest {
 		Stack<Card> olds = new Stack<Card>();
 		Stack<Card> news = new Stack<Card>();
 		CardCollection c = new CardCollection(olds);
-		c.setCardStack(news);
+		c.setCards(news);
 		
 		assertEquals(news, c.getCardStack());
 		

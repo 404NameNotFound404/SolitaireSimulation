@@ -24,7 +24,9 @@ public class Deck extends CardCollection{
 	}
 	
 	public Card drawCard() {
-		return this.getCardStack().pop();
+		Card c = this.getCardStack().pop();
+		super.setCards(this.getCardStack());
+		return c;
 	}
 	
 	public void shuffleDeck() {
