@@ -1,5 +1,5 @@
 package controller;
-
+import entity.TableTop;
 /**
  * @author AnnaNguyen
  *
@@ -9,19 +9,23 @@ public class SimulationController {
 	public static int totalTurns;
 	public static int games;
 	public static double totalTimeToPlay;
+	private static TableTop gameBoard;
 	
 	public static class StaticStrategyController{
+
 		
+
 		/**
 		 * 
 		 */
 		public static void startSimulation(int games) {
+			gameBoard =  StrategyController.StaticStrategyController.playGame();
 			for (int i = 0; i < games; i ++) {
-				if(StrategyController.StaticStrategyController.playGame()) {
+				if(gameBoard.checkForWin()) {
 					wins++;
 				}
 				
-				totalTurns += StrategyController.StaticStrategyController.getTurns();
+				totalTurns += gameBoard.getTurns();
 			}
 			
 			
