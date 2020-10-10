@@ -19,6 +19,12 @@ public class CardStack extends CardCollection
 		super(s);
 	}
 	
+	/**
+	 * Check the face up card order to see if they are in ascending order
+	 * @return True if they are in ascending order 
+	 * False if there is not in ascending order or there are not any 
+	 * flip up card
+	 */
 	public boolean checkOrder()
 	{
 		boolean result = false;
