@@ -39,9 +39,16 @@ public class TableTop {
 	}
 	
 	
-	public void resetDrawPile() { //forgot to flip
+	public void resetDrawPile() { 
 		if (deck.isStackEmpty()) {
 			deck.setCards(talon.getCardStack());
+			
+			//Loop through the Deck to flip the cards down
+			for (Card c: deck.getCardStack()) {
+				c.flip();
+			}
+			
+			//reset Talon to empty cards
 			talon.setCards(new Stack<Card>());
 			this.deckPasses += 1;
 		}
