@@ -1,9 +1,7 @@
 package controller;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
 import org.junit.Before;
+import org.junit.Test;
 
 public class StrategyControllerTest {
 	
@@ -12,7 +10,7 @@ public class StrategyControllerTest {
 	 * @throws java.lang.Exception
 	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		result =  StrategyController.StaticStrategyController.playGame();
 	}
 
