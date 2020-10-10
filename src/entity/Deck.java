@@ -1,7 +1,6 @@
 package entity;
 
 import java.util.Stack;
-import java.util.Collections;
 import java.util.Random;
 
 public class Deck extends CardCollection{

@@ -13,7 +13,7 @@ import entity.TableTop;
 public class StrategyController {
 	public static TableTop gameBoard;
 	public static int turns;
-	public static double timeToPlay;
+	public static long timeToPlay;
 	
 	public static class StaticStrategyController{
 
@@ -22,6 +22,7 @@ public class StrategyController {
 		 */
 		public static boolean playGame() {
 			int turns = 0;
+			long start = System.currentTimeMillis();
 			gameBoard = new TableTop();
 
 			while(gameBoard.checkForWin()== false || turns == 3) {
@@ -46,6 +47,9 @@ public class StrategyController {
 
 
 			}
+			
+			long end = System.currentTimeMillis();
+			timeToPlay = end - start;
 			
 			return gameBoard.checkForWin();
 		}
@@ -75,6 +79,14 @@ public class StrategyController {
 		 */
 		public static int getTurns(){
 			return turns;
+		}
+		
+		/**
+		 * Getter for time to play
+		 * @return the time of the game
+		 */
+		public static long getTime() {
+			return timeToPlay;
 		}
 		
 

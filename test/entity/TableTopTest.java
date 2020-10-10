@@ -4,10 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 
-import java.util.Random;
-import java.util.Stack;
 
 public class TableTopTest {
 	private TableTop gameBoard = new TableTop();
