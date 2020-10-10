@@ -62,20 +62,7 @@ public class TableTopTest {
 		}
 		
 	}
-	
-	@Test
-	public void testGenerateBoardAllCardsInDeck() {
-		
-	}
-	
-	@Test
-	public void testMoveTableauPass() {
-		CardStack stack = new CardStack();
-		Card card = new Card(0, 0);
-		stack.addToStack(card);
-		gameBoard.setTableau(0, stack);
-		
-	}
+
 	
 	@Test
 	public void moveTalon() {
@@ -83,6 +70,7 @@ public class TableTopTest {
 		
 		gameBoard.moveToTalon();
 		assertFalse(gameBoard.getTalon().isStackEmpty());
+		assertEquals(1, gameBoard.getTalon().getSize());
 
 	}
 	
