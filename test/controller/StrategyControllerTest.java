@@ -8,7 +8,6 @@ import entity.TableTop;
  *
  */
 
-import entity.TableTop;
 
 public class StrategyControllerTest {
 	//a boolean to store the game result
@@ -20,9 +19,8 @@ public class StrategyControllerTest {
 	@Before
 	public void setUp() {
 
-		//play game and get the result
+		//play game and get the gameBoard
 		
-		//System.out.println("test");
 		 gameBoard =  StrategyController.StaticStrategyController.playGame();
 
 	}
@@ -31,24 +29,19 @@ public class StrategyControllerTest {
 	
  	@Test
 	public void testPlayGame() {
- 		/**
- 		 * get the gameBoard from StrategyController and check if it wins, 
- 		 * the gameBoard result should equals to the playGame result
- 		 */
- 		System.out.println("play");
- 		boolean gameResult = gameBoard.checkForWin();
- 		assertEquals(gameResult,result);
+ 		//if the game is played the turns will not be 0
+ 		assertFalse(gameBoard.getTurns() == 0);
  		
 	}
 
 	@Test
 	public void testMoveTableuToFoundation() {
 		/**
-		 * if the result of playGame is true, which means you cannot move any cards from tableau to foundation 
+		 * if the result of gameBoard is true, which means you cannot move any cards from tableau to foundation 
 		 * so the result of moveTableauToFoundation should be false
 		 */
-		System.out.println("move");
-		if (result == true){
+		
+		if (gameBoard.checkForWin() == true){
 			assertFalse(StrategyController.StaticStrategyController.moveTableauToFoundation());
 		}
 	}
@@ -60,9 +53,8 @@ public class StrategyControllerTest {
 		 * if game loses which means you use up three times to go through the deck so turns should be 3
 		 * else turns < 3
 		 */
-		//System.out.println(StrategyController.StaticStrategyController.getTurns());
 		
-		if (result == false)
+		if (gameBoard.checkForWin() == false)
 		{
 			assertEquals(3, gameBoard.getTurns());
 		}
@@ -71,13 +63,12 @@ public class StrategyControllerTest {
 			assertFalse(gameBoard.getTurns() == 3);
 		}
 		
-	
 	}
 	
-	@Test
-	public void testGetTime() {
- 		
-// 		assertFalse(StrategyController.StaticStrategyController.getTime() == 0);
-	}
+//	@Test
+//	public void testGetTime() {
+// 		
+//// 		assertFalse(StrategyController.StaticStrategyController.getTime() == 0);
+//	}
 	
 }
