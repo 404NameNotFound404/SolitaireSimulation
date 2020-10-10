@@ -24,6 +24,7 @@ public class StrategyController {
 			int turns = 0;
 			gameBoard = new TableTop();
 
+
 			while(gameBoard.checkForWin()== false || turns == 3) {
 				
 				//Check if the Deck is empty to reset the Deck
