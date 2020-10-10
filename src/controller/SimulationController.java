@@ -1,5 +1,7 @@
 package controller;
+import java.util.ArrayList;
 
+import entity.TableTop;
 /**
  * @author AnnaNguyen
  *
@@ -9,20 +11,72 @@ public class SimulationController {
 	public static int totalTurns;
 	public static int games;
 	public static double totalTimeToPlay;
+	/**
+	 * 
+	 */
+	private static TableTop gameBoard;
 	
+	public static TableTop getGameBoard() {
+		return gameBoard;
+	}
+
+	public static void setGameBoard(TableTop gameBoard) {
+		SimulationController.gameBoard = gameBoard;
+	}
+
+	public static int getWins() {
+		return wins;
+	}
+
+	public static void setWins(int wins) {
+		SimulationController.wins = wins;
+	}
+
+	public static int getTotalTurns() {
+		return totalTurns;
+	}
+
+	public static void setTotalTurns(int totalTurns) {
+		SimulationController.totalTurns = totalTurns;
+	}
+
+	public static int getGames() {
+		return games;
+	}
+
+	public static void setGames(int games) {
+		SimulationController.games = games;
+	}
+
+	public static double getTotalTimeToPlay() {
+		return totalTimeToPlay;
+	}
+
+	public static void setTotalTimeToPlay(double totalTimeToPlay) {
+		SimulationController.totalTimeToPlay = totalTimeToPlay;
+	}
+
 	public static class StaticStrategyController{
+
 		
+
 		/**
 		 * 
 		 */
-		public static void startSimulation(int games) {
+		public static ArrayList<TableTop> startSimulation(int games) {
+			ArrayList<TableTop> results = new ArrayList<TableTop>();
 			for (int i = 0; i < games; i ++) {
-				if(StrategyController.StaticStrategyController.playGame()) {
+				gameBoard =  StrategyController.StaticStrategyController.playGame();
+				if(gameBoard.checkForWin()) {
 					wins++;
+					totalTimeToPlay += gameBoard.getTime();
 				}
 				
-				totalTurns += StrategyController.StaticStrategyController.getTurns();
+				totalTurns += gameBoard.getTurns();
+				
+				results.add(gameBoard);
 			}
+			return results;
 			
 			
 		}
@@ -44,8 +98,8 @@ public class SimulationController {
 		/**
 		 * 
 		 */
-		public static void getAverageTime() {		
-			
+		public static double getAverageTime() {		
+			return totalTimeToPlay/games;
 		}
 		
 		public static void main(String[] args) {

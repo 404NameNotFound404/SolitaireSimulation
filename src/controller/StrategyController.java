@@ -20,7 +20,7 @@ public class StrategyController {
 		/**
 		 * Play the game
 		 */
-		public static boolean playGame() {
+		public static TableTop playGame() {
 			int turns = 0;
 			long start = System.currentTimeMillis();
 			gameBoard = new TableTop();
@@ -52,7 +52,9 @@ public class StrategyController {
 			long end = System.currentTimeMillis();
 			timeToPlay = end - start;
 			
-			return gameBoard.checkForWin();
+			gameBoard.setTime(timeToPlay);
+			gameBoard.setTurns(turns);
+			return gameBoard;
 		}
 
 		/**
@@ -74,30 +76,30 @@ public class StrategyController {
 			return check;
 		}
 		
-		/**
-		 * Getter for turns 
-		 * @return the number of turns
-		 */
-		public static int getTurns(){
-			return turns;
-		}
-		
-		/**
-		 * Getter for time to play
-		 * @return the time of the game
-		 */
-		public static long getTime() {
-			return timeToPlay;
-		}
-		
-		/**
-		 * Getter for game board
-		 * @return the game board
-		 */
-		public static TableTop getGameBoard() {
-			return gameBoard;
-		}
-
+//		/**
+//		 * Getter for turns 
+//		 * @return the number of turns
+//		 */
+//		public static int getTurns(){
+//			return turns;
+//		}
+//		
+//		/**
+//		 * Getter for time to play
+//		 * @return the time of the game
+//		 */
+//		public static long getTime() {
+//			return timeToPlay;
+//		}
+//		
+//		/**
+//		 * Getter for game board
+//		 * @return the game board
+//		 */
+//		public static TableTop getGameBoard() {
+//			return gameBoard;
+//		}
+//
 
 
 

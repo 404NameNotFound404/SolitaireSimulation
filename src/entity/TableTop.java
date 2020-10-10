@@ -8,6 +8,20 @@ public class TableTop {
 	private CardStack[] foundations;
 	private Deck deck;
 	private CardCollection talon;
+	public long time;
+	public int turns;
+
+
+	public int getTurns() {
+		return turns;
+	}
+
+	public void setTurns(int turns) {
+		this.turns = turns;
+	}
+
+	
+
 	int deckPasses = 0;
 	
 	public TableTop() {
@@ -16,6 +30,15 @@ public class TableTop {
 		deck = new Deck();
 		talon = new CardCollection();
 	}
+	
+	public long getTime() {
+		return time;
+	}
+
+	public void setTime(long time) {
+		this.time = time;
+	}
+
 	
 	public CardStack[] getTableaus() {
 		return this.tableaus;
