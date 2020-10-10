@@ -8,47 +8,57 @@ import entity.TableTop;
  *
  */
 public class SimulationController {
-	public static boolean win;
-	public static TableTop gameBoard;
-	public static int turns;
-	public static double timeToPlay;
+	public static int wins;
+	public static int totalTurns;
+	public static int games;
+	public static double totalTimeToPlay;
+	
 	public static class StaticStrategyController{
 		
 		/**
 		 * 
 		 */
-		public static void playGame() {		
-			gameBoard = new TableTop();
+		public static void startSimulation(int games) {
+			for (int i = 0; i < games; i ++) {
+				if(StrategyController.StaticStrategyController.playGame()) {
+					wins++;
+				}
 				
-			moveTableauToFoundation();
+				totalTurns += StrategyController.StaticStrategyController.getTurns();
+			}
 			
-			//Draw card from Deck Card to Talon
-			gameBoard.moveToTalon();
 			
-			//Check if the card can go into any of the foundation stacks
-			gameBoard.moveCardTableau(gameBoard.getTalon().getCardStack().peek());
+		}
+
+		/**
+		 * 
+		 */
+		public static double getWinPercentage() {		
+			return wins/games;
 		}
 		
 		/**
-		 * Check to see if any cards in the Tableaus can be moved
-		 * into the foundation
-		 * @return True if it move any card from the Tableaus to 
-		 * the Foundations
+		 * 
 		 */
-		public static boolean moveTableauToFoundation() {
-			
-			boolean check = false;
-			//get the tableaus from the foundation
-			CardStack[] tableaus = gameBoard.getTableaus();
-			
-			for(CardStack s: tableaus) {
-				check = gameBoard.moveFoundation(s.getCardStack().peek());
-			}
-			
-			return check;
+		public static double getAverageTurns() {		
+			return totalTurns/games;
 		}
 		
+		/**
+		 * 
+		 */
+		public static void getAverageTime() {		
+			
+		}
 		
+		public static void main(String[] args) {
+			startSimulation(Integer.parseInt(args[0]));
+			
+			System.out.println("Win Percentage: " + getWinPercentage());
+			
+			System.out.println("Average Turns: " + getAverageTurns());
+		
+		}
 		
 		
 	}
