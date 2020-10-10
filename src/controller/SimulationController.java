@@ -84,22 +84,27 @@ public class SimulationController {
 		/**
 		 * 
 		 */
-		public static double getWinPercentage() {		
-			return wins/games;
+		public static double getWinPercentage() {
+			double w = wins;
+			double g = games;
+			return w/g;
 		}
 		
 		/**
 		 * 
 		 */
-		public static double getAverageTurns() {		
-			return totalTurns/games;
+		public static double getAverageTurns() {
+			double turns = totalTurns;
+			double g = games;
+			return turns/g;
 		}
 		
 		/**
 		 * 
 		 */
-		public static double getAverageTime() {		
-			return totalTimeToPlay/games;
+		public static double getAverageTime() {
+			double g = games;
+			return totalTimeToPlay/g;
 		}
 		
 		public static void main(String[] args) {
