@@ -91,6 +91,13 @@ public class StrategyController {
 			return timeToPlay;
 		}
 		
+		/**
+		 * Getter for game board
+		 * @return the game board
+		 */
+		public static TableTop getGameBoard() {
+			return gameBoard;
+		}
 
 
 
