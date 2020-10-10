@@ -163,9 +163,12 @@ public class TableTop {
 	public boolean moveFoundation(Card c) {
 		//check moves in tableau
 		
-		if(foundations[c.getSuit()].getCardStack().peek() == null && c.getValue() == 0) {
+		if(foundations[c.getSuit()].getCardStack().isEmpty() && c.getValue() == 0) {
 			foundations[c.getSuit()].getCardStack().add(c);
 			return true;
+		}
+		else if(foundations[c.getSuit()].getCardStack().isEmpty()) {
+			return false;
 		}
 		else if(foundations[c.getSuit()].getCardStack().peek().compareTo(c) == 1) {
 			foundations[c.getSuit()].getCardStack().add(c);
