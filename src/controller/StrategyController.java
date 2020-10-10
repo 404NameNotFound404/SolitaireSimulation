@@ -24,6 +24,7 @@ public class StrategyController {
 			int turns = 0;
 			long start = System.currentTimeMillis();
 			gameBoard = new TableTop();
+			gameBoard.generateBoard();
 
 			while(gameBoard.checkForWin()== false || turns == 3) {
 				
