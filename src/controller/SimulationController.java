@@ -84,18 +84,29 @@ public class SimulationController {
 		/**
 		 * 
 		 */
-		public static double getWinPercentage() {
-			double w = wins;
-			double g = games;
+		public static double getWinPercentage(ArrayList<TableTop> games) {
+			
+			double w = 0;
+			
+			for(TableTop t: games) {
+				if(t.checkForWin()==true) {
+					w++;
+				}
+			}
+			double g = games.size();
 			return w/g;
 		}
 		
 		/**
 		 * 
 		 */
-		public static double getAverageTurns() {
-			double turns = totalTurns;
-			double g = games;
+		public static double getAverageTurns(ArrayList<TableTop> games) {
+			double turns = 0;
+			for(TableTop t: games) {
+				turns += t.getTurns();
+			}
+			System.out.println(turns);
+			double g = games.size();
 			return turns/g;
 		}
 		
@@ -108,11 +119,12 @@ public class SimulationController {
 		}
 		
 		public static void main(String[] args) {
-			startSimulation(Integer.parseInt(args[0]));
 			
-			System.out.println("Win Percentage: " + getWinPercentage());
+			ArrayList<TableTop> allGames = startSimulation(Integer.parseInt(args[0]));
 			
-			System.out.println("Average Turns: " + getAverageTurns());
+			System.out.println("Win Percentage: " + getWinPercentage(allGames));
+			
+			System.out.println("Average Turns: " + getAverageTurns(allGames));
 		
 		}
 		

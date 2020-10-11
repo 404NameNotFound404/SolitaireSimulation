@@ -25,6 +25,8 @@ public class TableTop {
 	int deckPasses = 0;
 	
 	public TableTop() {
+		//set turns equal 0
+		turns = 0;
 		tableaus = new CardStack[7];
 		foundations = new CardStack[4];
 		deck = new Deck();
@@ -163,6 +165,7 @@ public class TableTop {
 				Card card = s.getCardStack().peek();
 				if(card.compareTo(c) == -1 && card.isRed() != c.isRed()) {
 					s.addToStack(talon.removeTopCard());
+					turns++;
 					return true;
 				}
 			}
@@ -201,6 +204,7 @@ public class TableTop {
 		
 		if(foundations[c.getSuit()].getCardStack().isEmpty() && c.getValue() == 0) {
 			foundations[c.getSuit()].getCardStack().add(c);
+			turns++;
 			return true;
 		}
 		else if(foundations[c.getSuit()].getCardStack().isEmpty()) {
@@ -208,6 +212,7 @@ public class TableTop {
 		}
 		else if(foundations[c.getSuit()].getCardStack().peek().compareTo(c) == 1) {
 			foundations[c.getSuit()].getCardStack().add(c);
+			turns++;
 			return true;
 		}
 		else {

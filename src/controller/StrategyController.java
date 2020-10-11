@@ -21,19 +21,19 @@ public class StrategyController {
 		 * Play the game
 		 */
 		public static TableTop playGame() {
-			int turns = 0;
+			int deckTurns = 0;
 			long start = System.currentTimeMillis();
 			gameBoard = new TableTop();
 			gameBoard.generateBoard();
 
 
-			while(gameBoard.checkForWin() == false && turns < 3) {
+			while(gameBoard.checkForWin() == false && deckTurns < 3) {
 				//Check if the Deck is empty to reset the Deck
 				if (gameBoard.getDrawPile().getSize() != 0) {
 					moveTableauToFoundation();
 				}
 				else {
-					turns++;
+					deckTurns++;
 					gameBoard.resetDrawPile();
 				}
 				
@@ -53,7 +53,7 @@ public class StrategyController {
 			timeToPlay = end - start;
 			
 			gameBoard.setTime(timeToPlay);
-			gameBoard.setTurns(turns);
+			//gameBoard.setTurns(turns);
 			return gameBoard;
 		}
 
