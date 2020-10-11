@@ -1,12 +1,11 @@
-package entity;
+package controller;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ CardCollectionTest.class, CardStackTest.class, CardTest.class, DeckTest.class })
-
+@SuiteClasses({ SimulationControllerTest.class, StrategyControllerTest.class })
 public class AllTests {
 
 }
