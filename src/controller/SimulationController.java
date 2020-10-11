@@ -68,10 +68,10 @@ public class SimulationController {
 			for (int i = 0; i < games; i ++) {
 				gameBoard =  StrategyController.StaticStrategyController.playGame();
 				if(gameBoard.checkForWin()) {
-					wins++;
-					totalTimeToPlay += gameBoard.getTime();
+					wins++;	
 				}
 				
+				totalTimeToPlay += gameBoard.getTime();
 				totalTurns += gameBoard.getTurns();
 				
 				results.add(gameBoard);

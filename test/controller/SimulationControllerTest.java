@@ -127,4 +127,23 @@ class SimulationControllerTest {
 		SimulationController.setTotalTimeToPlay(time);
 		assertEquals(SimulationController.StaticStrategyController.getAverageTime(), av);
 	}
+	
+	@SuppressWarnings("static-access")
+	@Test
+	void testStartSimulation()
+	{
+		int games = 10;
+		SimulationController.StaticStrategyController cn = null;
+		ArrayList<TableTop> tables = cn.startSimulation(games);
+		double time = 0;
+		double turns = 0;
+		for (TableTop tab : tables)
+		{
+			time = time + tab.getTime();
+			turns = turns + tab.getTurns();
+		}
+		assertNotEquals(0, time);
+		assertNotEquals(0, turns);
+			
+	}
 }
