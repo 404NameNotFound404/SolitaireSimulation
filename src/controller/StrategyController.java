@@ -12,7 +12,6 @@ import entity.TableTop;
  */
 public class StrategyController {
 	public static TableTop gameBoard;
-	public static int turns;
 	public static long timeToPlay;
 	
 	public static class StaticStrategyController{
@@ -53,7 +52,7 @@ public class StrategyController {
 			timeToPlay = end - start;
 			
 			gameBoard.setTime(timeToPlay);
-			//gameBoard.setTurns(turns);
+
 			return gameBoard;
 		}
 
@@ -66,6 +65,7 @@ public class StrategyController {
 		public static boolean moveTableauToFoundation() {
 
 			boolean check = false;
+			
 			//get the tableaus from the foundation
 			CardStack[] tableaus = gameBoard.getTableaus();
 
@@ -75,31 +75,7 @@ public class StrategyController {
 
 			return check;
 		}
-		
-//		/**
-//		 * Getter for turns 
-//		 * @return the number of turns
-//		 */
-//		public static int getTurns(){
-//			return turns;
-//		}
-//		
-//		/**
-//		 * Getter for time to play
-//		 * @return the time of the game
-//		 */
-//		public static long getTime() {
-//			return timeToPlay;
-//		}
-//		
-//		/**
-//		 * Getter for game board
-//		 * @return the game board
-//		 */
-//		public static TableTop getGameBoard() {
-//			return gameBoard;
-//		}
-//
+	
 
 
 

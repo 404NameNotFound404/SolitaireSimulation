@@ -9,6 +9,8 @@ public class TableTop {
 	private Deck deck;
 	private CardCollection talon;
 	public long time;
+	
+	//the number of times the cards move
 	public int turns;
 
 
@@ -95,10 +97,14 @@ public class TableTop {
 		return isWin;
 	}
 	
+	
 	public void setFoundation(int index, CardStack c) {
 		foundations[index] = c;
 	}
 	
+	/**
+	 * Generate the game board
+	 */
 	public void generateBoard() {
 		deck.shuffleDeck();
 		int count = 0;
@@ -117,7 +123,6 @@ public class TableTop {
 			}
 			tableaus[i].getCardStack().peek().flip();
 			
-			//System.out.println(i);
 		}
 		
 		for (int i = 0; i < 4; i++) {
@@ -128,26 +133,10 @@ public class TableTop {
 			
 	}
 	
-//	public boolean moveCardTableau() {
-//		
-//		Card topCard = deck.getCardStack().get(0);
-//		
-//		for (int i = 0; i < 7; i++) {
-//			
-//			CardStack tableau = tableaus[i];
-//			Card tableauCard = tableau.getCardStack().get(0);
-//			if (topCard.getValue() - 1 == tableauCard.getValue() && topCard.isRed() != tableauCard.isRed()) {
-//				tableau.addToStack(deck.drawCard());
-//				return true;
-//			}
-//			else if(tableau.isStackEmpty() && topCard.getValue() == 13) {
-//				tableau.addToStack(deck.drawCard());
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
 	
+	/**
+	 * Move card to the talon
+	 */
 	public void moveToTalon() {
 		talon.addToStack(deck.drawCard());
 		talon.flipTopCard();
@@ -158,6 +147,12 @@ public class TableTop {
 		talon = s;
 	}
 	
+	/**
+	 * Move card to the Tableau
+	 * @param c the card want to move
+	 * @return True if move card successful, and 
+	 * False if move card not successful
+	 */
 	public boolean moveCardTableau(Card c) {
 		//check moves in tableau
 		for(CardStack s: tableaus) {
@@ -177,28 +172,11 @@ public class TableTop {
 		return false;
 	}
 	
-
-	
-//	public boolean moveFoundation() {
-//		
-//		Card topCard = deck.getCardStack().get(0);
-//		
-//		for (int i = 0; i < 4; i++) {
-//			
-//			CardStack foundation = foundations[i];
-//			Card foundationCard = foundation.getCardStack().get(0);
-//			if (topCard.getValue() + 1 == foundationCard.getValue() && topCard.isSameSuit(foundationCard)) {
-//				foundation.addToStack(deck.drawCard());
-//				return true;
-//			}
-//			else if(foundation.isStackEmpty() && topCard.getValue() == 0) {
-//				foundation.addToStack(deck.drawCard());
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-	
+	/**
+	 * Move card to foundation 
+	 * @param c the card want to move
+	 * @return True if move successful
+	 */
 	public boolean moveFoundation(Card c) {
 		//check moves in tableau
 		

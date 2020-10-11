@@ -87,6 +87,9 @@ public class Card {
 		return this.suit == c.getSuit();
 	}
 
+	/**
+	 * Print out the cards
+	 */
 	public String toString() {
 		String description;
 		if (this.getSuit() == heart) {

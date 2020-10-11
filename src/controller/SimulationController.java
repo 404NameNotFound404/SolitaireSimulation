@@ -7,73 +7,50 @@ import entity.TableTop;
  *
  */
 public class SimulationController {
-	public static int wins;
-	public static int totalTurns;
-	public static int games;
-	public static double totalTimeToPlay;
-	/**
-	 * 
-	 */
-	private static TableTop gameBoard;
-	
-	public static TableTop getGameBoard() {
-		return gameBoard;
+
+
+	public static int getWins(ArrayList<TableTop> games) {
+		int w = 0;
+		
+		for(TableTop t: games) {
+			if(t.checkForWin()==true) {
+				w++;
+			}
+		}
+		return w;
 	}
 
-	public static void setGameBoard(TableTop gameBoard) {
-		SimulationController.gameBoard = gameBoard;
+
+	public static int getTotalTurns(ArrayList<TableTop> games) {
+		int turns = 0;
+		for(TableTop t: games) {
+			turns += t.getTurns();
+		}
+		return turns;
 	}
 
-	public static int getWins() {
-		return wins;
-	}
 
-	public static void setWins(int wins) {
-		SimulationController.wins = wins;
-	}
 
-	public static int getTotalTurns() {
-		return totalTurns;
-	}
-
-	public static void setTotalTurns(int totalTurns) {
-		SimulationController.totalTurns = totalTurns;
-	}
-
-	public static int getGames() {
-		return games;
-	}
-
-	public static void setGames(int games) {
-		SimulationController.games = games;
-	}
-
-	public static double getTotalTimeToPlay() {
+	public static long getTotalTimeToPlay(ArrayList<TableTop> games) {
+		long totalTimeToPlay = 0;
+		for(TableTop t: games) {
+			totalTimeToPlay += t.getTime();
+		}
 		return totalTimeToPlay;
 	}
 
-	public static void setTotalTimeToPlay(double totalTimeToPlay) {
-		SimulationController.totalTimeToPlay = totalTimeToPlay;
-	}
 
 	public static class StaticStrategyController{
 
 		
-
 		/**
-		 * 
+		 * Start the simulation
+		 * @return an array list of game boards
 		 */
 		public static ArrayList<TableTop> startSimulation(int games) {
 			ArrayList<TableTop> results = new ArrayList<TableTop>();
 			for (int i = 0; i < games; i ++) {
-				gameBoard =  StrategyController.StaticStrategyController.playGame();
-				if(gameBoard.checkForWin()) {
-					wins++;	
-				}
-				
-				totalTimeToPlay += gameBoard.getTime();
-				totalTurns += gameBoard.getTurns();
-				
+				TableTop gameBoard =  StrategyController.StaticStrategyController.playGame();			
 				results.add(gameBoard);
 			}
 			return results;
@@ -82,39 +59,32 @@ public class SimulationController {
 		}
 
 		/**
-		 * 
+		 * Get the win percentage
+		 * @return the win percentage in double
 		 */
 		public static double getWinPercentage(ArrayList<TableTop> games) {
-			
-			double w = 0;
-			
-			for(TableTop t: games) {
-				if(t.checkForWin()==true) {
-					w++;
-				}
-			}
-			double g = games.size();
+			int w = getWins(games);
+			int g = games.size();
 			return w/g;
 		}
 		
 		/**
-		 * 
+		 * Get the average turns
+		 * @return the average turns as integer
 		 */
 		public static double getAverageTurns(ArrayList<TableTop> games) {
-			double turns = 0;
-			for(TableTop t: games) {
-				turns += t.getTurns();
-			}
-			System.out.println(turns);
+			int turns = getTotalTurns(games);
 			double g = games.size();
 			return turns/g;
 		}
 		
 		/**
-		 * 
+		 * Get the average time play each game
+		 * @return the average time for game in double
 		 */
-		public static double getAverageTime() {
-			double g = games;
+		public static double getAverageTime(ArrayList<TableTop> games) {
+			long totalTimeToPlay = getTotalTimeToPlay(games);
+			double g = games.size();
 			return totalTimeToPlay/g;
 		}
 		
@@ -125,6 +95,8 @@ public class SimulationController {
 			System.out.println("Win Percentage: " + getWinPercentage(allGames));
 			
 			System.out.println("Average Turns: " + getAverageTurns(allGames));
+			
+			System.out.println("Average Times per Game: " + getAverageTime(allGames));
 		
 		}
 		
