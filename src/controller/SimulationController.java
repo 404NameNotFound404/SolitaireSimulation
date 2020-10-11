@@ -31,11 +31,12 @@ public class SimulationController {
 		return dev;
 				
 	}
+	
 	public static int getWins(ArrayList<TableTop> games) {
 		int w = 0;
 		
 		for(TableTop t: games) {
-			if(t.checkForWin()==true) {
+			if(t.getWin()==true) {
 				w++;
 			}
 		}

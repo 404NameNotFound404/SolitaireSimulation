@@ -12,17 +12,28 @@ public class TableTop {
 	
 	//the number of times the cards move
 	public int turns;
+	
+	//the result of the game, true means win
+	public boolean isWin = true;
 
-
+	//needed for testing SimulationController
 	public int getTurns() {
 		return turns;
 	}
-
+	//needed for testing SimulationController
 	public void setTurns(int turns) {
 		this.turns = turns;
 	}
-
-	
+	//needed for testing SimulationController
+	public boolean getWin()
+	{
+		return isWin;
+	}
+	//needed for testing SimulationController	
+	public void setWin(boolean status)
+	{
+		this.isWin = status;
+	}
 
 	int deckPasses = 0;
 	
@@ -88,7 +99,7 @@ public class TableTop {
 	 * False if it lose. 
 	 */
 	public boolean checkForWin() {
-		boolean isWin = true;
+		
 		for (CardStack cards : foundations) {
 			if (cards.getSize() < 13){
 				isWin = false;

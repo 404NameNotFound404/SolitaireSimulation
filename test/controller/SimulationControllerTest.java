@@ -1,136 +1,102 @@
 package controller;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
-import org.junit.jupiter.api.Test;
-import entity.*;
 
-class SimulationControllerTest {
+import org.junit.Before;
+import org.junit.Test;
+import entity.TableTop;
+/**
+ * @author MiaLi
+ *
+ */
 
-	@Test
-	void testGetGameBoard() {
-		TableTop table = new TableTop();
-		TableTop fakeTable = new TableTop();
-		SimulationController.setGameBoard(table);
-		assertEquals(SimulationController.getGameBoard(), table);
-		assertNotEquals(SimulationController.getGameBoard(), fakeTable);;
-	}
 
-	@Test
-	void testSetGameBoard() {
-		TableTop table = new TableTop();
-		TableTop fakeTable = new TableTop();
-		SimulationController.setGameBoard(table);
-		assertEquals(SimulationController.getGameBoard(), table);
-		assertNotEquals(SimulationController.getGameBoard(), fakeTable);
+public class SimulationControllerTest {
+	
+	public ArrayList<TableTop> games = new ArrayList<TableTop>();
+	public int totalTurns, averageTurns;
+	public long totalTime, averageTime;
+	
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@Before
+	public void setUp() {
+
+		TableTop gameboard1 = new TableTop();
+		TableTop gameboard2 = new TableTop();
+		TableTop gameboard3 = new TableTop();
+		
+		gameboard1.setWin(false);
+		
+		gameboard1.setTurns(4);
+		gameboard2.setTurns(5);
+		gameboard3.setTurns(6);
+		
+		totalTurns = 4 + 5 + 6;
+		averageTurns = totalTurns/3;
+		
+		gameboard1.setTime(7);
+		gameboard2.setTime(8);
+		gameboard3.setTime(9);
+		
+		totalTime = 9 + 7 + 8;
+		averageTime = totalTime /3;
+		
+		games.add(gameboard1);
+		games.add(gameboard2);
+		games.add(gameboard3);
+
 	}
 	
 	@Test
-	void testGetWins() {
-		int wins = 7;
-		int notWins = 8;
-		SimulationController.setWins(wins);
-		assertEquals(SimulationController.getWins(), wins);
-		assertNotEquals(SimulationController.getWins(), notWins);
+	public void testGetWins() {
+		
+		assertTrue(SimulationController.getWins(games)== 2);
+
 	}
 	
 	@Test
-	void testSetWins() {
-		int wins = 7;
-		int notWins = 8;
-		SimulationController.setWins(wins);
-		assertEquals(SimulationController.getWins(), wins);
-		assertNotEquals(SimulationController.getWins(), notWins);
+	public void testGetTotalTurns() {
+		
+		assertEquals(SimulationController.getTotalTurns(games), totalTurns);
 	}
 	
 	@Test
-	void testGetTotalTurns() {
-		int turns = 50;
-		int fakeTurns = 52;
-		SimulationController.setTotalTurns(turns);
-		assertEquals(SimulationController.getTotalTurns(), turns);
-		assertNotEquals(SimulationController.getTotalTurns(), fakeTurns);
-	}
-	
-	@Test
-	void testSetTotalTurns() {
-		int turns = 50;
-		int fakeTurns = 52;
-		SimulationController.setTotalTurns(turns);
-		assertEquals(SimulationController.getTotalTurns(), turns);
-		assertNotEquals(SimulationController.getTotalTurns(), fakeTurns);
-	}
-	
-	@Test
-	void testGetGames() {
-		int games = 1000;
-		int fakeGames = 1001;
-		SimulationController.setGames(games);
-		assertEquals(SimulationController.getGames(), games);
-		assertNotEquals(SimulationController.getGames(), fakeGames);
-	}
-	
-	@Test
-	void testSetGames() {
-		int games = 1000;
-		int fakeGames = 1001;
-		SimulationController.setGames(games);
-		assertEquals(SimulationController.getGames(), games);
-		assertNotEquals(SimulationController.getGames(), fakeGames);
-	}
-	
-	@Test
-	void testGetTotalTimeToPlay() {
-		double time = 90.0;
-		double badTime = 180.0;
-		SimulationController.setTotalTimeToPlay(time);
-		assertEquals(SimulationController.getTotalTimeToPlay(), time);
-		assertNotEquals(SimulationController.getTotalTimeToPlay(), badTime);
-	}
-	
-	@Test
-	void testSetTotalTimeToPlay() {
-		double time = 90.0;
-		double badTime = 180.0;
-		SimulationController.setTotalTimeToPlay(time);
-		assertEquals(SimulationController.getTotalTimeToPlay(), time);
-		assertNotEquals(SimulationController.getTotalTimeToPlay(), badTime);
-	}
-	
-	@Test
-	void testGetWinPercentage() {
-		int game = 10;
-		int wins = 4;
-		double pert = 4.0/10.0;
-		SimulationController.setGames(game);
-		SimulationController.setWins(wins);
-		assertEquals(SimulationController.StaticStrategyController.getWinPercentage(), pert);
+	public void testGetWinPercentage() {
+		//assumer win percentage to be 2/3
+		double pert = 2/3;		
+		assertTrue(SimulationController.StaticStrategyController.getWinPercentage(games) == pert);
 		
 	}
 	
 	@Test
-	void testGetAverageTurns() {
-		int game = 10;
-		int turns = 40;
-		double av = 40.0/10.0;
-		SimulationController.setGames(game);
-		SimulationController.setTotalTurns(turns);;
-		assertEquals(SimulationController.StaticStrategyController.getAverageTurns(), av);
+	public void testGetAverageTurns() {
+		
+		assertTrue(SimulationController.StaticStrategyController.getAverageTurns(games) == averageTurns);
+		
 	}
 	
 	@Test
-	void testGetAverageTime() {
-		int game = 10;
-		double time = 100.3454;
-		double av = time/10.0;
-		SimulationController.setGames(game);
-		SimulationController.setTotalTimeToPlay(time);
-		assertEquals(SimulationController.StaticStrategyController.getAverageTime(), av);
+	public void testGetTotalTimeToPlay() {
+	
+		assertTrue(SimulationController.getTotalTimeToPlay(games) == totalTime);
+		
+	}
+	
+	@Test
+	public void testGetAverageTime() {
+	
+		assertTrue(SimulationController.StaticStrategyController.getAverageTime(games) == averageTime);
 	}
 	
 	@SuppressWarnings("static-access")
 	@Test
-	void testStartSimulation()
+	public void testStartSimulation()
 	{
 		int games = 10;
 		SimulationController.StaticStrategyController cn = null;
