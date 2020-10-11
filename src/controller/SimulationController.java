@@ -8,7 +8,29 @@ import entity.TableTop;
  */
 public class SimulationController {
 
-
+	
+	/**
+	 * Method that calculate the standard deviation of an array list
+	 * @param result list
+	 * @param mean 
+	 * @return the standard deviation in double
+	 */
+	public static double standardDev (double[] result, double mean) {
+		double[] mean_array = new double[result.length];
+		for (int h = 0; h < result.length; h ++) {
+			mean_array[h] = (result[h] - mean)*(result[h] - mean);
+		}
+		
+		double s = 0;
+		for(double o: mean_array) {
+			s = s + o;
+		}
+		
+		double mean_dev = s/result.length;
+		double dev = Math.sqrt(mean_dev);
+		return dev;
+				
+	}
 	public static int getWins(ArrayList<TableTop> games) {
 		int w = 0;
 		
@@ -88,15 +110,32 @@ public class SimulationController {
 			return totalTimeToPlay/g;
 		}
 		
+		
+		
 		public static void main(String[] args) {
 			
 			ArrayList<TableTop> allGames = startSimulation(Integer.parseInt(args[0]));
+
+			double[] turnsArray = new double[allGames.size()];
+			double[] timeArray = new double[allGames.size()];
 			
+			for (int i = 0; i < allGames.size(); i++) {
+				turnsArray[i] = allGames.get(i).getTurns();
+				timeArray[i] = allGames.get(i).getTime();
+			}
 			System.out.println("Win Percentage: " + getWinPercentage(allGames));
 			
 			System.out.println("Average Turns: " + getAverageTurns(allGames));
 			
+			System.out.println("Standard Deviation for number of card moves per game: " 
+			+ standardDev(turnsArray, getAverageTurns(allGames)));
+			
 			System.out.println("Average Times per Game: " + getAverageTime(allGames));
+			
+			System.out.println("Standard Deviation for number of time play per game: " 
+					+ standardDev(timeArray, getAverageTime(allGames)));
+			
+			
 		
 		}
 		
