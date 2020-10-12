@@ -46,24 +46,24 @@ public class StrategyControllerTest {
 		}
 	}
 	
-	@Test
-	public void testGetTurns() {
-
-		/**
-		 * if game loses which means you use up three times to go through the deck so turns should be 3
-		 * else turns < 3
-		 */
-		
-		if (gameBoard.checkForWin() == false)
-		{
-			assertEquals(3, gameBoard.getTurns());
-		}
-		else
-		{
-			assertFalse(gameBoard.getTurns() == 3);
-		}
-		
-	}
+//	@Test
+//	public void testGetTurns() {
+//
+//		/**
+//		 * if game loses which means you use up three times to go through the deck so turns should be 3
+//		 * else turns < 3
+//		 */
+//		
+//		if (gameBoard.checkForWin() == false)
+//		{
+//			assertEquals(3, gameBoard.getTurns());
+//		}
+//		else
+//		{
+//			assertFalse(gameBoard.getTurns() == 3);
+//		}
+//		
+//	}
 	
 //	@Test
 //	public void testGetTime() {
