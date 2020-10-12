@@ -94,6 +94,20 @@ public class SimulationControllerTest {
 		assertTrue(SimulationController.StaticStrategyController.getAverageTime(games) == averageTime);
 	}
 	
+	@Test
+	public void testStandardDev()
+	{
+		double[] list = {11.0,11.0,11.0,11.0};
+		double mean = 11.0;
+		double SD = SimulationController.standardDev(list, mean);
+		assertEquals(SD, 0.0);
+		
+		double[] list2 = {1,2,3,4,5,6};
+		mean = 3.5;
+		double SD2 = SimulationController.standardDev(list2, mean);
+		assertEquals(SD2, 1.707825127659933);
+	}
+	
 	@SuppressWarnings("static-access")
 	@Test
 	public void testStartSimulation()
