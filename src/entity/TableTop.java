@@ -283,7 +283,11 @@ public class TableTop {
 						t.addToStack(tempStack.pop());
 					}
 					//flip the card after move
-					stack.peek().flip();
+					if(stack.size()!= 0)
+					{
+						stack.peek().flip();
+					}
+					
 					turns++;
 					break;
 				}
