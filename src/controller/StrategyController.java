@@ -65,22 +65,26 @@ public class StrategyController {
 				System.out.println("FOUNDATIONS AFTER GO THROUGH TABLEAUS: ");
 				gameBoard.printFoundations();
 				
-				//Draw card from Deck Card to Talon
-				gameBoard.moveToTalon();
-				
-				//Print out first card in Talon
-				System.out.println();
-				System.out.println("THE FIRST CARD IN TALON: ");
-				System.out.println(gameBoard.getTalon().getCardStack().peek().toString());
-				
-				//Check if the card can go into any of the foundation stacks
-				if(gameBoard.moveFoundation(gameBoard.getTalon().getCardStack())) {
-					continue;
+				if (!gameBoard.getDrawPile().getCardStack().isEmpty()) {
+					//Draw card from Deck Card to Talon
+					gameBoard.moveToTalon();
 				}
 				
-				//Check if the card can go into any of the Tableaus
-				gameBoard.moveCardTableau(gameBoard.getTalon().getCardStack());
-				
+				if (!gameBoard.getTalon().getCardStack().isEmpty()) {
+					//Print out first card in Talon
+					System.out.println();
+					System.out.println("THE FIRST CARD IN TALON: ");
+					System.out.println(gameBoard.getTalon().getCardStack().peek().toString());
+
+					//Check if the card can go into any of the foundation stacks
+					if(gameBoard.moveFoundation(gameBoard.getTalon().getCardStack())) {
+						continue;
+					}
+
+					//Check if the card can go into any of the Tableaus
+					gameBoard.moveCardTableau(gameBoard.getTalon().getCardStack());
+
+				}
 				//Print out tableaus after move
 				System.out.println();
 				System.out.println("Tableaus after move: ");
