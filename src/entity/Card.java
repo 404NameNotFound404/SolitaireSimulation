@@ -105,7 +105,7 @@ public class Card {
 			description = "club";
 		}
 
-		description += " " + rank[this.getValue()];
+		description += " " + rank[this.getValue()] + " face up: " + faceUp;
 		return description;
 	}
 	

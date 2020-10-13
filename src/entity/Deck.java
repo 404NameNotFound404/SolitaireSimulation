@@ -31,9 +31,14 @@ public class Deck extends CardCollection{
 	 * @return the card it removes from the Deck 
 	 */
 	public Card drawCard() {
+		if (!this.isStackEmpty()) {
 		Card c = this.getCardStack().pop();
 		super.setCards(this.getCardStack());
-		return c;
+		return c;}
+		else {
+			System.out.println("The deck of cards is EMPTY.");
+			return null;
+		}
 	}
 	
 	/**
