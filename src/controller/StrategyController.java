@@ -36,6 +36,7 @@ public class StrategyController {
 			gameBoard.printTableaus();
 
 			while(gameBoard.checkForWin() == false && deckTurns < 3) {
+				
 				//Check if the Deck is empty to reset the Deck
 				if (gameBoard.getDrawPile().getSize() == 0) {
 					deckTurns++;
@@ -67,15 +68,7 @@ public class StrategyController {
 				System.out.println("FOUNDATIONS AFTER GO THROUGH TABLEAUS: ");
 				gameBoard.printFoundations();
 				
-				//Print out first card in Talon
-				System.out.println();
-				System.out.println("THE FIRST CARD IN TALON: ");
-				//System.out.println(gameBoard.getTalon().getCardStack().peek().toString());
 				
-				//Check if the card can go into any of the foundation stacks
-				if(gameBoard.moveFoundation(gameBoard.getTalon().getCardStack())) {
-					continue;
-				}
 				if (!gameBoard.getDrawPile().getCardStack().isEmpty()) {
 					//Draw card from Deck Card to Talon
 					gameBoard.moveToTalon();

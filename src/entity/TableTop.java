@@ -165,7 +165,7 @@ public class TableTop {
 		{
 			talon.addToStack(deck.drawCard());
 		}
-		else if (!talon.isStackEmpty()) {
+		if (!talon.isStackEmpty()) {
 			talon.flipTopCard();
 		}
 		else {
