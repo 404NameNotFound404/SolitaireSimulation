@@ -73,6 +73,7 @@ public class TableTopTest {
 
 	}
 	
+	
 	@Test
 	public void setTableau() {
 		CardStack s = new CardStack();
