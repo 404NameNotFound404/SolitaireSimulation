@@ -176,22 +176,23 @@ public class TableTop {
 	 * @return True if move card successful, and 
 	 * False if move card not successful
 	 */
-	public boolean moveCardTableau(Card c) {
-		//check moves in tableau
+	public boolean moveCardTableau(Stack<Card> cards) {
+		
 		for(CardStack s: tableaus) {
 			if(!s.isStackEmpty()) {
 				Card card = s.getCardStack().peek();
-				if(card.compareTo(c) == 1 && card.isRed() != c.isRed()) {
-					s.addToStack(talon.removeTopCard());
+				if(card.compareTo(cards.peek()) == 1 && card.isRed() != cards.peek().isRed()) {
+					s.addToStack(cards.pop());
 					turns++;
 					return true;
 				}
 			}
-			else {
-				System.out.println("STACK EMPTY");
+			else if (cards.peek().getValue() == 12){
+				s.addToStack(cards.pop());
+				turns++;
+				return true;
 			}
 		}
-
 		return false;
 	}
 	

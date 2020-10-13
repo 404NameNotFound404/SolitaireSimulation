@@ -101,7 +101,7 @@ public class TableTopTest {
 		
 		gameBoard.setTalon(s2);
 		
-		assertTrue(gameBoard.moveCardTableau(c2));
+		assertTrue(gameBoard.moveCardTableau(gameBoard.getTalon().getCardStack()));
 		
 		assertEquals(2, gameBoard.getTableaus()[0].getSize());
 	}
@@ -143,7 +143,7 @@ public class TableTopTest {
 		
 		gameBoard.setTalon(s2);
 		
-		assertTrue(gameBoard.moveCardTableau(cardToAdd));
+		assertTrue(gameBoard.moveCardTableau(s4.getCardStack()));
 		
 		assertEquals(2, gameBoard.getTableaus()[3].getSize());
 	}
@@ -185,7 +185,7 @@ public class TableTopTest {
 		
 		gameBoard.setTalon(s2);
 		
-		assertTrue(gameBoard.moveCardTableau(cardToAdd));
+		assertTrue(gameBoard.moveCardTableau(s7.getCardStack()));
 		
 		assertEquals(2, gameBoard.getTableaus()[6].getSize());
 	}
