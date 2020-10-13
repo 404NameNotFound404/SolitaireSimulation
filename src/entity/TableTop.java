@@ -264,22 +264,26 @@ public class TableTop {
 		for(CardStack t: tableaus) {
 
 			if(!t.isStackEmpty()) {
-				if(t.getCardStack().peek().isFaceUp()== false) {
-					t.flipTopCard();
-				}
+				//flip the top card
+//				if(t.getCardStack().peek().isFaceUp()== false) {
+//					t.flipTopCard();
+//				}
 				Card card = t.getCardStack().peek();
 
 				if(card.compareTo(c) == 1 && card.isRed() != c.isRed()) {
 					//If card is movable, then 
 					//create a new stack contains the movable stack
-					while(count < stack.size()) {
+					
+					for(int j = 0; j < stack.size() - count; j ++) {
 						tempStack.push(stack.pop());
-						count++;
+						
 					}
 
 					for (int i = 0; i < tempStack.size() ; i++) {
 						t.addToStack(tempStack.pop());
 					}
+					//flip the card after move
+					stack.peek().flip();
 					turns++;
 					break;
 				}
@@ -287,9 +291,9 @@ public class TableTop {
 			else if (c.getValue() == 12){
 				//If card is movable, then 
 				//create a new stack contains the movable stack
-				while(count < stack.size()) {
+				for(int j = 0; j < stack.size() - count; j ++) {
 					tempStack.push(stack.pop());
-					count++;
+					
 				}
 				for (int i = 0; i < tempStack.size() ; i++) {
 					t.addToStack(tempStack.pop());
