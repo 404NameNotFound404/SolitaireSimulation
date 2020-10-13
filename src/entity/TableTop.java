@@ -35,7 +35,6 @@ public class TableTop {
 		this.isWin = status;
 	}
 
-	int deckPasses = 0;
 	
 	public TableTop() {
 		//set turns equal 0
@@ -80,7 +79,20 @@ public class TableTop {
 	 */
 	public void resetDrawPile() { 
 		if (deck.isStackEmpty()) {
-			deck.setCards(talon.getCardStack());
+			
+			
+			//reverse order of the talon
+			Stack<Card> temp = new Stack<Card>();
+			for (int i = talon.getSize() - 1; i >= 0; i--) {
+				temp.add(talon.getCardStack().elementAt(i));
+			}
+			
+			deck.setCards(temp);
+			
+//			System.out.println("The deck order after reset: ");
+//			for(Card c: deck.getCardStack()) {
+//				System.out.println(c.toString());
+//			}
 			
 			//Loop through the Deck to flip the cards down
 			for (Card c: deck.getCardStack()) {
@@ -89,7 +101,6 @@ public class TableTop {
 			
 			//reset Talon to empty cards
 			talon.setCards(new Stack<Card>());
-			this.deckPasses += 1;
 		}
 	}
 	
@@ -118,8 +129,9 @@ public class TableTop {
 	 */
 	public void generateBoard() {
 		deck.shuffleDeck();
-		int count = 0;
 		
+		int count = 0;
+	
 		for (int i = 0; i < 7; i++) {
 			tableaus[i] = new CardStack();
 		}
@@ -169,7 +181,7 @@ public class TableTop {
 		for(CardStack s: tableaus) {
 			if(!s.isStackEmpty()) {
 				Card card = s.getCardStack().peek();
-				if(card.compareTo(c) == -1 && card.isRed() != c.isRed()) {
+				if(card.compareTo(c) == 1 && card.isRed() != c.isRed()) {
 					s.addToStack(talon.removeTopCard());
 					turns++;
 					return true;
@@ -188,24 +200,71 @@ public class TableTop {
 	 * @param c the card want to move
 	 * @return True if move successful
 	 */
-	public boolean moveFoundation(Card c) {
-		//check moves in tableau
-		
+	public boolean moveFoundation(Stack<Card> s) {
+		Card c = s.peek();
+
 		if(foundations[c.getSuit()].getCardStack().isEmpty() && c.getValue() == 0) {
-			foundations[c.getSuit()].getCardStack().add(c);
+			foundations[c.getSuit()].getCardStack().add(s.pop());
 			turns++;
 			return true;
 		}
 		else if(foundations[c.getSuit()].getCardStack().isEmpty()) {
 			return false;
 		}
-		else if(foundations[c.getSuit()].getCardStack().peek().compareTo(c) == 1) {
-			foundations[c.getSuit()].getCardStack().add(c);
+		else if(foundations[c.getSuit()].getCardStack().peek().compareTo(c) == -1) {
+			foundations[c.getSuit()].getCardStack().add(s.pop());
 			turns++;
 			return true;
 		}
 		else {
 			return false;
+		}
+	}
+
+	/**
+	 * Print the information of the deck
+	 */
+	public void printDeck() {
+		System.out.println();
+		System.out.println("Cards left in the deck: ");
+
+		for(Card c: deck.getCardStack()) {
+			System.out.println(c.toString());
+		}
+
+	}
+	
+	/**
+	 * Print the information of the tableaus
+	 */
+	public void printTableaus() {
+		System.out.println();
+		System.out.println("THE TABLEAUS from left to right: ");
+		int count = 1;
+		for (CardStack s : tableaus) {
+			System.out.println();
+			System.out.println("Tableau: " + count);
+			for (Card c: s.getCardStack()) {
+				System.out.println(c.toString());
+			}
+			count++;
+		}
+	}
+	
+	/**
+	 * Print the foundations 
+	 */
+	public void printFoundations() {
+		System.out.println();
+		System.out.println("Foundations: ");
+		int count = 0;
+		for (CardStack f: foundations) {
+			System.out.println();
+			System.out.println("Foundations: " + count);
+			for (Card c: f.getCardStack()) {
+				System.out.println(c.toString());
+			}
+			count ++;
 		}
 	}
 	

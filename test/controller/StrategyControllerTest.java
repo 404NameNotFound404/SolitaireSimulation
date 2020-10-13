@@ -34,17 +34,17 @@ public class StrategyControllerTest {
  		
 	}
 
-	@Test
-	public void testMoveTableuToFoundation() {
-		/**
-		 * if the result of gameBoard is true, which means you cannot move any cards from tableau to foundation 
-		 * so the result of moveTableauToFoundation should be false
-		 */
-		
-		if (gameBoard.checkForWin() == true){
-			assertFalse(StrategyController.StaticStrategyController.moveTableauToFoundation());
-		}
-	}
+//	@Test
+//	public void testMoveTableuToFoundation() {
+//		/**
+//		 * if the result of gameBoard is true, which means you cannot move any cards from tableau to foundation 
+//		 * so the result of moveTableauToFoundation should be false
+//		 */
+//		
+//		if (gameBoard.checkForWin() == true){
+//			assertFalse(StrategyController.StaticStrategyController.moveTableauToFoundation());
+//		}
+//	}
 	
 //	@Test
 //	public void testGetTurns() {
