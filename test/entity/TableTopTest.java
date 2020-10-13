@@ -2,6 +2,8 @@ package entity;
 
 import static org.junit.Assert.*;
 
+import java.util.Stack;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -100,7 +102,7 @@ public class TableTopTest {
 		
 		gameBoard.setTalon(s2);
 		
-		assertTrue(gameBoard.moveCardTableau(c2));
+		assertTrue(gameBoard.moveCardTableau(gameBoard.getTalon().getCardStack()));
 		
 		assertEquals(2, gameBoard.getTableaus()[0].getSize());
 	}
@@ -142,7 +144,7 @@ public class TableTopTest {
 		
 		gameBoard.setTalon(s2);
 		
-		assertTrue(gameBoard.moveCardTableau(cardToAdd));
+		assertTrue(gameBoard.moveCardTableau(s4.getCardStack()));
 		
 		assertEquals(2, gameBoard.getTableaus()[3].getSize());
 	}
@@ -184,7 +186,7 @@ public class TableTopTest {
 		
 		gameBoard.setTalon(s2);
 		
-		assertTrue(gameBoard.moveCardTableau(cardToAdd));
+		assertTrue(gameBoard.moveCardTableau(s7.getCardStack()));
 		
 		assertEquals(2, gameBoard.getTableaus()[6].getSize());
 	}
@@ -228,8 +230,10 @@ public class TableTopTest {
 	public void testMoveFoundationPass() {
 		//move ace to foundation
 		Card c = new Card (2, 0);
+		Stack<Card> s = new Stack<Card>();
+		s.add(c);
 		assertTrue(gameBoard.getFoundation()[2].isStackEmpty());
-		gameBoard.moveFoundation(c);
+		gameBoard.moveFoundation(s);
 		assertFalse(gameBoard.getFoundation()[2].isStackEmpty());
 	}
 	
@@ -237,8 +241,10 @@ public class TableTopTest {
 	public void testMoveFoundationFailRightSuitWrongRankEmptyFoundation() {
 		//try to move right suit wrong rank to empty foundation
 		Card c = new Card (2, 3);
+		Stack<Card> s = new Stack<Card>();
+		s.add(c);
 		assertTrue(gameBoard.getFoundation()[2].isStackEmpty());
-		gameBoard.moveFoundation(c);
+		gameBoard.moveFoundation(s);
 		assertTrue(gameBoard.getFoundation()[2].isStackEmpty());
 		
 	}
@@ -248,7 +254,9 @@ public class TableTopTest {
 		//try to move wrong suit right rank to empty foundation
 		Card c = new Card (1, 0);
 		assertTrue(gameBoard.getFoundation()[2].isStackEmpty());
-		gameBoard.moveFoundation(c);
+		Stack<Card> s = new Stack<Card>();
+		s.add(c);
+		gameBoard.moveFoundation(s);
 		assertTrue(gameBoard.getFoundation()[2].isStackEmpty());	
 	}
 	
@@ -257,7 +265,9 @@ public class TableTopTest {
 		//try to move right suit wrong rank to foundation populated foundation
 		Card c = new Card (2, 3);
 		assertTrue(gameBoard.getFoundation()[2].isStackEmpty());
-		gameBoard.moveFoundation(c);
+		Stack<Card> s = new Stack<Card>();
+		s.add(c);
+		gameBoard.moveFoundation(s);
 		assertTrue(gameBoard.getFoundation()[2].isStackEmpty());	
 	}
 	
@@ -266,7 +276,9 @@ public class TableTopTest {
 		//try to move wrong suit right rank to foundation populated foundation
 		Card c = new Card (3, 2);
 		assertTrue(gameBoard.getFoundation()[2].isStackEmpty());
-		gameBoard.moveFoundation(c);
+		Stack<Card> s = new Stack<Card>();
+		s.add(c);
+		gameBoard.moveFoundation(s);
 		assertTrue(gameBoard.getFoundation()[2].isStackEmpty());
 		
 	}
