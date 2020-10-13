@@ -256,13 +256,13 @@ public class TableTop {
 			}
 		}
 		Stack<Card> tempStack = new Stack<Card>();
-		
+
 		//The first flip up card in the stack 
 		Card c = stack.get(count);
 
 		//Check to see if the card is movable between Tableau
 		for(CardStack t: tableaus) {
-			
+
 			if(!t.isStackEmpty()) {
 				if(t.getCardStack().peek().isFaceUp()== false) {
 					t.flipTopCard();
@@ -276,11 +276,12 @@ public class TableTop {
 						tempStack.push(stack.pop());
 						count++;
 					}
-					
+
 					for (int i = 0; i < tempStack.size() ; i++) {
 						t.addToStack(tempStack.pop());
 					}
 					turns++;
+					break;
 				}
 			}
 			else if (c.getValue() == 12){

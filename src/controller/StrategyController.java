@@ -55,19 +55,7 @@ public class StrategyController {
 						System.out.println("The top card in the tableau: " +tab.getCardStack().peek());
 						
 					}
-				}
-				
-				for (CardStack tabl: tableaus) {
-					if(!tabl.isStackEmpty()) {
-						
-						
-						//Move card between tableaus
-						//gameBoard.moveCardTableau(tab.getCardStack());
-						
-						//Move stack of cards between tableaus
-						gameBoard.moveStackCardTableau(tabl.getCardStack());
-						
-					}
+	
 				}
 	
 				//Check if tableau cards can go to foundations	
@@ -82,6 +70,17 @@ public class StrategyController {
 				gameBoard.printFoundations();
 				
 				
+				for (CardStack tabl: tableaus) {
+					if(!tabl.isStackEmpty()) {
+						
+						//Move card between tableaus
+						//gameBoard.moveCardTableau(tab.getCardStack());
+						
+						//Move stack of cards between tableaus
+						gameBoard.moveStackCardTableau(tabl.getCardStack());
+						
+					}
+				}
 				if (!gameBoard.getDrawPile().getCardStack().isEmpty()) {
 					//Draw card from Deck Card to Talon
 					gameBoard.moveToTalon();
