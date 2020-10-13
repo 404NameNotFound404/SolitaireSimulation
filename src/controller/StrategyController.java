@@ -49,8 +49,10 @@ public class StrategyController {
 				CardStack[] tableaus = gameBoard.getTableaus();
 				for (CardStack tab: tableaus) {
 					if(!tab.isStackEmpty()) {
+						tab.flipTopCard();
 						System.out.println("The top card in the tableau: " +tab.getCardStack().peek());
 						gameBoard.moveCardTableau(tab.getCardStack());
+						
 					}
 				}
 				
