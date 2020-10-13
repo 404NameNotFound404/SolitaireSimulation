@@ -161,8 +161,11 @@ public class TableTop {
 	 * Move card to the talon
 	 */
 	public void moveToTalon() {
-		talon.addToStack(deck.drawCard());
-		talon.flipTopCard();
+		if (deck.isStackEmpty() == false)
+		{
+			talon.addToStack(deck.drawCard());
+			talon.flipTopCard();
+		}
 		
 	}
 	
@@ -202,6 +205,8 @@ public class TableTop {
 	 * @return True if move successful
 	 */
 	public boolean moveFoundation(Stack<Card> s) {
+		if (s.isEmpty() == false) 
+		{
 		Card c = s.peek();
 
 		if(foundations[c.getSuit()].getCardStack().isEmpty() && c.getValue() == 0) {
@@ -220,6 +225,8 @@ public class TableTop {
 		else {
 			return false;
 		}
+		}
+		return false;
 	}
 
 	/**

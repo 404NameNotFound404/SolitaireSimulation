@@ -71,7 +71,7 @@ public class StrategyController {
 				//Print out first card in Talon
 				System.out.println();
 				System.out.println("THE FIRST CARD IN TALON: ");
-				System.out.println(gameBoard.getTalon().getCardStack().peek().toString());
+				//System.out.println(gameBoard.getTalon().getCardStack().peek().toString());
 				
 				//Check if the card can go into any of the foundation stacks
 				if(gameBoard.moveFoundation(gameBoard.getTalon().getCardStack())) {
