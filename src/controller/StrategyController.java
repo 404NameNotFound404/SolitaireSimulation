@@ -48,6 +48,7 @@ public class StrategyController {
 		
 				//Move cards between tableaus 
 				CardStack[] tableaus = gameBoard.getTableaus();
+				
 				for (CardStack tab: tableaus) {
 					if(!tab.isStackEmpty()) {
 						tab.flipTopCard();
@@ -57,6 +58,13 @@ public class StrategyController {
 					}
 				}
 				
+				//Move stack of cards between tableaus
+				for (CardStack tabl: tableaus) {
+					if(!tabl.isStackEmpty()) {
+						
+					}
+				}
+	
 				//Check if tableau cards can go to foundations	
 				for(CardStack t: tableaus) {
 					if (!t.isStackEmpty()) {

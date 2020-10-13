@@ -7,6 +7,14 @@ public class TableTop {
 	private CardStack[] tableaus;
 	private CardStack[] foundations;
 	private Deck deck;
+	
+	public Deck getDeck() {
+		return deck;
+	}
+	public void setDeck(Deck deck) {
+		this.deck = deck;
+	}
+
 	private CardCollection talon;
 	public long time;
 
@@ -87,22 +95,18 @@ public class TableTop {
 				temp.add(talon.getCardStack().elementAt(i));
 			}
 
-			deck.setCards(temp);
+			deck.setCards(temp);		}
 
-			//			System.out.println("The deck order after reset: ");
-			//			for(Card c: deck.getCardStack()) {
-			//				System.out.println(c.toString());
-			//			}
-
-			//Loop through the Deck to flip the cards down
-			for (Card c: deck.getCardStack()) {
-				c.flip();
-			}
-
-			//reset Talon to empty cards
-			talon.setCards(new Stack<Card>());
+		//Loop through the Deck to flip the cards down
+		for (Card c: deck.getCardStack()) {
+			c.flip();
 		}
+
+		//reset Talon to empty cards
+		talon.setCards(new Stack<Card>());
 	}
+
+
 
 	/**
 	 * Check to see if the game win
@@ -232,7 +236,19 @@ public class TableTop {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Move stack of cards between tableau
+	 * @param s the stack of card in CardStack
+	 * @return True if move successfully
+	 */
+	public boolean moveStackCardTableau(CardStack s) {
+		//Find the first card that flip up in the card of stack
+		//Check to see if the first card is movable between Tableau
+		//If card is movable, then 
+		//move card from that card to the end of the stack to the new stack
+		return false;
+	}
 	/**
 	 * Print the information of the deck
 	 */
