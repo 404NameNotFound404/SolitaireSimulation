@@ -2,6 +2,8 @@ package entity;
 
 /**
  * 
+ * 
+ * 
  * @author mnguyen001
  *
  */
@@ -51,6 +53,10 @@ public class Card {
 		this.suit = suit;
 	}
 	
+	/**
+	 * Checks if card is a red suit
+	 * 
+	 */
 	public boolean isRed() {
 		return (this.getSuit() == 0 || this.getSuit() == 1);
 	}
