@@ -46,21 +46,26 @@ public class StrategyController {
 				}
 				
 		
-				//Move cards between tableaus 
+			 
 				CardStack[] tableaus = gameBoard.getTableaus();
-				
+				System.out.println();
 				for (CardStack tab: tableaus) {
 					if(!tab.isStackEmpty()) {
-						tab.flipTopCard();
+						
 						System.out.println("The top card in the tableau: " +tab.getCardStack().peek());
-						gameBoard.moveCardTableau(tab.getCardStack());
 						
 					}
 				}
 				
-				//Move stack of cards between tableaus
 				for (CardStack tabl: tableaus) {
 					if(!tabl.isStackEmpty()) {
+						
+						
+						//Move card between tableaus
+						//gameBoard.moveCardTableau(tab.getCardStack());
+						
+						//Move stack of cards between tableaus
+						gameBoard.moveStackCardTableau(tabl.getCardStack());
 						
 					}
 				}

@@ -7,7 +7,7 @@ public class TableTop {
 	private CardStack[] tableaus;
 	private CardStack[] foundations;
 	private Deck deck;
-	
+
 	public Deck getDeck() {
 		return deck;
 	}
@@ -183,7 +183,7 @@ public class TableTop {
 
 	/**
 	 * Move card to the Tableau
-	 * @param c the card want to move
+	 * @param cards the Stack of cards want to move
 	 * @return True if move card successful, and 
 	 * False if move card not successful
 	 */
@@ -215,40 +215,90 @@ public class TableTop {
 	public boolean moveFoundation(Stack<Card> s) {
 		if (s.isEmpty() == false) 
 		{
-		Card c = s.peek();
+			Card c = s.peek();
 
-		if(foundations[c.getSuit()].getCardStack().isEmpty() && c.getValue() == 0) {
-			foundations[c.getSuit()].getCardStack().add(s.pop());
-			turns++;
-			return true;
-		}
-		else if(foundations[c.getSuit()].getCardStack().isEmpty()) {
-			return false;
-		}
-		else if(foundations[c.getSuit()].getCardStack().peek().compareTo(c) == -1) {
-			foundations[c.getSuit()].getCardStack().add(s.pop());
-			turns++;
-			return true;
-		}
-		else {
-			return false;
-		}
+			if(foundations[c.getSuit()].getCardStack().isEmpty() && c.getValue() == 0) {
+				foundations[c.getSuit()].getCardStack().add(s.pop());
+				turns++;
+				return true;
+			}
+			else if(foundations[c.getSuit()].getCardStack().isEmpty()) {
+				return false;
+			}
+			else if(foundations[c.getSuit()].getCardStack().peek().compareTo(c) == -1) {
+				foundations[c.getSuit()].getCardStack().add(s.pop());
+				turns++;
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Move stack of cards between tableau
-	 * @param s the stack of card in CardStack
+	 * @param stack the stack of card in CardStack
 	 * @return True if move successfully
 	 */
-	public boolean moveStackCardTableau(CardStack s) {
+	public void moveStackCardTableau(Stack<Card> stack) {
+		
 		//Find the first card that flip up in the card of stack
-		//Check to see if the first card is movable between Tableau
-		//If card is movable, then 
-		//move card from that card to the end of the stack to the new stack
-		return false;
+		boolean check = false;
+		int count =0;
+		while(!check && count < stack.size()) {
+			if(stack.get(count).isFaceUp()) {
+				check = true;
+			}
+			else {
+				count++;
+			}
+		}
+		Stack<Card> tempStack = new Stack<Card>();
+		
+		//The first flip up card in the stack 
+		Card c = stack.get(count);
+
+		//Check to see if the card is movable between Tableau
+		for(CardStack t: tableaus) {
+			
+			if(!t.isStackEmpty()) {
+				if(t.getCardStack().peek().isFaceUp()== false) {
+					t.flipTopCard();
+				}
+				Card card = t.getCardStack().peek();
+
+				if(card.compareTo(c) == 1 && card.isRed() != c.isRed()) {
+					//If card is movable, then 
+					//create a new stack contains the movable stack
+					while(count < stack.size()) {
+						tempStack.push(stack.pop());
+						count++;
+					}
+					
+					for (int i = 0; i < tempStack.size() ; i++) {
+						t.addToStack(tempStack.pop());
+					}
+					turns++;
+				}
+			}
+			else if (c.getValue() == 12){
+				//If card is movable, then 
+				//create a new stack contains the movable stack
+				while(count < stack.size()) {
+					tempStack.push(stack.pop());
+					count++;
+				}
+				for (int i = 0; i < tempStack.size() ; i++) {
+					t.addToStack(tempStack.pop());
+				}
+				turns++;
+			}
+		}
+
 	}
+
 	/**
 	 * Print the information of the deck
 	 */
