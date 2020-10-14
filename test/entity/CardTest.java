@@ -45,7 +45,7 @@ public class CardTest {
 	@Test
 	public void testFlip() {
 		Card c = new Card(0,2);
-		c.flip();
+		c.flip(true);
 		assertTrue(c.isFaceUp());
 				
 	}

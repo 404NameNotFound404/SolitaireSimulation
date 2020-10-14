@@ -99,7 +99,7 @@ public class TableTop {
 
 		//Loop through the Deck to flip the cards down
 		for (Card c: deck.getCardStack()) {
-			c.flip();
+			c.flip(false);
 		}
 
 		//reset Talon to empty cards
@@ -148,7 +148,7 @@ public class TableTop {
 				tableaus[i].addToStack(cardToAdd);
 				count++;
 			}
-			tableaus[i].getCardStack().peek().flip();
+			tableaus[i].getCardStack().peek().flip(true);
 
 		}
 
@@ -221,7 +221,7 @@ public class TableTop {
 				foundations[c.getSuit()].getCardStack().add(s.pop());
 				turns++;
 				if(!s.isEmpty()) {
-					s.peek().flip();
+					s.peek().flip(true);
 				}
 				return true;
 			}
@@ -232,7 +232,7 @@ public class TableTop {
 				foundations[c.getSuit()].getCardStack().add(s.pop());
 				turns++;
 				if(!s.isEmpty()) {
-					s.peek().flip();
+					s.peek().flip(true);
 				}
 				return true;
 			}
@@ -294,7 +294,7 @@ public class TableTop {
 					//flip the card after move
 					if(!stack.isEmpty())
 					{
-						stack.peek().flip();
+						stack.peek().flip(true);
 					}
 					
 					turns++;

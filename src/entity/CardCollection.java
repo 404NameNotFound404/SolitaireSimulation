@@ -39,7 +39,7 @@ public class CardCollection {
 	 * Flip the top card in the stack
 	 */
     public void flipTopCard(){
-        cards.peek().flip();
+        cards.peek().flip(true);
     }
 
     /**

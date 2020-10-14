@@ -37,8 +37,8 @@ public class Card {
 	/**
 	 * Flip the card
 	 */
-	public void flip(){
-		this.setFaceUp(true);
+	public void flip(boolean f){
+		this.setFaceUp(f);
 	}
 	/**
 	 * @return the suit

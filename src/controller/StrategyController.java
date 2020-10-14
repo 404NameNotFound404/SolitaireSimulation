@@ -43,6 +43,7 @@ public class StrategyController {
 					gameBoard.resetDrawPile();
 					System.out.println();
 					System.out.println("RESET THE DECK OF CARDS!!");
+					gameBoard.printDeck();
 				}
 				
 		
