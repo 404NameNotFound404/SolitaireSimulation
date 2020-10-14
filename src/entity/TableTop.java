@@ -123,6 +123,7 @@ public class TableTop {
 		}
 		return isWin;
 	}
+	
 
 
 	public void setFoundation(int index, CardStack c) {
@@ -134,14 +135,12 @@ public class TableTop {
 	 */
 	public void generateBoard() {
 
-		//deck.shuffleDeck();
-		deck.winDeck();
-		System.out.println("Size of the WIN DECK: " + deck.getSize());
+
+		//deck.winDeck();
+		
 		//deck.impossibleDeck();
 
-		//deck.shuffleDeck();
-
-		int count = 0;
+		deck.shuffleDeck();
 
 		for (int i = 0; i < 7; i++) {
 			tableaus[i] = new CardStack();
@@ -153,7 +152,6 @@ public class TableTop {
 				Card cardToAdd = deck.drawCard();
 
 				tableaus[i].addToStack(cardToAdd);
-				count++;
 			}
 			tableaus[i].getCardStack().peek().flip(true);
 
@@ -229,10 +227,10 @@ public class TableTop {
 
 			if(foundations[c.getSuit()].getCardStack().isEmpty() && c.getValue() == 0) {
 				foundations[c.getSuit()].getCardStack().add(s.pop());
-				turns++;
 				if(!s.isEmpty()) {
 					s.peek().flip(true);
 				}
+				turns++;
 				return true;
 			}
 			else if(foundations[c.getSuit()].getCardStack().isEmpty()) {
@@ -240,10 +238,10 @@ public class TableTop {
 			}
 			else if(foundations[c.getSuit()].getCardStack().peek().compareTo(c) == -1) {
 				foundations[c.getSuit()].getCardStack().add(s.pop());
-				turns++;
 				if(!s.isEmpty()) {
 					s.peek().flip(true);
 				}
+				turns ++;
 				return true;
 			}
 			else {
@@ -253,7 +251,7 @@ public class TableTop {
 		return false;
 	}
 	
-	public void moveStackCardTableau(Stack<Card> stack) {
+	public boolean moveStackCardTableau(Stack<Card> stack) {
 		Card tempCard = new Card(0,0);
 		//Find the first card that flip up the card of stack
 		for(Card c: stack) {
@@ -288,7 +286,7 @@ public class TableTop {
 						stack.peek().flip(true);
 					}
 					turns++;
-					break;
+					return true;
 				}
 			}
 			else if (tempCard.getValue() == 12){
@@ -307,9 +305,11 @@ public class TableTop {
 				}
 						
 				turns++;
-				break;
+				return true;
 			}
+			
 		}
+		return false;
 		
 		
 	}

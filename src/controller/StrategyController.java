@@ -3,6 +3,8 @@
  */
 package controller;
 
+import java.util.ArrayList;
+
 import entity.Card;
 import entity.CardStack;
 import entity.TableTop;
@@ -23,6 +25,8 @@ public class StrategyController {
 		public static TableTop playGame() {
 			int deckTurns = 0;
 			long start = System.currentTimeMillis();
+			boolean stop = false;
+			
 			gameBoard = new TableTop();
 			gameBoard.generateBoard();
 
@@ -35,8 +39,9 @@ public class StrategyController {
 			System.out.println("Tableaus before move: ");
 			gameBoard.printTableaus();
 
-			while(gameBoard.checkForWin() == false) {
-
+			while(gameBoard.checkForWin() == false && stop == false) {
+				int turns = gameBoard.getTurns();
+				System.out.println("TURNS: " + turns);
 				if (deckTurns < 3) {
 					//Check if the Deck is empty to reset the Deck
 					if (gameBoard.getDrawPile().getSize() == 0) {
@@ -60,7 +65,7 @@ public class StrategyController {
 					}
 
 				}
-
+				
 				//Check if tableau cards can go to foundations	
 				for(CardStack t: tableaus) {
 					if (!t.isStackEmpty()) {
@@ -72,9 +77,9 @@ public class StrategyController {
 				System.out.println();
 				System.out.println("FOUNDATIONS AFTER GO THROUGH TABLEAUS: ");
 				gameBoard.printFoundations();
-
-
+			
 				for (CardStack tabl: tableaus) {
+					
 					if(!tabl.isStackEmpty()) {
 
 						//Move card between tableaus
@@ -85,6 +90,8 @@ public class StrategyController {
 
 					}
 				}
+				
+				
 				if (deckTurns < 3) {
 					if (!gameBoard.getDrawPile().getCardStack().isEmpty()) {
 						//Draw card from Deck Card to Talon
@@ -107,6 +114,11 @@ public class StrategyController {
 
 					}
 				}
+				else if(deckTurns == 3 && turns == gameBoard.getTurns()) {
+					System.out.println("CHECK: ");
+					stop = true;
+				}
+			
 				//Print out tableaus after move
 				System.out.println();
 				System.out.println("Tableaus after move: ");
