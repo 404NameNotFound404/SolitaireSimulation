@@ -203,9 +203,6 @@ public class TableTop {
 			}
 			else if (cards.peek().getValue() == 12){
 				s.addToStack(cards.pop());
-				if(!cards.isEmpty()) {
-					cards.peek().flip(true);
-				}
 				turns++;
 				return true;
 			}
@@ -248,80 +245,66 @@ public class TableTop {
 		}
 		return false;
 	}
-
-	/**
-	 * Move stack of cards between tableau
-	 * @param stack the stack of card in CardStack
-	 * @return True if move successfully
-	 */
+	
 	public void moveStackCardTableau(Stack<Card> stack) {
-		
-		//Find the first card that flip up in the card of stack
-		boolean check = false;
-		int count =0;
-		while(!check && count < stack.size()) {
-			if(stack.get(count).isFaceUp()) {
-				check = true;
-			}
-			else {
-				count++;
+		Card tempCard = new Card(0,0);
+		//Find the first card that flip up the card of stack
+		for(Card c: stack) {
+			if(c.isFaceUp()) {
+				tempCard = c;
+				break;
 			}
 		}
-		Stack<Card> tempStack = new Stack<Card>();
 		
-		System.out.println(count);
-		System.out.println("Size: " + stack.size());
-		//The first flip up card in the stack 
-		Card c = stack.get(count);
-		System.out.println(count + " " + c.toString());
-
-		//Check to see if the card is movable between Tableau
+		//Check to see if card can move to other tableaus
 		for(CardStack t: tableaus) {
-
 			if(!t.isStackEmpty()) {
-				//flip the top card
-//				if(t.getCardStack().peek().isFaceUp()== false) {
-//					t.flipTopCard();
-//				}
 				Card card = t.getCardStack().peek();
-
-				if(card.compareTo(c) == 1 && card.isRed() != c.isRed()) {
-					//If card is movable, then 
-					//create a new stack contains the movable stack
+				if(card.compareTo(tempCard) == 1 && card.isRed() != tempCard.isRed()) {
 					
-					for(int j = 0; j < stack.size() - count; j ++) {
-						tempStack.push(stack.pop());
-						
+					//Make a temp stack that have all the cards that move
+					Stack<Card> tempStack = new Stack<Card>();
+					for(Card ca: stack) {
+						if(ca.isFaceUp()) {
+							tempStack.push(ca);
+						}
 					}
-
-					for (int i = 0; i < tempStack.size() ; i++) {
-						t.addToStack(tempStack.pop());
+					
+					//Add the card to the new stack
+					for(Card car: tempStack) {
+						t.addToStack(car);
 					}
-					//flip the card after move
-					if(!stack.isEmpty())
-					{
+					
+					//Flip the card in the stack after move
+					if(!stack.isEmpty()) {
 						stack.peek().flip(true);
 					}
-					
 					turns++;
 					break;
 				}
 			}
-			else if (c.getValue() == 12){
-				//If card is movable, then 
-				//create a new stack contains the movable stack
-				for(int j = 0; j < stack.size() - count; j ++) {
-					tempStack.push(stack.pop());
-					
+			else if (tempCard.getValue() == 12){
+				//Make a temp stack that have all the cards that move
+				Stack<Card> tempStack = new Stack<Card>();
+				for(Card ca: stack) {
+					if(ca.isFaceUp()) {
+						tempStack.push(ca);
+					}
 				}
-				for (int i = 0; i < tempStack.size() ; i++) {
-					t.addToStack(tempStack.pop());
+				
+				//Add the card to the new stack
+				for(Card car: tempStack) {
+					t.addToStack(car);
 				}
+						
 				turns++;
+				break;
 			}
 		}
-
+		
+		
 	}
+
 
 	/**
 	 * Print the information of the deck
