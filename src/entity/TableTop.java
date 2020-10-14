@@ -272,6 +272,7 @@ public class TableTop {
 					
 					//Add the card to the new stack
 					for(Card car: tempStack) {
+						stack.pop();
 						t.addToStack(car);
 					}
 					
