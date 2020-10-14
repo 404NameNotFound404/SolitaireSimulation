@@ -220,6 +220,9 @@ public class TableTop {
 			if(foundations[c.getSuit()].getCardStack().isEmpty() && c.getValue() == 0) {
 				foundations[c.getSuit()].getCardStack().add(s.pop());
 				turns++;
+				if(!s.isEmpty()) {
+					s.peek().flip();
+				}
 				return true;
 			}
 			else if(foundations[c.getSuit()].getCardStack().isEmpty()) {
@@ -228,6 +231,9 @@ public class TableTop {
 			else if(foundations[c.getSuit()].getCardStack().peek().compareTo(c) == -1) {
 				foundations[c.getSuit()].getCardStack().add(s.pop());
 				turns++;
+				if(!s.isEmpty()) {
+					s.peek().flip();
+				}
 				return true;
 			}
 			else {
@@ -256,9 +262,12 @@ public class TableTop {
 			}
 		}
 		Stack<Card> tempStack = new Stack<Card>();
-
+		
+		System.out.println(count);
+		System.out.println("Size: " + stack.size());
 		//The first flip up card in the stack 
 		Card c = stack.get(count);
+		System.out.println(count + " " + c.toString());
 
 		//Check to see if the card is movable between Tableau
 		for(CardStack t: tableaus) {
@@ -283,7 +292,7 @@ public class TableTop {
 						t.addToStack(tempStack.pop());
 					}
 					//flip the card after move
-					if(stack.size()!= 0)
+					if(!stack.isEmpty())
 					{
 						stack.peek().flip();
 					}

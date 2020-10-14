@@ -62,6 +62,7 @@ public class StrategyController {
 				for(CardStack t: tableaus) {
 					if (!t.isStackEmpty()) {
 					gameBoard.moveFoundation(t.getCardStack());
+					
 					}
 				}
 				
