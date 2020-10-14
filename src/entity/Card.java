@@ -110,6 +110,7 @@ public class Card {
 		else {
 			description = "club";
 		}
+	
 		description += " " + rank[this.getValue()] + " face up: " + this.isFaceUp();
 		
 		return description;

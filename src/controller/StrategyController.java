@@ -14,7 +14,7 @@ import entity.TableTop;
 public class StrategyController {
 	public static TableTop gameBoard;
 	public static long timeToPlay;
-	
+
 	public static class StaticStrategyController{
 
 		/**
@@ -25,83 +25,87 @@ public class StrategyController {
 			long start = System.currentTimeMillis();
 			gameBoard = new TableTop();
 			gameBoard.generateBoard();
-			
+
 			//Print out the deck before play game
 			System.out.println("Deck before play game: ");
 			gameBoard.printDeck();
-			
+
 			//Print out tableaus before move
 			System.out.println();
 			System.out.println("Tableaus before move: ");
 			gameBoard.printTableaus();
 
-			while(gameBoard.checkForWin() == false && deckTurns < 3) {
-				
-				//Check if the Deck is empty to reset the Deck
-				if (gameBoard.getDrawPile().getSize() == 0) {
-					deckTurns++;
-					gameBoard.resetDrawPile();
-					System.out.println();
-					System.out.println("RESET THE DECK OF CARDS!!");
-					gameBoard.printDeck();
+			while(gameBoard.checkForWin() == false) {
+
+				if (deckTurns < 3) {
+					//Check if the Deck is empty to reset the Deck
+					if (gameBoard.getDrawPile().getSize() == 0) {
+						deckTurns++;
+						gameBoard.resetDrawPile();
+						System.out.println();
+						System.out.println("RESET THE DECK OF CARDS!!");
+						gameBoard.printDeck();
+					}
 				}
-				
-		
-			 
+
+
+
 				CardStack[] tableaus = gameBoard.getTableaus();
 				System.out.println();
 				for (CardStack tab: tableaus) {
 					if(!tab.isStackEmpty()) {
-						
+
 						System.out.println("The top card in the tableau: " +tab.getCardStack().peek());
-						
+
 					}
-	
+
 				}
-	
+
 				//Check if tableau cards can go to foundations	
 				for(CardStack t: tableaus) {
 					if (!t.isStackEmpty()) {
-					gameBoard.moveFoundation(t.getCardStack());
-					
+						gameBoard.moveFoundation(t.getCardStack());
+
 					}
 				}
-				
+
 				System.out.println();
 				System.out.println("FOUNDATIONS AFTER GO THROUGH TABLEAUS: ");
 				gameBoard.printFoundations();
-				
-				
+
+
 				for (CardStack tabl: tableaus) {
 					if(!tabl.isStackEmpty()) {
-						
+
 						//Move card between tableaus
 						//gameBoard.moveCardTableau(tabl.getCardStack());
-						
+
 						//Move stack of cards between tableaus
 						gameBoard.moveStackCardTableau(tabl.getCardStack());
-						
+
 					}
 				}
-				if (!gameBoard.getDrawPile().getCardStack().isEmpty()) {
-					//Draw card from Deck Card to Talon
-					gameBoard.moveToTalon();
-				}
-				
-				if (!gameBoard.getTalon().getCardStack().isEmpty()) {
-					//Print out first card in Talon
-					System.out.println();
-					System.out.println("THE FIRST CARD IN TALON: ");
-					System.out.println(gameBoard.getTalon().getCardStack().peek().toString());
-
-					//Check if the card can go into any of the foundation stacks
-					if(gameBoard.moveFoundation(gameBoard.getTalon().getCardStack())) {
-						continue;
+				if (deckTurns < 3) {
+					if (!gameBoard.getDrawPile().getCardStack().isEmpty()) {
+						//Draw card from Deck Card to Talon
+						gameBoard.moveToTalon();
 					}
 
-					//Check if the card can go into any of the Tableaus
-					gameBoard.moveCardTableau(gameBoard.getTalon().getCardStack());
+					if (!gameBoard.getTalon().getCardStack().isEmpty()) {
+						//Print out first card in Talon
+						System.out.println();
+						System.out.println("THE FIRST CARD IN TALON: ");
+						System.out.println(gameBoard.getTalon().getCardStack().peek().toString());
 
+						//Check if the card can go into any of the foundation stacks
+						if(gameBoard.moveFoundation(gameBoard.getTalon().getCardStack())) {
+							continue;
+						}
+
+						//Check if the card can go into any of the Tableaus
+						gameBoard.moveCardTableau(gameBoard.getTalon().getCardStack());
+
+					}
 				}
 				//Print out tableaus after move
 				System.out.println();
@@ -109,38 +113,38 @@ public class StrategyController {
 				gameBoard.printTableaus();
 
 			}
-			
+
 			long end = System.currentTimeMillis();
 			timeToPlay = end - start;
-			
+
 			gameBoard.setTime(timeToPlay);
-			
+
 			//Print out the deck after play game
 			gameBoard.printDeck();
 
 			return gameBoard;
 		}
 
-//		/**
-//		 * Check to see if any cards in the Tableaus can be moved
-//		 * into the foundation
-//		 * @return True if it move any card from the Tableaus to 
-//		 * the Foundations
-//		 */
-//		public static boolean moveTableauToFoundation() {
-//
-//			boolean check = false;
-//			
-//			//get the tableaus from the foundation
-//			CardStack[] tableaus = gameBoard.getTableaus();
-//
-//			for(CardStack s: tableaus) {
-//				check = gameBoard.moveFoundation(s.getCardStack());
-//			}
-//
-//			return check;
-//		}
-	
+		//		/**
+		//		 * Check to see if any cards in the Tableaus can be moved
+		//		 * into the foundation
+		//		 * @return True if it move any card from the Tableaus to 
+		//		 * the Foundations
+		//		 */
+		//		public static boolean moveTableauToFoundation() {
+		//
+		//			boolean check = false;
+		//			
+		//			//get the tableaus from the foundation
+		//			CardStack[] tableaus = gameBoard.getTableaus();
+		//
+		//			for(CardStack s: tableaus) {
+		//				check = gameBoard.moveFoundation(s.getCardStack());
+		//			}
+		//
+		//			return check;
+		//		}
+
 
 
 
