@@ -56,6 +56,10 @@ public class Deck extends CardCollection{
         }
 	}
 	
+	
+	/**
+	 * A deck designed to always win
+	 */
 	public void winDeck()
 	{
 		//spade = 3, club = 2, diamond = 1, heart = 0
@@ -170,6 +174,10 @@ public class Deck extends CardCollection{
 		super.setCards(deck);
 	}
 	
+	
+	/**
+	 * A deck designed to always lose
+	 */
 	public void impossibleDeck()
 	{
 		//spade = 3, club = 2, diamond = 1, heart = 0
@@ -281,6 +289,6 @@ public class Deck extends CardCollection{
 		deck.add(dK);
 		deck.add(hK);
 		
-		
+		super.setCards(deck);
 	}
 }
