@@ -115,7 +115,7 @@ public class SimulationController {
 		
 		public static void main(String[] args) {
 			
-			ArrayList<TableTop> allGames = startSimulation(1000);
+			ArrayList<TableTop> allGames = startSimulation(Integer.parseInt(args[0]));
 
 			double[] turnsArray = new double[allGames.size()];
 			double[] timeArray = new double[allGames.size()];
