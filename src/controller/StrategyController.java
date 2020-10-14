@@ -76,7 +76,7 @@ public class StrategyController {
 					if(!tabl.isStackEmpty()) {
 						
 						//Move card between tableaus
-						//gameBoard.moveCardTableau(tab.getCardStack());
+						//gameBoard.moveCardTableau(tabl.getCardStack());
 						
 						//Move stack of cards between tableaus
 						gameBoard.moveStackCardTableau(tabl.getCardStack());
