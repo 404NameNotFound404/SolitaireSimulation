@@ -247,6 +247,7 @@ public class TableTop {
 		//Find the first card that flip up in the card of stack
 		boolean check = false;
 		int count =0;
+		Card c = null;
 		while(!check && count < stack.size()) {
 			if(stack.get(count).isFaceUp()) {
 				check = true;
@@ -258,7 +259,7 @@ public class TableTop {
 		Stack<Card> tempStack = new Stack<Card>();
 
 		//The first flip up card in the stack 
-		Card c = stack.get(count);
+		c = stack.get(count);
 
 		//Check to see if the card is movable between Tableau
 		for(CardStack t: tableaus) {
