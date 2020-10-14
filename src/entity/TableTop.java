@@ -134,10 +134,11 @@ public class TableTop {
 	public void generateBoard() {
 
 		//deck.shuffleDeck();
-		//deck.winDeck();
+		deck.winDeck();
+		System.out.println("Size of the WIN DECK: " + deck.getSize());
 		//deck.impossibleDeck();
 
-		deck.shuffleDeck();
+		//deck.shuffleDeck();
 
 		int count = 0;
 
@@ -332,6 +333,7 @@ public class TableTop {
 	public void printTableaus() {
 		System.out.println();
 		System.out.println("THE TABLEAUS from left to right: ");
+		
 		int count = 1;
 		for (CardStack s : tableaus) {
 			System.out.println();
