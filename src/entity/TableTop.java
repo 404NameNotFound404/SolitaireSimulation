@@ -265,6 +265,7 @@ public class TableTop {
 		for(CardStack t: tableaus) {
 			if(!t.isStackEmpty()) {
 				Card card = t.getCardStack().peek();
+				//System.out.println("COMPARE CARD : " + tempCard.toString() + " to TABLEAU: " + card.toString() );
 				if(card.compareTo(tempCard) == 1 && card.isRed() != tempCard.isRed()) {
 					
 					//Make a temp stack that have all the cards that move
@@ -289,7 +290,7 @@ public class TableTop {
 					return true;
 				}
 			}
-			else if (tempCard.getValue() == 12){
+			else if (tempCard.getValue() == 12 && stack.get(0).compareTo(tempCard) != 0){
 				//Make a temp stack that have all the cards that move
 				Stack<Card> tempStack = new Stack<Card>();
 				for(Card ca: stack) {

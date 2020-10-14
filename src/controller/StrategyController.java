@@ -118,6 +118,9 @@ public class StrategyController {
 					System.out.println("CHECK: ");
 					stop = true;
 				}
+				else if(turns > 1000) {
+					stop = true;
+				}
 			
 				//Print out tableaus after move
 				System.out.println();
