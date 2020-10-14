@@ -253,6 +253,7 @@ public class TableTop {
 		//Find the first card that flip up in the card of stack
 		boolean check = false;
 		int count =0;
+
 		while(!check && count < stack.size()) {
 			if(stack.get(count).isFaceUp()) {
 				check = true;
@@ -266,6 +267,7 @@ public class TableTop {
 		System.out.println(count);
 		System.out.println("Size: " + stack.size());
 		//The first flip up card in the stack 
+
 		Card c = stack.get(count);
 		System.out.println(count + " " + c.toString());
 
