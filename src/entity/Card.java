@@ -65,7 +65,7 @@ public class Card {
 	 * @return the value
 	 */
 	public int getValue() {
-		return value;
+		return this.value;
 	}
 	/**
 	 * @param value the value to set
@@ -110,8 +110,8 @@ public class Card {
 		else {
 			description = "club";
 		}
-
-		description += " " + rank[this.getValue()] + " face up: " + faceUp;
+		description += " " + rank[this.getValue()] + " face up: " + this.isFaceUp();
+		
 		return description;
 	}
 	
