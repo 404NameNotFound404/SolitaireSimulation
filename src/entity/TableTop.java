@@ -132,7 +132,7 @@ public class TableTop {
 	 * Generate the game board
 	 */
 	public void generateBoard() {
-		//deck.shuffleDeck();
+		deck.shuffleDeck();
 		
 		int count = 0;
 
@@ -194,12 +194,18 @@ public class TableTop {
 				Card card = s.getCardStack().peek();
 				if(card.compareTo(cards.peek()) == 1 && card.isRed() != cards.peek().isRed()) {
 					s.addToStack(cards.pop());
+					if(!cards.isEmpty()) {
+						cards.peek().flip(true);
+					}
 					turns++;
 					return true;
 				}
 			}
 			else if (cards.peek().getValue() == 12){
 				s.addToStack(cards.pop());
+				if(!cards.isEmpty()) {
+					cards.peek().flip(true);
+				}
 				turns++;
 				return true;
 			}
