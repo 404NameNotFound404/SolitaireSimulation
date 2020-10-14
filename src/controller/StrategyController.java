@@ -115,7 +115,6 @@ public class StrategyController {
 					}
 				}
 				else if(deckTurns == 3 && turns == gameBoard.getTurns()) {
-					System.out.println("CHECK: ");
 					stop = true;
 				}
 				else if(turns > 1000) {

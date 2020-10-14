@@ -304,6 +304,11 @@ public class TableTop {
 					stack.pop();
 					t.addToStack(car);
 				}
+				
+				//Flip the card in the stack after move
+				if(!stack.isEmpty()) {
+					stack.peek().flip(true);
+				}
 						
 				turns++;
 				return true;
