@@ -133,7 +133,8 @@ public class TableTop {
 	 */
 	public void generateBoard() {
 		//deck.shuffleDeck();
-		
+		//deck.winDeck();
+		//deck.impossibleDeck();
 		int count = 0;
 
 		for (int i = 0; i < 7; i++) {
