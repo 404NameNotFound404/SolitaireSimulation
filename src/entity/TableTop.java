@@ -117,6 +117,7 @@ public class TableTop {
 	public boolean checkForWin() {
 		isWin = true;
 		for (CardStack cards : foundations) {
+			System.out.println("HERE: " + cards);
 			if (cards.getSize() < 13){
 				isWin = false;
 			}

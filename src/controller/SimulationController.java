@@ -36,7 +36,7 @@ public class SimulationController {
 		int w = 0;
 		
 		for(TableTop t: games) {
-			if(t.getWin()==true) {
+			if(t.checkForWin()==true) {
 				w++;
 			}
 		}
@@ -88,7 +88,7 @@ public class SimulationController {
 		public static double getWinPercentage(ArrayList<TableTop> games) {
 			int w = getWins(games);
 			int g = games.size();
-			return w/g;
+			return (double) w/(double) g;
 		}
 		
 		/**
