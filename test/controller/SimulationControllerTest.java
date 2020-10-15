@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import entity.Deck;
 import entity.TableTop;
 /**
  * @author MiaLi
@@ -44,6 +46,10 @@ public class SimulationControllerTest {
 		gameboard2.setTime(8);
 		gameboard3.setTime(9);
 		
+		gameboard1.generateBoard();
+		gameboard2.generateBoard();
+		gameboard3.generateBoard();
+		
 		totalTime = 9 + 7 + 8;
 		averageTime = totalTime /3;
 		
@@ -54,9 +60,24 @@ public class SimulationControllerTest {
 	}
 	
 	@Test
-	public void testGetWins() {
-		
-		assertTrue(SimulationController.getWins(games)== 2);
+	public void testGetWinsNone() {
+		ArrayList<TableTop> games2 = new ArrayList<TableTop>();
+		TableTop gameboard4 = new TableTop();
+		gameboard4.setWin(false);
+		gameboard4.generateBoard();
+		games2.add(gameboard4);
+		assertTrue(SimulationController.getWins(games2)== 0);
+
+	}
+	
+	@Test
+	public void testGetWinsOne() {
+		ArrayList<TableTop> games2 = new ArrayList<TableTop>();
+		TableTop gameboard4 = new TableTop();
+		gameboard4.setWin(true);
+		gameboard4.generateBoard();
+		games2.add(gameboard4);
+		assertTrue(SimulationController.getWins(games2) == 1);
 
 	}
 	
