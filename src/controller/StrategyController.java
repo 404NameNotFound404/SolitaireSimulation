@@ -78,18 +78,6 @@ public class StrategyController {
 				System.out.println("FOUNDATIONS AFTER GO THROUGH TABLEAUS: ");
 				gameBoard.printFoundations();
 			
-				for (CardStack tabl: tableaus) {
-					
-					if(!tabl.isStackEmpty()) {
-
-						//Move card between tableaus
-						//gameBoard.moveCardTableau(tabl.getCardStack());
-
-						//Move stack of cards between tableaus
-						gameBoard.moveStackCardTableau(tabl.getCardStack());
-
-					}
-				}
 				
 				
 				if (deckTurns < 3) {
@@ -112,6 +100,19 @@ public class StrategyController {
 						//Check if the card can go into any of the Tableaus
 						gameBoard.moveCardTableau(gameBoard.getTalon().getCardStack());
 
+					}
+					
+					for (CardStack tabl: tableaus) {
+						
+						if(!tabl.isStackEmpty()) {
+
+							//Move card between tableaus
+							//gameBoard.moveCardTableau(tabl.getCardStack());
+
+							//Move stack of cards between tableaus
+							gameBoard.moveStackCardTableau(tabl.getCardStack());
+
+						}
 					}
 				}
 				else if(deckTurns == 3 && turns == gameBoard.getTurns()) {
