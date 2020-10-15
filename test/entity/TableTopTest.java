@@ -18,6 +18,7 @@ public class TableTopTest {
 	
 	@Test 
 	public void testGenerateBoardNumberOfCards() {
+		
 		//test foundation and tableau length
 		assertEquals(7, gameBoard.getTableaus().length);
 		assertEquals(4, gameBoard.getFoundation().length);
@@ -43,9 +44,9 @@ public class TableTopTest {
 	
 	@Test
 	public void testGenerateBoardCorrectCardsFlippedinTableau() {
+
 		CardStack[] tabs = gameBoard.getTableaus();
-		
-		
+	
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < tabs[i].getCardStack().size(); j++) {
 				if (i == tabs[i].getCardStack().size()-1) {
@@ -64,7 +65,8 @@ public class TableTopTest {
 
 	
 	@Test
-	public void moveTalon() {
+	public void testMoveTalon() {
+		
 		assertTrue(gameBoard.getTalon().isStackEmpty());
 		
 		gameBoard.moveToTalon();
@@ -75,7 +77,7 @@ public class TableTopTest {
 	
 	
 	@Test
-	public void setTableau() {
+	public void testSetTableau() {
 		CardStack s = new CardStack();
 		Card c1 = new Card (0, 0);
 		s.addToStack(c1);
@@ -91,20 +93,25 @@ public class TableTopTest {
 	@Test
 	public void testCheckMoveTableauPassFirstTableau() {
 		CardStack s = new CardStack();
-		Card c1 = new Card (0, 0);
+		Card c1 = new Card (2, 1);
+		c1.flip(true);
+		
 		s.addToStack(c1);
 		gameBoard.setTableau(0, s);
 		
-		Card c2 = new Card(2, 1);
-		
+		Card c2 = new Card(0, 0);
+		c2.flip(true);
 		CardStack s2 = new CardStack();
 		s2.addToStack(c2);
 		
 		gameBoard.setTalon(s2);
 		
-		assertTrue(gameBoard.moveCardTableau(gameBoard.getTalon().getCardStack()));
 		
+		assertTrue(gameBoard.moveCardTableau(gameBoard.getTalon().getCardStack()));
 		assertEquals(2, gameBoard.getTableaus()[0].getSize());
+		assertEquals(0, gameBoard.getTalon().getSize());
+		
+		
 	}
 	
 	@Test
@@ -116,13 +123,23 @@ public class TableTopTest {
 		CardStack s5 = new CardStack();
 		CardStack s6 = new CardStack();
 		CardStack s7 = new CardStack();
+		
 		Card c1 = new Card (1, 0);
-		Card c2 = new Card (3, 1);
+		Card c2 = new Card (3, 5);
 		Card c3 = new Card (1, 2);
-		Card c4 = new Card (0, 0);
+		Card c4 = new Card (2, 1);
 		Card c5 = new Card (1, 5);
 		Card c6 = new Card (1, 5);
-		Card c7 = new Card (3, 1);
+		Card c7 = new Card (0, 1);
+		
+		c1.flip(true);
+		c2.flip(true);
+		c3.flip(true);
+		c4.flip(true);
+		c5.flip(true);
+		c6.flip(true);
+		c7.flip(true);
+		
 		s1.addToStack(c1);
 		s2.addToStack(c2);
 		s3.addToStack(c3);
@@ -138,15 +155,22 @@ public class TableTopTest {
 		gameBoard.setTableau(5, s6);
 		gameBoard.setTableau(6, s7);
 		
-		Card cardToAdd = new Card(2, 1);
+		Card cardToAdd = new Card(0, 0);
+		cardToAdd.flip(true);
 		
-		s4.addToStack(cardToAdd);
+		CardStack talon = new CardStack();
+		talon.addToStack(cardToAdd);
 		
-		gameBoard.setTalon(s2);
+		gameBoard.setTalon(talon);
 		
-		assertTrue(gameBoard.moveCardTableau(s4.getCardStack()));
+		System.out.println(gameBoard.getTalon().getCardStack().peek());
 		
+		
+		assertTrue(gameBoard.moveCardTableau(gameBoard.getTalon().getCardStack()));
+		//System.out.println(gameBoard.getTableaus()[0].getCardStack().peek());
+		//System.out.println(gameBoard.getTableaus()[3].getCardStack().peek());
 		assertEquals(2, gameBoard.getTableaus()[3].getSize());
+		
 	}
 	
 	@Test
@@ -158,13 +182,22 @@ public class TableTopTest {
 		CardStack s5 = new CardStack();
 		CardStack s6 = new CardStack();
 		CardStack s7 = new CardStack();
-		Card c1 = new Card (1, 0);
-		Card c2 = new Card (3, 1);
+		Card c1 = new Card (2, 0);
+		Card c2 = new Card (0, 0);
 		Card c3 = new Card (1, 2);
-		Card c4 = new Card (3, 1);
+		Card c4 = new Card (1, 1);
 		Card c5 = new Card (1, 5);
 		Card c6 = new Card (1, 5);
-		Card c7 = new Card (0, 0);
+		Card c7 = new Card (2, 1);
+		
+		c1.flip(true);
+		c2.flip(true);
+		c3.flip(true);
+		c4.flip(true);
+		c5.flip(true);
+		c6.flip(true);
+		c7.flip(true);
+		
 		s1.addToStack(c1);
 		s2.addToStack(c2);
 		s3.addToStack(c3);
@@ -172,6 +205,7 @@ public class TableTopTest {
 		s5.addToStack(c5);
 		s6.addToStack(c6);
 		s7.addToStack(c7);
+		
 		gameBoard.setTableau(0, s1);
 		gameBoard.setTableau(1, s2);
 		gameBoard.setTableau(2, s3);
@@ -180,13 +214,9 @@ public class TableTopTest {
 		gameBoard.setTableau(5, s6);
 		gameBoard.setTableau(6, s7);
 		
-		Card cardToAdd = new Card(2, 1);
 		
-		s7.addToStack(cardToAdd);
 		
-		gameBoard.setTalon(s2);
-		
-		assertTrue(gameBoard.moveCardTableau(s7.getCardStack()));
+		assertTrue(gameBoard.moveCardTableau(gameBoard.getTableaus()[1].getCardStack()));
 		
 		assertEquals(2, gameBoard.getTableaus()[6].getSize());
 	}
@@ -339,17 +369,15 @@ public class TableTopTest {
 		CardStack s2 = new CardStack();
 		CardStack s3 = new CardStack();
 		CardStack s4 = new CardStack();
-		CardStack s5 = new CardStack();
-		CardStack s6 = new CardStack();
-		CardStack s7 = new CardStack();
-		Card c1 = new Card (3, 0);
-		Card c2 = new Card (2, 1);
+
+		Card c1 = new Card (0, 7);
+		Card c2 = new Card (2, 3);
 		Card c3 = new Card (1, 2);
-		Card c4 = new Card (2, 3);
+		Card c4 = new Card (2, 1);
 		
-		Card c5 = new Card (1, 5);
-		Card c6 = new Card (2, 5);
-		Card c7 = new Card (1, 0);
+		Card c5 = new Card (1, 3);
+		Card c6 = new Card (2, 6);
+		Card c7 = new Card (1, 4);
 		
 		c2.flip(true);
 		c3.flip(true);
@@ -360,22 +388,42 @@ public class TableTopTest {
 		s1.addToStack(c2);
 		s1.addToStack(c3);
 		s1.addToStack(c4);
+		
+		
+		
 		s2.addToStack(c5);
 		s2.addToStack(c6);
 		s2.addToStack(c7);
+		
+		Card c8 = new Card (3, 12);
+		Card c9 = new Card (0, 11);
+		Card c10 = new Card(2,4);
+		
+		c8.flip(true);
+		c9.flip(true);
+		
+		s3.addToStack(c10);
+		s3.addToStack(c8);
+		s3.addToStack(c9);
+		
 		gameBoard.setTableau(0, s1);
 		gameBoard.setTableau(1, s2);
 		gameBoard.setTableau(2, s3);
 		gameBoard.setTableau(3, s4);
-		gameBoard.setTableau(4, s5);
-		gameBoard.setTableau(5, s6);
-		gameBoard.setTableau(6, s7);
 		
 		gameBoard.moveStackCardTableau(gameBoard.getTableaus()[0].getCardStack());
 		
 		assertEquals(gameBoard.getTableaus()[1].getCardStack().peek(), c4);
-		//assertEquals(s1.getCardStack().peek(), c1);
+		assertEquals(1,gameBoard.getTableaus()[0].getSize());
+		assertEquals(6,gameBoard.getTableaus()[1].getSize());
+		assertEquals(gameBoard.getTableaus()[0].getCardStack().peek(), c1);
 		
+		gameBoard.moveStackCardTableau(gameBoard.getTableaus()[2].getCardStack());
+		
+		assertEquals(gameBoard.getTableaus()[3].getCardStack().peek(), c9);
+		assertEquals(1,gameBoard.getTableaus()[2].getSize());
+		assertEquals(2,gameBoard.getTableaus()[3].getSize());
+		assertEquals(gameBoard.getTableaus()[0].getCardStack().peek().isFaceUp(), true);
 	}
 
 

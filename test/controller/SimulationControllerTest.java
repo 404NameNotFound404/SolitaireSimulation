@@ -34,6 +34,8 @@ public class SimulationControllerTest {
 		TableTop gameboard3 = new TableTop();
 		
 		gameboard1.setWin(false);
+		//gameboard2.setWin(true);
+		//gameboard3.setWin(true);
 		
 		gameboard1.setTurns(4);
 		gameboard2.setTurns(5);
@@ -78,7 +80,7 @@ public class SimulationControllerTest {
 		gameboard4.generateBoard();
 		games2.add(gameboard4);
 		assertTrue(SimulationController.getWins(games2) == 1);
-
+		
 	}
 	
 	@Test
@@ -91,7 +93,7 @@ public class SimulationControllerTest {
 	public void testGetWinPercentage() {
 		//assumer win percentage to be 2/3
 		double pert = 2/3;		
-		assertTrue(SimulationController.StaticStrategyController.getWinPercentage(games) == pert);
+		assertEquals(SimulationController.StaticStrategyController.getWinPercentage(games), pert);
 		
 	}
 	

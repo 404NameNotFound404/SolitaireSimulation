@@ -22,7 +22,7 @@ public class TableTop {
 	public int turns;
 
 	//the result of the game, true means win
-	public boolean isWin;
+	public boolean isWin = true;
 
 	//needed for testing SimulationController
 	public int getTurns() {
@@ -119,6 +119,7 @@ public class TableTop {
 		for (CardStack cards : foundations) {
 			if (cards.getSize() < 13){
 				isWin = false;
+				break;
 			}
 		}
 		return isWin;
