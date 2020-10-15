@@ -93,7 +93,8 @@ public class CardTest {
 	@Test
 	public void testToString() {
 		Card c = new Card(0,2);
-		assertEquals("heart 3", c.toString());
+		
+		assertEquals("heart 3 face up: false", c.toString());
 				
 	}
 	
