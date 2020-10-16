@@ -13,7 +13,7 @@ public class TableTopTest {
 	
 	@Before
 	public void setUp() {
-		gameBoard.generateBoard();
+		gameBoard.generateBoard(3);
 	}
 	
 	@Test 

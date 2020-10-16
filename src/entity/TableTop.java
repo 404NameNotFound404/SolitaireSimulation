@@ -22,7 +22,7 @@ public class TableTop {
 	public int turns;
 
 	//the result of the game, true means win
-	public boolean isWin = true;
+	public boolean isWin;
 
 	//needed for testing SimulationController
 	public int getTurns() {
@@ -32,11 +32,7 @@ public class TableTop {
 	public void setTurns(int turns) {
 		this.turns = turns;
 	}
-	//needed for testing SimulationController
-	public boolean getWin()
-	{
-		return isWin;
-	}
+
 	//needed for testing SimulationController	
 	public void setWin(boolean status)
 	{
@@ -124,7 +120,7 @@ public class TableTop {
 		}
 		return isWin;
 	}
-	
+
 
 
 	public void setFoundation(int index, CardStack c) {
@@ -133,21 +129,26 @@ public class TableTop {
 
 	/**
 	 * Generate the game board
+	 * @param n if n equals 1, it will generate the win deck,
+	 * if n equals 2, it will generate the impossible deck, 
+	 * if n equals 3, it will shuffle the deck. 
 	 */
-	public void generateBoard() {
+	public void generateBoard(int n) {
 
+		if (n == 1) {
+			deck.winDeck();
+		}
+		else if ( n == 2) {
 
-		//deck.winDeck();
-		
-		//deck.impossibleDeck();
-
-		deck.shuffleDeck();
-
-		for (int i = 0; i < 7; i++) {
-			tableaus[i] = new CardStack();
+			deck.impossibleDeck();
+		} 
+		else if (n == 3) {
+			deck.shuffleDeck();
 		}
 
+		//Generate the 7 tableaus
 		for (int i = 0; i < 7; i++) {
+			tableaus[i] = new CardStack();
 			for (int j = 0; j <= i; j++) {
 
 				Card cardToAdd = deck.drawCard();
@@ -187,6 +188,163 @@ public class TableTop {
 		talon = s;
 	}
 
+
+	/**
+	 * Move the first Tableau card to foundation 
+	 * @param s the stack of cards
+	 * @return True if move successful
+	 */
+	public boolean moveFoundation(Stack<Card> s) {
+		if (s.isEmpty() == false) 
+		{
+			Card c = s.peek();
+
+			if(foundations[c.getSuit()].getCardStack().isEmpty() && c.getValue() == 0) {
+				foundations[c.getSuit()].getCardStack().add(s.pop());
+				if(!s.isEmpty()) {
+					s.peek().flip(true);
+				}
+				turns++;
+				return true;
+			}
+			else if(foundations[c.getSuit()].getCardStack().isEmpty()) {
+				return false;
+			}
+			else if(foundations[c.getSuit()].getCardStack().peek().compareTo(c) == -1) {
+				foundations[c.getSuit()].getCardStack().add(s.pop());
+				if(!s.isEmpty()) {
+					s.peek().flip(true);
+				}
+				turns ++;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Move stack of cards between the tableau
+	 * @param stack
+	 * @return
+	 */
+	public boolean moveStackCardTableau(Stack<Card> stack) {
+		Card tempCard = new Card(0,0);
+		//Find the first card that flip up the card of stack
+		for(Card c: stack) {
+			if(c.isFaceUp()) {
+				tempCard = c;
+				break;
+			}
+		}
+
+		//Check to see if card can move to other tableaus
+		for(CardStack t: tableaus) {
+			if(!t.isStackEmpty()) {
+				Card card = t.getCardStack().peek();
+				//System.out.println("COMPARE CARD : " + tempCard.toString() + " to TABLEAU: " + card.toString() );
+				if(card.compareTo(tempCard) == 1 && card.isRed() != tempCard.isRed()) {
+
+					//Make a temp stack that have all the cards that move
+					Stack<Card> tempStack = new Stack<Card>();
+					for(Card ca: stack) {
+						if(ca.isFaceUp()) {
+							tempStack.push(ca);
+						}
+					}
+
+					//Add the card to the new stack
+					for(Card car: tempStack) {
+						stack.pop();
+						t.addToStack(car);
+					}
+
+					//Flip the card in the stack after move
+					if(!stack.isEmpty()) {
+						stack.peek().flip(true);
+					}
+					turns++;
+					return true;
+				}
+			}
+			else if (tempCard.getValue() == 12 && stack.get(0).compareTo(tempCard) != 0){
+				//Make a temp stack that have all the cards that move
+				Stack<Card> tempStack = new Stack<Card>();
+				for(Card ca: stack) {
+					if(ca.isFaceUp()) {
+						tempStack.push(ca);
+					}
+				}
+
+				//Add the card to the new stack
+				for(Card car: tempStack) {
+					stack.pop();
+					t.addToStack(car);
+				}
+
+				//Flip the card in the stack after move
+				if(!stack.isEmpty()) {
+					stack.peek().flip(true);
+				}
+
+				turns++;
+				return true;
+			}
+
+		}
+		return false;
+
+
+	}
+
+
+	/**
+	 * Print the information of the deck
+	 */
+	public void printDeck() {
+		System.out.println();
+		System.out.println("Cards left in the deck: ");
+
+		for(Card c: deck.getCardStack()) {
+			System.out.println(c.toString());
+		}
+
+	}
+
+	/**
+	 * Print the information of the tableaus
+	 */
+	public void printTableaus() {
+		System.out.println();
+		System.out.println("THE TABLEAUS from left to right: ");
+
+		int count = 1;
+		for (CardStack s : tableaus) {
+			System.out.println();
+			System.out.println("Tableau: " + count);
+			for (Card c: s.getCardStack()) {
+				System.out.println(c.toString());
+			}
+			count++;
+		}
+	}
+
+	/**
+	 * Print the foundations 
+	 */
+	public void printFoundations() {
+		System.out.println();
+		System.out.println("Foundations: ");
+		int count = 0;
+		for (CardStack f: foundations) {
+			System.out.println();
+			System.out.println("Foundations: " + count);
+			for (Card c: f.getCardStack()) {
+				System.out.println(c.toString());
+			}
+			count ++;
+		}
+	}
+	
 	/**
 	 * Move card to the Tableau
 	 * @param cards the Stack of cards want to move
@@ -214,160 +372,6 @@ public class TableTop {
 			}
 		}
 		return false;
-	}
-
-	/**
-	 * Move card to foundation 
-	 * @param c the card want to move
-	 * @return True if move successful
-	 */
-	public boolean moveFoundation(Stack<Card> s) {
-		if (s.isEmpty() == false) 
-		{
-			Card c = s.peek();
-
-			if(foundations[c.getSuit()].getCardStack().isEmpty() && c.getValue() == 0) {
-				foundations[c.getSuit()].getCardStack().add(s.pop());
-				if(!s.isEmpty()) {
-					s.peek().flip(true);
-				}
-				turns++;
-				return true;
-			}
-			else if(foundations[c.getSuit()].getCardStack().isEmpty()) {
-				return false;
-			}
-			else if(foundations[c.getSuit()].getCardStack().peek().compareTo(c) == -1) {
-				foundations[c.getSuit()].getCardStack().add(s.pop());
-				if(!s.isEmpty()) {
-					s.peek().flip(true);
-				}
-				turns ++;
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		return false;
-	}
-	
-	public boolean moveStackCardTableau(Stack<Card> stack) {
-		Card tempCard = new Card(0,0);
-		//Find the first card that flip up the card of stack
-		for(Card c: stack) {
-			if(c.isFaceUp()) {
-				tempCard = c;
-				break;
-			}
-		}
-		
-		//Check to see if card can move to other tableaus
-		for(CardStack t: tableaus) {
-			if(!t.isStackEmpty()) {
-				Card card = t.getCardStack().peek();
-				//System.out.println("COMPARE CARD : " + tempCard.toString() + " to TABLEAU: " + card.toString() );
-				if(card.compareTo(tempCard) == 1 && card.isRed() != tempCard.isRed()) {
-					
-					//Make a temp stack that have all the cards that move
-					Stack<Card> tempStack = new Stack<Card>();
-					for(Card ca: stack) {
-						if(ca.isFaceUp()) {
-							tempStack.push(ca);
-						}
-					}
-					
-					//Add the card to the new stack
-					for(Card car: tempStack) {
-						stack.pop();
-						t.addToStack(car);
-					}
-					
-					//Flip the card in the stack after move
-					if(!stack.isEmpty()) {
-						stack.peek().flip(true);
-					}
-					turns++;
-					return true;
-				}
-			}
-			else if (tempCard.getValue() == 12 && stack.get(0).compareTo(tempCard) != 0){
-				//Make a temp stack that have all the cards that move
-				Stack<Card> tempStack = new Stack<Card>();
-				for(Card ca: stack) {
-					if(ca.isFaceUp()) {
-						tempStack.push(ca);
-					}
-				}
-				
-				//Add the card to the new stack
-				for(Card car: tempStack) {
-					stack.pop();
-					t.addToStack(car);
-				}
-				
-				//Flip the card in the stack after move
-				if(!stack.isEmpty()) {
-					stack.peek().flip(true);
-				}
-						
-				turns++;
-				return true;
-			}
-			
-		}
-		return false;
-		
-		
-	}
-
-
-	/**
-	 * Print the information of the deck
-	 */
-	public void printDeck() {
-		System.out.println();
-		System.out.println("Cards left in the deck: ");
-
-		for(Card c: deck.getCardStack()) {
-			System.out.println(c.toString());
-		}
-
-	}
-
-	/**
-	 * Print the information of the tableaus
-	 */
-	public void printTableaus() {
-		System.out.println();
-		System.out.println("THE TABLEAUS from left to right: ");
-		
-		int count = 1;
-		for (CardStack s : tableaus) {
-			System.out.println();
-			System.out.println("Tableau: " + count);
-			for (Card c: s.getCardStack()) {
-				System.out.println(c.toString());
-			}
-			count++;
-		}
-	}
-
-	/**
-	 * Print the foundations 
-	 */
-	public void printFoundations() {
-		System.out.println();
-		System.out.println("Foundations: ");
-		int count = 0;
-		for (CardStack f: foundations) {
-			System.out.println();
-			System.out.println("Foundations: " + count);
-			for (Card c: f.getCardStack()) {
-				System.out.println(c.toString());
-			}
-			count ++;
-		}
 	}
 
 }

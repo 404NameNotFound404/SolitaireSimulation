@@ -36,7 +36,7 @@ public class SimulationController {
 		int w = 0;
 		
 		for(TableTop t: games) {
-			if(t.getWin()==true) {
+			if(t.checkForWin()==true) {
 				w++;
 			}
 		}

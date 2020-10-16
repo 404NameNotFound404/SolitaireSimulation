@@ -4,14 +4,14 @@ import java.util.Stack;
 import java.util.Random;
 
 public class Deck extends CardCollection{
-	
-	
-	
+
+
+
 	public Deck() {
-			super(makeDeck());
-		}
-		
-	
+		super(makeDeck());
+	}
+
+
 	/**
 	 * Generate the deck of card
 	 * @return Stack<Card> deck of card 
@@ -25,38 +25,38 @@ public class Deck extends CardCollection{
 		}
 		return newDeck;	
 	}
-	
+
 	/**
 	 * Draw card from deck of card
 	 * @return the card it removes from the Deck 
 	 */
 	public Card drawCard() {
 		if (!this.isStackEmpty()) {
-		Card c = this.getCardStack().pop();
-		super.setCards(this.getCardStack());
-		return c;}
+			Card c = this.getCardStack().pop();
+			//super.setCards(this.getCardStack());
+			return c;}
 		else {
 			System.out.println("The deck of cards is EMPTY.");
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Shuffle the deck of card 
 	 */
 	public void shuffleDeck() {
 		Stack<Card> deck = this.getCardStack();
-        int numCards = deck.size();
-        Random random = new Random();
-        for (int i = 0; i < numCards; i++) {
-            int randomIndex = i + random.nextInt(numCards - i);
-            Card randomElement = deck.get(randomIndex);
-            deck.set(randomIndex, deck.get(i));
-            deck.set(i, randomElement);
-        }
+		int numCards = deck.size();
+		Random random = new Random();
+		for (int i = 0; i < numCards; i++) {
+			int randomIndex = i + random.nextInt(numCards - i);
+			Card randomElement = deck.get(randomIndex);
+			deck.set(randomIndex, deck.get(i));
+			deck.set(i, randomElement);
+		}
 	}
-	
-	
+
+
 	/**
 	 * A deck designed to always win
 	 */
@@ -64,7 +64,7 @@ public class Deck extends CardCollection{
 	{
 		//spade = 3, club = 2, diamond = 1, heart = 0
 		Stack<Card> deck = new Stack<Card>();
-		
+
 		Card s6 = new Card(3, 5);
 		Card c6 = new Card(2, 5);
 		Card d6 = new Card(1, 5);
@@ -117,7 +117,7 @@ public class Deck extends CardCollection{
 		Card hQ = new Card(0, 11);
 		Card dQ = new Card(1, 11);
 		Card cQ = new Card(2, 11);		
-		
+
 		deck.add(s6);
 		deck.add(c6);
 		deck.add(d6);
@@ -170,11 +170,11 @@ public class Deck extends CardCollection{
 		deck.add(h10);
 		deck.add(dQ);
 		deck.add(cQ);
-		
+
 		super.setCards(deck);
 	}
-	
-	
+
+
 	/**
 	 * A deck designed to always lose
 	 */
@@ -182,7 +182,7 @@ public class Deck extends CardCollection{
 	{
 		//spade = 3, club = 2, diamond = 1, heart = 0
 		Stack<Card> deck = new Stack<Card>();
-		
+
 		Card s6 = new Card(3, 5);
 		Card c6 = new Card(2, 5);
 		Card d6 = new Card(1, 5);
@@ -235,7 +235,7 @@ public class Deck extends CardCollection{
 		Card hQ = new Card(0, 11);
 		Card dQ = new Card(1, 11);
 		Card cQ = new Card(2, 11);
-		
+
 		deck.add(s6);
 		deck.add(s5);
 		deck.add(s4);
@@ -288,7 +288,7 @@ public class Deck extends CardCollection{
 		deck.add(cQ);
 		deck.add(dK);
 		deck.add(hK);
-		
+
 		super.setCards(deck);
 	}
 }
