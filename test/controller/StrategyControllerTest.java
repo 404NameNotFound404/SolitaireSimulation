@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import entity.TableTop;
+import java.util.*;
 /**
  * @author MiaLi
  *
@@ -12,7 +13,7 @@ import entity.TableTop;
 public class StrategyControllerTest {
 	//a boolean to store the game result
 	public boolean result;
-	public TableTop gameBoard;
+	public TableTop gameBoard1;
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -21,18 +22,37 @@ public class StrategyControllerTest {
 
 		//play game and get the gameBoard
 		
-		 gameBoard =  StrategyController.StaticStrategyController.playGame();
+		 gameBoard1 =  StrategyController.StaticStrategyController.playGame(3);
 
 	}
 
 	
 	
  	@Test
-	public void testPlayGame() {
+	public void testPlayGameWithRandomDeck() {
  		//if the game is played the turns will not be 0
- 		assertFalse(gameBoard.getTurns() == 0);
+ 		assertFalse(gameBoard1.getTurns() == 0);
  		
 	}
+ 	@SuppressWarnings("deprecation")
+	@Test
+	public void testPlayGameWithWinDeck() {
+ 		TableTop gameBoard2 = StrategyController.StaticStrategyController.playGame(1);
+ 		ArrayList<TableTop> games = new ArrayList<TableTop>();
+ 		games.add(gameBoard2);
+ 		assertTrue(SimulationController.StaticStrategyController.getWinPercentage(games)== 1.0);
+ 		
+	}
+ 	
+ 	@Test
+	public void testPlayGameWithImpossibleDeck() {
+ 		TableTop gameBoard2 = StrategyController.StaticStrategyController.playGame(2);
+ 		ArrayList<TableTop> games = new ArrayList<TableTop>();
+ 		games.add(gameBoard2);
+ 		assertTrue(SimulationController.StaticStrategyController.getWinPercentage(games)==0.0);
+	}
+ 	
+ 	
 
 //	@Test
 //	public void testMoveTableuToFoundation() {

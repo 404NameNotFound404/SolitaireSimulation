@@ -72,6 +72,7 @@ public class TableTopTest {
 		gameBoard.moveToTalon();
 		assertFalse(gameBoard.getTalon().isStackEmpty());
 		assertEquals(1, gameBoard.getTalon().getSize());
+		assertEquals(23,gameBoard.getDeck().getSize());
 
 	}
 	
@@ -225,17 +226,17 @@ public class TableTopTest {
 	public void testCheckMoveTableauRightSuitWrongRank() {
 		//try to move right suit wrong rank to tableau
 		CardStack s1 = new CardStack();
-		Card c1 = new Card (0, 0);
+		Card c1 = new Card (2, 3);
 		s1.addToStack(c1);
 		gameBoard.setTableau(0, s1);
 		
-		Card c2 = new Card(2, 3);
+		Card c2 = new Card(0, 0);
 		CardStack s2 = new CardStack();
 		s2.addToStack(c2);
 		
 		gameBoard.setTalon(s2);
 		
-		//assertFalse(gameBoard.moveCardTableau(c2));
+		assertFalse(gameBoard.moveCardTableau(s2.getCardStack()));
 		
 		assertEquals(1, gameBoard.getTableaus()[0].getSize());
 		
@@ -244,13 +245,18 @@ public class TableTopTest {
 	@Test
 	public void testCheckMoveTableauWrongSuitRightRank() {
 		//try to move wrong suit right rank to tableau
-		Card c2 = new Card(1, 1);
+		CardStack s1 = new CardStack();
+		Card c1 = new Card (2, 3);
+		s1.addToStack(c1);
+		gameBoard.setTableau(0, s1);
 		
+		Card c2 = new Card(2, 2);
 		CardStack s2 = new CardStack();
 		s2.addToStack(c2);
+		
 		gameBoard.setTalon(s2);
 		
-		//assertFalse(gameBoard.moveCardTableau(c2));
+		assertFalse(gameBoard.moveCardTableau(s2.getCardStack()));
 		
 		assertEquals(1, gameBoard.getTableaus()[0].getSize());
 	}
@@ -265,6 +271,7 @@ public class TableTopTest {
 		assertTrue(gameBoard.getFoundation()[2].isStackEmpty());
 		gameBoard.moveFoundation(s);
 		assertFalse(gameBoard.getFoundation()[2].isStackEmpty());
+		assertTrue(s.isEmpty());
 	}
 	
 	@Test
@@ -347,7 +354,7 @@ public class TableTopTest {
 		// with no cards
 		assertFalse(gameBoard.checkForWin());
 		
-		//with some cards
+		////the first three foundation pile has all 13 cards while the last foundation is empty.
 		CardStack s;
 		Card c = new Card(0, 0);
 		for(int i = 0; i < 3; i ++) {
@@ -360,11 +367,33 @@ public class TableTopTest {
 			gameBoard.setFoundation(i, s);
 		}
 		assertFalse(gameBoard.checkForWin());
+		
+		
+	}
+	
+	@Test
+	public void testCheckWinFailWithoutSettingTheFirstFoundation() {
+		//the last foundation pile has all 13 cards while the first foundation is empty.
+		CardStack s;
+		Card c = new Card(0, 0);
+		for(int i = 1; i < 4; i ++) {
+			s = new CardStack();
+			for (int j = 0; j < 13; j++) {
+				c.setSuit(i);
+				c.setValue(j);
+				s.addToStack(c);
+			}
+					gameBoard.setFoundation(i, s);
+		}
+		assertFalse(gameBoard.checkForWin());
+		
 	}
 	
 
 	@Test
 	public void testMoveStackCardTableau() {
+		//test move stack from tableau to tableau
+		
 		CardStack s1 = new CardStack();
 		CardStack s2 = new CardStack();
 		CardStack s3 = new CardStack();
@@ -388,13 +417,24 @@ public class TableTopTest {
 		s1.addToStack(c2);
 		s1.addToStack(c3);
 		s1.addToStack(c4);
-		
-		
-		
+
 		s2.addToStack(c5);
 		s2.addToStack(c6);
 		s2.addToStack(c7);
 		
+		gameBoard.setTableau(0, s1);
+		gameBoard.setTableau(1, s2);
+		
+		gameBoard.moveStackCardTableau(gameBoard.getTableaus()[0].getCardStack());
+		
+		//test the size and the first card in the move and be moved tableaus
+		assertEquals(gameBoard.getTableaus()[1].getCardStack().peek(), c4);
+		assertEquals(1,gameBoard.getTableaus()[0].getSize());
+		assertEquals(6,gameBoard.getTableaus()[1].getSize());
+		assertEquals(gameBoard.getTableaus()[0].getCardStack().peek(), c1);
+		
+		
+		//test move stack from tableau to empty tableau
 		Card c8 = new Card (3, 12);
 		Card c9 = new Card (0, 11);
 		Card c10 = new Card(2,4);
@@ -406,20 +446,11 @@ public class TableTopTest {
 		s3.addToStack(c8);
 		s3.addToStack(c9);
 		
-		gameBoard.setTableau(0, s1);
-		gameBoard.setTableau(1, s2);
 		gameBoard.setTableau(2, s3);
 		gameBoard.setTableau(3, s4);
 		
-		gameBoard.moveStackCardTableau(gameBoard.getTableaus()[0].getCardStack());
-		
-		assertEquals(gameBoard.getTableaus()[1].getCardStack().peek(), c4);
-		assertEquals(1,gameBoard.getTableaus()[0].getSize());
-		assertEquals(6,gameBoard.getTableaus()[1].getSize());
-		assertEquals(gameBoard.getTableaus()[0].getCardStack().peek(), c1);
-		
 		gameBoard.moveStackCardTableau(gameBoard.getTableaus()[2].getCardStack());
-		
+		//test the size and first card in the move and be moved tableaus
 		assertEquals(gameBoard.getTableaus()[3].getCardStack().peek(), c9);
 		assertEquals(1,gameBoard.getTableaus()[2].getSize());
 		assertEquals(2,gameBoard.getTableaus()[3].getSize());

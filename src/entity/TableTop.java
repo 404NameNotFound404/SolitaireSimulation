@@ -33,12 +33,6 @@ public class TableTop {
 		this.turns = turns;
 	}
 
-	//needed for testing SimulationController	
-	public void setWin(boolean status)
-	{
-		this.isWin = status;
-	}
-
 
 	public TableTop() {
 		//set turns equal 0

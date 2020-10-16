@@ -73,7 +73,7 @@ public class SimulationController {
 		public static ArrayList<TableTop> startSimulation(int games) {
 			ArrayList<TableTop> results = new ArrayList<TableTop>();
 			for (int i = 0; i < games; i ++) {
-				TableTop gameBoard =  StrategyController.StaticStrategyController.playGame();			
+				TableTop gameBoard =  StrategyController.StaticStrategyController.playGame(3);			
 				results.add(gameBoard);
 			}
 			return results;

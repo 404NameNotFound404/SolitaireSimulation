@@ -33,24 +33,20 @@ public class SimulationControllerTest {
 		TableTop gameboard2 = new TableTop();
 		TableTop gameboard3 = new TableTop();
 		
-		gameboard1.setWin(false);
-		//gameboard2.setWin(true);
-		//gameboard3.setWin(true);
+		gameboard1.generateBoard(1);
+		gameboard2.generateBoard(2);
+		gameboard3.generateBoard(2);
 		
 		gameboard1.setTurns(4);
 		gameboard2.setTurns(5);
 		gameboard3.setTurns(6);
-		
+				
 		totalTurns = 4 + 5 + 6;
 		averageTurns = totalTurns/3;
 		
 		gameboard1.setTime(7);
 		gameboard2.setTime(8);
 		gameboard3.setTime(9);
-		
-		gameboard1.generateBoard(3);
-		gameboard2.generateBoard(3);
-		gameboard3.generateBoard(3);
 		
 		totalTime = 9 + 7 + 8;
 		averageTime = totalTime /3;
@@ -64,9 +60,7 @@ public class SimulationControllerTest {
 	@Test
 	public void testGetWinsNone() {
 		ArrayList<TableTop> games2 = new ArrayList<TableTop>();
-		TableTop gameboard4 = new TableTop();
-		gameboard4.setWin(false);
-		gameboard4.generateBoard(3);
+		TableTop gameboard4 = StrategyController.StaticStrategyController.playGame(2);
 		games2.add(gameboard4);
 		assertTrue(SimulationController.getWins(games2)== 0);
 
@@ -75,11 +69,9 @@ public class SimulationControllerTest {
 	@Test
 	public void testGetWinsOne() {
 		ArrayList<TableTop> games2 = new ArrayList<TableTop>();
-		TableTop gameboard4 = new TableTop();
-		gameboard4.setWin(true);
-		gameboard4.generateBoard(3);
+		TableTop gameboard4 = StrategyController.StaticStrategyController.playGame(1);
 		games2.add(gameboard4);
-		assertTrue(SimulationController.getWins(games2) == 1);
+		assertTrue(SimulationController.getWins(games2)== 1);
 		
 	}
 	
@@ -89,11 +81,18 @@ public class SimulationControllerTest {
 		assertEquals(SimulationController.getTotalTurns(games), totalTurns);
 	}
 	
+	
 	@Test
 	public void testGetWinPercentage() {
-		//assumer win percentage to be 2/3
-		double pert = 2/3;		
-		assertEquals(SimulationController.StaticStrategyController.getWinPercentage(games), pert);
+		ArrayList<TableTop> games2 = new ArrayList<TableTop>();
+	
+		TableTop gameboard4 = StrategyController.StaticStrategyController.playGame(1);
+		TableTop gameboard5 = StrategyController.StaticStrategyController.playGame(2);
+		
+		games2.add(gameboard4);
+		games2.add(gameboard5);
+		
+		assertEquals(SimulationController.StaticStrategyController.getWinPercentage(games2), 0.5);
 		
 	}
 	
@@ -114,7 +113,7 @@ public class SimulationControllerTest {
 	@Test
 	public void testGetAverageTime() {
 	
-		assertTrue(SimulationController.StaticStrategyController.getAverageTime(games) == averageTime);
+		assertEquals(SimulationController.StaticStrategyController.getAverageTime(games), averageTime);
 	}
 	
 	@Test

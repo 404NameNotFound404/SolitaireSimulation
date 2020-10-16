@@ -22,12 +22,12 @@ public class StrategyController {
 		/**
 		 * Play the game
 		 */
-		public static TableTop playGame() {
+		public static TableTop playGame(int n) {
 			int deckTurns = 0;
 			boolean stop = false;
 			
 			gameBoard = new TableTop();
-			gameBoard.generateBoard(3);
+			gameBoard.generateBoard(n);
 
 //			//Print out the deck before play game
 //			System.out.println("Deck before play game: ");
