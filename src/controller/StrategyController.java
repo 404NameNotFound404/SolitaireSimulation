@@ -14,8 +14,8 @@ import entity.TableTop;
  *
  */
 public class StrategyController {
-	public static TableTop gameBoard;
-	public static long timeToPlay;
+	//public static TableTop gameBoard;
+	//public static long timeToPlay;
 
 	public static class StaticStrategyController{
 
@@ -26,7 +26,7 @@ public class StrategyController {
 			int deckTurns = 0;
 			boolean stop = false;
 			
-			gameBoard = new TableTop();
+			TableTop gameBoard = new TableTop();
 			gameBoard.generateBoard(n);
 
 //			//Print out the deck before play game
@@ -132,7 +132,7 @@ public class StrategyController {
 			}
 
 			long end = System.currentTimeMillis();
-			timeToPlay = end - start;
+			long timeToPlay = end - start;
 
 			gameBoard.setTime(timeToPlay);
 
