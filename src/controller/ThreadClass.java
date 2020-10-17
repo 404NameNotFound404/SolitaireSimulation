@@ -66,7 +66,7 @@ public class ThreadClass {
 		public static int getTotalTurns(ArrayList<TableTop> games) {
 			int turns = 0;
 			for(TableTop t: games) {
-				turns += t.getTurns();
+				turns += t.getMoves();
 			}
 			return turns;
 		}

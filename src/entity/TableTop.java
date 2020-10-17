@@ -23,6 +23,8 @@ public class TableTop {
 
 	//the result of the game, true means win
 	public boolean isWin;
+	
+	private int moves;
 
 	//needed for testing SimulationController
 	public int getTurns() {
@@ -32,18 +34,27 @@ public class TableTop {
 	public void setTurns(int turns) {
 		this.turns = turns;
 	}
+	
 
 
 	public TableTop() {
 		//set turns equal 0
 		turns = 0;
+		moves = 0;
 		tableaus = new CardStack[7];
 		foundations = new CardStack[4];
 		deck = new Deck();
 		talon = new CardCollection();
 		isWin = false;
+		
 	}
 
+	public int getMoves() {
+		return moves;
+	}
+	public void setMoves(int moves) {
+		this.moves = moves;
+	}
 	public long getTime() {
 		return time;
 	}
