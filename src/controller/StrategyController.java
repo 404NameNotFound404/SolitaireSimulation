@@ -75,6 +75,16 @@ public class StrategyController {
 
 					}
 				}
+				
+				for (CardStack tabl: tableaus) {
+					
+					if(!tabl.isStackEmpty()) {
+
+						//Move stack of cards between tableaus
+						gameBoard.moveStackCardTableau(tabl.getCardStack());
+
+					}
+				}
 
 //				System.out.println();
 //				System.out.println("FOUNDATIONS AFTER GO THROUGH TABLEAUS: ");

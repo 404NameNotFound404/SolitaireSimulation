@@ -223,7 +223,7 @@ public class TableTop {
 	 */
 	public boolean moveStackCardTableau(Stack<Card> stack) {
 		Card tempCard = new Card(0,0);
-		//Find the first card that flip up the card of stack
+		//Find the first card that flip up the stack of card
 		for(Card c: stack) {
 			if(c.isFaceUp()) {
 				tempCard = c;
