@@ -69,10 +69,10 @@ public class StrategyController {
 //				}
 				
 				//Check if tableau cards can go to foundations	
+				
 				for(CardStack t: tableaus) {
-					if (!t.isStackEmpty()) {
-						gameBoard.moveFoundation(t.getCardStack());
-
+					while (!t.isStackEmpty() && gameBoard.moveFoundation(t.getCardStack())) {
+						continue;
 					}
 				}
 				
@@ -114,24 +114,6 @@ public class StrategyController {
 						//Check if the card can go into any of the foundation stacks
 						while(gameBoard.moveFoundation(gameBoard.getTalon().getCardStack())) {
 							//check if cards can be moved between tableaus
-							int count = 0;
-								
-							for (CardStack tabl: tableaus) {
-								
-								while(!tabl.isStackEmpty() && gameBoard.moveStackCardTableau(tabl.getCardStack())&& count < 50) {
-
-									//Move card between tableaus
-									//gameBoard.moveCardTableau(tabl.getCardStack());
-
-									//Move stack of cards between tableaus
-									
-									//gameBoard.moveStackCardTableau(tabl.getCardStack());
-									count++;
-									continue;
-
-								}
-							}
-
 							continue;
 						}
 
