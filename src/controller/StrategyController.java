@@ -75,12 +75,29 @@ public class StrategyController {
 
 					}
 				}
+				
+				//move cards between tableaus until cannot be moved
+				int count1 = 0;
+				
+				for (CardStack tabl: tableaus) {
+					
+					while(!tabl.isStackEmpty() && gameBoard.moveStackCardTableau(tabl.getCardStack())&& count1 < 50) {
 
+						//Move card between tableaus
+						//gameBoard.moveCardTableau(tabl.getCardStack());
+
+						//Move stack of cards between tableaus
+						
+						//gameBoard.moveStackCardTableau(tabl.getCardStack());
+						count1++;
+						continue;
+
+					}
+				}
 //				System.out.println();
 //				System.out.println("FOUNDATIONS AFTER GO THROUGH TABLEAUS: ");
 //				gameBoard.printFoundations();
 			
-				
 				
 				if (deckTurns < 3) {
 					if (!gameBoard.getDrawPile().getCardStack().isEmpty()) {
@@ -95,27 +112,52 @@ public class StrategyController {
 //						System.out.println(gameBoard.getTalon().getCardStack().peek().toString());
 
 						//Check if the card can go into any of the foundation stacks
-						if(gameBoard.moveFoundation(gameBoard.getTalon().getCardStack())) {
+						while(gameBoard.moveFoundation(gameBoard.getTalon().getCardStack())) {
+							//check if cards can be moved between tableaus
+							int count = 0;
+								
+							for (CardStack tabl: tableaus) {
+								
+								while(!tabl.isStackEmpty() && gameBoard.moveStackCardTableau(tabl.getCardStack())&& count < 50) {
+
+									//Move card between tableaus
+									//gameBoard.moveCardTableau(tabl.getCardStack());
+
+									//Move stack of cards between tableaus
+									
+									//gameBoard.moveStackCardTableau(tabl.getCardStack());
+									count++;
+									continue;
+
+								}
+							}
+
 							continue;
 						}
 
 						//Check if the card can go into any of the Tableaus
-						gameBoard.moveCardTableau(gameBoard.getTalon().getCardStack());
-
+						if (!gameBoard.getTalon().getCardStack().isEmpty()) {
+							gameBoard.moveCardTableau(gameBoard.getTalon().getCardStack());
+						}
 					}
 					
+					int count2 = 0;
 					for (CardStack tabl: tableaus) {
 						
-						if(!tabl.isStackEmpty()) {
+						while(!tabl.isStackEmpty() && gameBoard.moveStackCardTableau(tabl.getCardStack())&& count2 < 50) {
 
 							//Move card between tableaus
 							//gameBoard.moveCardTableau(tabl.getCardStack());
 
 							//Move stack of cards between tableaus
-							gameBoard.moveStackCardTableau(tabl.getCardStack());
+							
+							//gameBoard.moveStackCardTableau(tabl.getCardStack());
+							count2++;
+							continue;
 
 						}
 					}
+					
 				}
 				else if(deckTurns == 3 && turns == gameBoard.getTurns()) {
 					stop = true;
