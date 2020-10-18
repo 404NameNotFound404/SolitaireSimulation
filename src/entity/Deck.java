@@ -1,6 +1,6 @@
 package entity;
 
-import java.util.Stack;
+import java.util.*;
 import java.util.Random;
 
 public class Deck extends CardCollection{
@@ -174,7 +174,15 @@ public class Deck extends CardCollection{
 		super.setCards(deck);
 	}
 
-
+	public static void reverseStack(Stack stack){
+		Queue rev = new LinkedList();
+		while(stack.size() > 0){
+			rev.offer(stack.pop());
+		}
+		while(rev.size() > 0){
+			stack.push(rev.poll());
+		}
+	}
 	/**
 	 * A deck designed to always lose
 	 */
@@ -182,6 +190,7 @@ public class Deck extends CardCollection{
 	{
 		//spade = 3, club = 2, diamond = 1, heart = 0
 		Stack<Card> deck = new Stack<Card>();
+
 
 		Card s6 = new Card(3, 5);
 		Card c6 = new Card(2, 5);
@@ -234,61 +243,62 @@ public class Deck extends CardCollection{
 		Card sK = new Card(3, 12);
 		Card hQ = new Card(0, 11);
 		Card dQ = new Card(1, 11);
-		Card cQ = new Card(2, 11);
+		Card cQ = new Card(2, 11);		
 
 		deck.add(s6);
-		deck.add(s5);
-		deck.add(s4);
-		deck.add(s3);
-		deck.add(s2);
-		deck.add(cK);
-		deck.add(sK);
-		deck.add(d10);
-		deck.add(d9);
-		deck.add(d8);
-		deck.add(d7);
-		deck.add(d6);
-		deck.add(d5);
-		deck.add(d4);
-		deck.add(d3);
-		deck.add(d2);
-		deck.add(h9);
-		deck.add(h8);
-		deck.add(h7);
-		deck.add(h6);
-		deck.add(h5);
-		deck.add(h4);
-		deck.add(h3);
-		deck.add(h2);
-		deck.add(s7);
-		deck.add(s8);
-		deck.add(hA);
-		deck.add(c2);
 		deck.add(c6);
-		deck.add(s10);
-		deck.add(h10);
-		deck.add(dA);
-		deck.add(sA);
-		deck.add(c3);
-		deck.add(c7);
-		deck.add(c10);
-		deck.add(dJ);
-		deck.add(cA);
-		deck.add(c4);
-		deck.add(c8);
-		deck.add(cJ);
-		deck.add(hJ);
+		deck.add(d6);
+		deck.add(h6);
+		deck.add(s5);
 		deck.add(c5);
-		deck.add(s9);
-		deck.add(sJ);
-		deck.add(dQ);
+		deck.add(d5);
+		deck.add(h5);
+		deck.add(s4);
+		deck.add(c4);
+		deck.add(d4);
+		deck.add(h4);
+		deck.add(s3);
+		deck.add(c3);
+		deck.add(d3);
+		deck.add(h3);
+		deck.add(s2);
+		deck.add(c2);
+		deck.add(d2);
+		deck.add(h2);
+		deck.add(sA);
+		deck.add(cA);
+		deck.add(dA);
+		deck.add(hA);		
+		deck.add(s7);
+		deck.add(d7);
+		deck.add(c8);
 		deck.add(c9);
+		deck.add(d10);
 		deck.add(sQ);
-		deck.add(hQ);
-		deck.add(cQ);
-		deck.add(dK);
 		deck.add(hK);
-
+		deck.add(c7);
+		deck.add(s8);
+		deck.add(s9);
+		deck.add(c10);
+		deck.add(hJ);
+		deck.add(dK);
+		deck.add(h7);
+		deck.add(h8);
+		deck.add(s10);
+		deck.add(dJ);
+		deck.add(cK);
+		deck.add(d8);
+		deck.add(h9);
+		deck.add(cJ);
+		deck.add(sK);
+		deck.add(d9);
+		deck.add(sJ);
+		deck.add(hQ);
+		deck.add(h10);
+		deck.add(dQ);
+		deck.add(cQ);
+		
+		reverseStack(deck);
 		super.setCards(deck);
 	}
 }
