@@ -457,6 +457,13 @@ public class TableTopTest {
 		assertEquals(gameBoard.getTableaus()[0].getCardStack().peek().isFaceUp(), true);
 	}
 
-
+	@Test
+	public void testSetMoves(){
+		assertEquals(gameBoard.getMoves(),0);
+		
+		gameBoard.setMoves(4);
+		
+		assertEquals(gameBoard.getMoves(),4);
+	}
 
 }
