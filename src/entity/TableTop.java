@@ -16,7 +16,6 @@ public class TableTop {
 	}
 
 	private CardCollection talon;
-	public long time;
 
 	//the number of times the cards move
 	public int turns;
@@ -55,13 +54,7 @@ public class TableTop {
 	public void setMoves(int moves) {
 		this.moves = moves;
 	}
-	public long getTime() {
-		return time;
-	}
 
-	public void setTime(long time) {
-		this.time = time;
-	}
 
 
 	public CardStack[] getTableaus() {

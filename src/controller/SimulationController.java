@@ -53,12 +53,10 @@ public class SimulationController {
 	}
 
 
-
+	//Need edited
 	public static long getTotalTimeToPlay(ArrayList<TableTop> games) {
 		long totalTimeToPlay = 0;
-		for(TableTop t: games) {
-			totalTimeToPlay += t.getTime();
-		}
+		
 		return totalTimeToPlay;
 	}
 
@@ -73,7 +71,7 @@ public class SimulationController {
 		public static ArrayList<TableTop> startSimulation(int games) {
 			ArrayList<TableTop> results = new ArrayList<TableTop>();
 			for (int i = 0; i < games; i ++) {
-				TableTop gameBoard =  StrategyController.StaticStrategyController.playGame(3);			
+				TableTop gameBoard =  StrategyController.StaticStrategyController.playGame(2);			
 				results.add(gameBoard);
 			}
 			return results;
@@ -122,19 +120,18 @@ public class SimulationController {
 			
 			for (int i = 0; i < allGames.size(); i++) {
 				turnsArray[i] = allGames.get(i).getTurns();
-				timeArray[i] = allGames.get(i).getTime();
 			}
 			System.out.println("Win Percentage: " + getWinPercentage(allGames));
-			
-			System.out.println("Average Turns: " + getAverageTurns(allGames));
-			
-			System.out.println("Standard Deviation for number of card moves per game: " 
-			+ standardDev(turnsArray, getAverageTurns(allGames)));
-			
-			System.out.println("Average Times per Game: " + getAverageTime(allGames));
-			
-			System.out.println("Standard Deviation for number of time play per game: " 
-					+ standardDev(timeArray, getAverageTime(allGames)));
+//			
+//			System.out.println("Average Turns: " + getAverageTurns(allGames));
+//			
+//			System.out.println("Standard Deviation for number of card moves per game: " 
+//			+ standardDev(turnsArray, getAverageTurns(allGames)));
+//			
+//			System.out.println("Average Times per Game: " + getAverageTime(allGames));
+//			
+//			System.out.println("Standard Deviation for number of time play per game: " 
+//					+ standardDev(timeArray, getAverageTime(allGames)));
 			
 			
 		

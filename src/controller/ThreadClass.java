@@ -10,10 +10,11 @@ import entity.TableTop;
  *
  */
 public class ThreadClass {
-	
+
 	public static int numGame;
-	
-	
+
+	public static long timeToPlay;
+
 	public static ArrayList<TableTop> allGames = new ArrayList<TableTop>();
 
 	public static class MyRunnable implements Runnable {
@@ -35,21 +36,17 @@ public class ThreadClass {
 		 * Get the average turns
 		 * @return the average turns as integer
 		 */
-		public static double getAverageTurns(ArrayList<TableTop> games) {
-			int turns = getTotalTurns(games);
-			double g = games.size();
-			return turns/g;
+		public static double getAverageMovesWinnable(ArrayList<TableTop> games) {
+			int moves = 0;
+			for(TableTop t: games) {
+				if(t.checkForWin()) {
+					moves += t.getMoves();
+				}
+
+			}
+			return (double) moves/getWins(games);
 		}
 
-		/**
-		 * Get the average time play each game
-		 * @return the average time for game in double
-		 */
-		public static double getAverageTime(ArrayList<TableTop> games) {
-			long totalTimeToPlay = getTotalTimeToPlay(games);
-			double g = games.size();
-			return totalTimeToPlay/g;
-		}
 
 		public static int getWins(ArrayList<TableTop> games) {
 			int w = 0;
@@ -63,30 +60,31 @@ public class ThreadClass {
 		}
 
 
-		public static int getTotalTurns(ArrayList<TableTop> games) {
+		public static int getTotalMoves(ArrayList<TableTop> games) {
 			int turns = 0;
 			for(TableTop t: games) {
+
 				turns += t.getMoves();
+
 			}
 			return turns;
 		}
 
-
-
-		public static long getTotalTimeToPlay(ArrayList<TableTop> games) {
-			long totalTimeToPlay = 0;
-			for(TableTop t: games) {
-				totalTimeToPlay += t.getTime();
-			}
-			return totalTimeToPlay;
+		public static double getAverageMoveTime(ArrayList<TableTop> games) {
+			return (double) timeToPlay/ getTotalMoves(games);
 		}
+
 
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		
+
 		numGame = Integer.parseInt(args[0]);
 		Thread[] threads = new Thread[numGame];
+
+		//record time in millisecond
+		long start = System.currentTimeMillis();
+
 		for (int i =0; i < numGame; i ++)
 		{
 			Thread thread = new Thread (new MyRunnable());
@@ -95,13 +93,18 @@ public class ThreadClass {
 			thread.join();
 		}
 
-		
-		
+
+		long end = System.currentTimeMillis();
+		timeToPlay = end - start;
+
+
+
 		System.out.println("Win Percentage: " + MyRunnable.getWinPercentage(allGames));
 
-		System.out.println("Average Turns: " + MyRunnable.getAverageTurns(allGames));
+		System.out.println("Average turns in winnable games: " + MyRunnable.getAverageMovesWinnable(allGames));
 
-		System.out.println("Average Times per Game: " + MyRunnable.getAverageTime(allGames));
+		System.out.println("Average move time over all games: " + MyRunnable.getAverageMoveTime(allGames));
+
 	}
 
 }
