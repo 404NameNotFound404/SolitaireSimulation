@@ -13,6 +13,7 @@ public class SimulationController {
 	
 	public static class StaticStrategyController{
 		
+		
 		/**
 		 * Method that calculate the standard deviation of an array list
 		 * @param result list

@@ -106,7 +106,6 @@ public class ThreadClass {
 		{
 			Thread thread = new Thread (new MyRunnable());
 			thread.start();
-			System.out.println("Thread : " + i + " is running");
 			thread.join();
 		}
 
