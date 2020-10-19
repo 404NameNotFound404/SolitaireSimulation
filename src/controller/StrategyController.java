@@ -149,9 +149,6 @@ public class StrategyController {
 				else if(deckTurns == 3 && turns == gameBoard.getTurns()) {
 					stop = true;
 				}
-				else if(turns > 1000) {
-					stop = true;
-				}
 
 				//Print out tableaus after move
 //				System.out.println();
