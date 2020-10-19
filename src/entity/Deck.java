@@ -173,7 +173,11 @@ public class Deck extends CardCollection{
 
 		super.setCards(deck);
 	}
-
+	
+	/**
+	 * Reverse a stack
+	 * @param stack want to reverse
+	 */
 	public static void reverseStack(Stack stack){
 		Queue rev = new LinkedList();
 		while(stack.size() > 0){

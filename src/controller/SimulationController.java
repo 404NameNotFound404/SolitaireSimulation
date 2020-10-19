@@ -1,6 +1,7 @@
 package controller;
 import java.util.ArrayList;
 
+import controller.ThreadClass.MyRunnable;
 import entity.TableTop;
 /**
  * @author AnnaNguyen
@@ -8,62 +9,88 @@ import entity.TableTop;
  */
 public class SimulationController {
 
+	public static long timeToPlay;
 	
-	/**
-	 * Method that calculate the standard deviation of an array list
-	 * @param result list
-	 * @param mean 
-	 * @return the standard deviation in double
-	 */
-	public static double standardDev (double[] result, double mean) {
-		double[] mean_array = new double[result.length];
-		for (int h = 0; h < result.length; h ++) {
-			mean_array[h] = (result[h] - mean)*(result[h] - mean);
-		}
-		
-		double s = 0;
-		for(double o: mean_array) {
-			s = s + o;
-		}
-		
-		double mean_dev = s/result.length;
-		double dev = Math.sqrt(mean_dev);
-		return dev;
-				
-	}
-	
-	public static int getWins(ArrayList<TableTop> games) {
-		int w = 0;
-		
-		for(TableTop t: games) {
-			if(t.checkForWin()==true) {
-				w++;
-			}
-		}
-		return w;
-	}
-
-
-	public static int getTotalTurns(ArrayList<TableTop> games) {
-		int turns = 0;
-		for(TableTop t: games) {
-			turns += t.getTurns();
-		}
-		return turns;
-	}
-
-
-	//Need edited
-	public static long getTotalTimeToPlay(ArrayList<TableTop> games) {
-		long totalTimeToPlay = 0;
-		
-		return totalTimeToPlay;
-	}
-
-
 	public static class StaticStrategyController{
-
 		
+		/**
+		 * Method that calculate the standard deviation of an array list
+		 * @param result list
+		 * @param mean 
+		 * @return the standard deviation in double
+		 */
+		public static double standardDev (double[] result, double mean) {
+			double[] mean_array = new double[result.length];
+			for (int h = 0; h < result.length; h ++) {
+				mean_array[h] = (result[h] - mean)*(result[h] - mean);
+			}
+
+			double s = 0;
+			for(double o: mean_array) {
+				s = s + o;
+			}
+
+			double mean_dev = s/result.length;
+			double dev = Math.sqrt(mean_dev);
+			return dev;
+
+		}
+
+		/**
+		 * Get the number of win games
+		 * @param games 
+		 * @return the number of win game
+		 */
+		public static int getWins(ArrayList<TableTop> games) {
+			int w = 0;
+
+			for(TableTop t: games) {
+				if(t.checkForWin()) {
+					w++;
+				}
+			}
+			return w;
+		}
+
+
+		/**
+		 * Get the average moves for winnable games
+		 * @return the average moves for winnable games
+		 */
+		public static double getAverageMovesWinnable(ArrayList<TableTop> games) {
+			int moves = 0;
+			for(TableTop t: games) {
+				if(t.checkForWin()) {
+					moves += t.getMoves();
+				}
+
+			}
+			return (double) moves/getWins(games);
+		}
+
+		/**
+		 * Get the total moves for all the games
+		 * @param games
+		 * @return the number of moves for all the game
+		 */
+		public static int getTotalMoves(ArrayList<TableTop> games) {
+			int moves = 0;
+			for(TableTop t: games) {
+
+				moves += t.getMoves();
+
+			}
+			return moves;
+		}
+
+		/**
+		 * Get the average move time over all games played
+		 * @param games
+		 * @return the average move time in double
+		 */
+		public static double getAverageMoveTime(ArrayList<TableTop> games) {
+			return (double) timeToPlay/ getTotalMoves(games);
+		}
 		/**
 		 * Start the simulation
 		 * @return an array list of game boards
@@ -71,12 +98,12 @@ public class SimulationController {
 		public static ArrayList<TableTop> startSimulation(int games) {
 			ArrayList<TableTop> results = new ArrayList<TableTop>();
 			for (int i = 0; i < games; i ++) {
-				TableTop gameBoard =  StrategyController.StaticStrategyController.playGame(2);			
+				TableTop gameBoard =  StrategyController.StaticStrategyController.playGame(3);			
 				results.add(gameBoard);
 			}
 			return results;
-			
-			
+
+
 		}
 
 		/**
@@ -88,55 +115,32 @@ public class SimulationController {
 			int g = games.size();
 			return (double) w/(double) g;
 		}
-		
-		/**
-		 * Get the average turns
-		 * @return the average turns as integer
-		 */
-		public static double getAverageTurns(ArrayList<TableTop> games) {
-			int turns = getTotalTurns(games);
-			double g = games.size();
-			return turns/g;
-		}
-		
-		/**
-		 * Get the average time play each game
-		 * @return the average time for game in double
-		 */
-		public static double getAverageTime(ArrayList<TableTop> games) {
-			long totalTimeToPlay = getTotalTimeToPlay(games);
-			double g = games.size();
-			return totalTimeToPlay/g;
-		}
-		
-		
-		
+
+
+
+
+
 		public static void main(String[] args) {
-			
+
+			long start = System.currentTimeMillis();
 			ArrayList<TableTop> allGames = startSimulation(Integer.parseInt(args[0]));
 
-			double[] turnsArray = new double[allGames.size()];
-			double[] timeArray = new double[allGames.size()];
-			
-			for (int i = 0; i < allGames.size(); i++) {
-				turnsArray[i] = allGames.get(i).getTurns();
-			}
+			long end = System.currentTimeMillis();
+			timeToPlay = end - start;
+
 			System.out.println("Win Percentage: " + getWinPercentage(allGames));
-//			
-//			System.out.println("Average Turns: " + getAverageTurns(allGames));
-//			
-//			System.out.println("Standard Deviation for number of card moves per game: " 
-//			+ standardDev(turnsArray, getAverageTurns(allGames)));
-//			
-//			System.out.println("Average Times per Game: " + getAverageTime(allGames));
-//			
-//			System.out.println("Standard Deviation for number of time play per game: " 
-//					+ standardDev(timeArray, getAverageTime(allGames)));
+
+			System.out.println("Average turns in winnable games: " + getAverageMovesWinnable(allGames));
+
+			System.out.println("Average move time over all games: " + getAverageMoveTime(allGames));
+
 			
-			
-		
+
+
+
+
 		}
-		
-		
+
+
 	}
 }

@@ -63,7 +63,7 @@ public class SimulationControllerTest {
 		TableTop gameboard4 = StrategyController.StaticStrategyController.playGame(2);
 		System.out.println(gameboard4.checkForWin());
 		games2.add(gameboard4);
-		assertTrue(SimulationController.getWins(games2)== 0);
+		assertTrue(SimulationController.StaticStrategyController.getWins(games2)== 0);
 
 	}
 	
@@ -72,16 +72,10 @@ public class SimulationControllerTest {
 		ArrayList<TableTop> games2 = new ArrayList<TableTop>();
 		TableTop gameboard4 = StrategyController.StaticStrategyController.playGame(1);
 		games2.add(gameboard4);
-		assertTrue(SimulationController.getWins(games2)== 1);
+		assertTrue(SimulationController.StaticStrategyController.getWins(games2)== 1);
 		
 	}
-	
-	@Test
-	public void testGetTotalTurns() {
 		
-		assertEquals(SimulationController.getTotalTurns(games), totalTurns);
-	}
-	
 	
 	@Test
 	public void testGetWinPercentage() {
@@ -98,36 +92,32 @@ public class SimulationControllerTest {
 	}
 	
 	@Test
-	public void testGetAverageTurns() {
-		
-		assertTrue(SimulationController.StaticStrategyController.getAverageTurns(games) == averageTurns);
-		
+	public void testGetAverageMovesWinnable() {
+		//TODO
 	}
 	
 	@Test
-	public void testGetTotalTimeToPlay() {
-	
-		assertTrue(SimulationController.getTotalTimeToPlay(games) == totalTime);
-		
+	public void testGetTotalMoves() {
+		//TODO
 	}
 	
 	@Test
-	public void testGetAverageTime() {
-	
-		assertEquals(SimulationController.StaticStrategyController.getAverageTime(games), averageTime);
+	public void testGetAverageMoveTime() {
+		//TODO
 	}
+
 	
 	@Test
 	public void testStandardDev()
 	{
 		double[] list = {11.0,11.0,11.0,11.0};
 		double mean = 11.0;
-		double SD = SimulationController.standardDev(list, mean);
+		double SD = SimulationController.StaticStrategyController.standardDev(list, mean);
 		assertEquals(SD, 0.0);
 		
 		double[] list2 = {1,2,3,4,5,6};
 		mean = 3.5;
-		double SD2 = SimulationController.standardDev(list2, mean);
+		double SD2 = SimulationController.StaticStrategyController.standardDev(list2, mean);
 		assertEquals(SD2, 1.707825127659933);
 	}
 	
@@ -142,10 +132,8 @@ public class SimulationControllerTest {
 		double turns = 0;
 		for (TableTop tab : tables)
 		{
-//		time = time + tab.getTime();
 			turns = turns + tab.getTurns();
 		}
-		//assertNotEquals(0, time);
 		assertNotEquals(0, turns);
 			
 	}

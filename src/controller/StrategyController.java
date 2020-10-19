@@ -14,13 +14,16 @@ import entity.TableTop;
  *
  */
 public class StrategyController {
-	//public static TableTop gameBoard;
-	//public static long timeToPlay;
+
 
 	public static class StaticStrategyController{
 
 		/**
 		 * Play the game
+		 * @param n which specify the deck of card
+		 * 1 : winnable deck of card
+		 * 2 : impossible deck of card
+		 * 3 : shuffle deck of card
 		 */
 		public static TableTop playGame(int n) {
 			int deckTurns = 0;

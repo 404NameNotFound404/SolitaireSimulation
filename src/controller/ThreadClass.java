@@ -25,7 +25,11 @@ public class ThreadClass {
 			allGames.add(t);
 
 		}
-
+		
+		/**
+		 * Get the win percentage
+		 * @return the win percentage in double
+		 */
 		public static double getWinPercentage(ArrayList<TableTop> games) {
 			int w = getWins(games);
 			int g = games.size();
@@ -33,8 +37,8 @@ public class ThreadClass {
 		}
 
 		/**
-		 * Get the average turns
-		 * @return the average turns as integer
+		 * Get the average moves for winnable games
+		 * @return the average moves for winnable games
 		 */
 		public static double getAverageMovesWinnable(ArrayList<TableTop> games) {
 			int moves = 0;
@@ -47,7 +51,11 @@ public class ThreadClass {
 			return (double) moves/getWins(games);
 		}
 
-
+		/**
+		 * Get the number of win games
+		 * @param games 
+		 * @return the number of win game
+		 */
 		public static int getWins(ArrayList<TableTop> games) {
 			int w = 0;
 
@@ -59,17 +67,26 @@ public class ThreadClass {
 			return w;
 		}
 
-
+		/**
+		 * Get the total moves for all the games
+		 * @param games
+		 * @return the number of moves for all the game
+		 */
 		public static int getTotalMoves(ArrayList<TableTop> games) {
-			int turns = 0;
+			int moves = 0;
 			for(TableTop t: games) {
 
-				turns += t.getMoves();
+				moves += t.getMoves();
 
 			}
-			return turns;
+			return moves;
 		}
-
+		
+		/**
+		 * Get the average move time over all games played
+		 * @param games
+		 * @return the average move time in double
+		 */
 		public static double getAverageMoveTime(ArrayList<TableTop> games) {
 			return (double) timeToPlay/ getTotalMoves(games);
 		}

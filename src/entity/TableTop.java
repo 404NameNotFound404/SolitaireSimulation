@@ -18,13 +18,18 @@ public class TableTop {
 	private CardCollection talon;
 
 	//the number of times the cards move
+	//needed to stop the infinite loop through
+	//tableaus
 	public int turns;
 
 	//the result of the game, true means win
 	public boolean isWin;
 	
+	//The number of moves, only counted when card from
+	//the talon
 	private int moves;
 
+	
 	//needed for testing SimulationController
 	public int getTurns() {
 		return turns;
@@ -47,32 +52,61 @@ public class TableTop {
 		isWin = false;
 		
 	}
-
+	
+	/*
+	 * Get the number of moves per game
+	 * @return the number of moves
+	 */
 	public int getMoves() {
 		return moves;
 	}
+	
+	/**
+	 * Set the number of moves per game
+	 * @param moves as an integer
+	 */
 	public void setMoves(int moves) {
 		this.moves = moves;
 	}
 
 
-
+	/*
+	 * Get all the tableaus
+	 * @returns all the tableaus in CardStack[]
+	 */
 	public CardStack[] getTableaus() {
 		return this.tableaus;
 	}
-
+	
+	/*
+	 * Get all the foundations
+	 * @return all the foundations in CardStack[]
+	 */
 	public CardStack[] getFoundation() {
 		return this.foundations;
 	}
 
+	/*
+	 * Get the deck of card
+	 * @return the Deck of card
+	 */
 	public Deck getDrawPile() {
 		return deck;
 	}
 
+	/*
+	 * Get the talon 
+	 * @return the talon as CardCollection 
+	 */
 	public CardCollection getTalon() {
 		return talon;
 	}
 
+	/*
+	 * Set the tableau
+	 * @param index the number of the tableau
+	 * @param c the CardStack
+	 */
 	public void setTableau(int index, CardStack c) {
 		tableaus[index] = c;
 	}
@@ -120,7 +154,11 @@ public class TableTop {
 	}
 
 
-
+	/**
+	 * Set the foundation
+	 * @param index the number of the foundation
+	 * @param c the CardStack
+	 */
 	public void setFoundation(int index, CardStack c) {
 		foundations[index] = c;
 	}

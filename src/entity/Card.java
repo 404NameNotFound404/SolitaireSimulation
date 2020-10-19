@@ -41,12 +41,14 @@ public class Card {
 		this.setFaceUp(f);
 	}
 	/**
+	 * Get the suit of the card
 	 * @return the suit
 	 */
 	public int getSuit() {
 		return suit;
 	}
 	/**
+	 * Set the suit of the card
 	 * @param suit the suit to set
 	 */
 	public void setSuit(int suit) {
@@ -55,46 +57,45 @@ public class Card {
 	
 	/**
 	 * Checks if card is a red suit
-	 * 
+	 * @return True if the suit is a red suit
 	 */
 	public boolean isRed() {
 		return (this.getSuit() == 0 || this.getSuit() == 1);
 	}
 	
 	/**
+	 * Get the value of the card
 	 * @return the value
 	 */
 	public int getValue() {
 		return this.value;
 	}
 	/**
+	 * Set the value of the card
 	 * @param value the value to set
 	 */
 	public void setValue(int value) {
 		this.value = value;
 	}
 	/**
+	 * Check if the card is face up
 	 * @return the faceUp
 	 */
 	public boolean isFaceUp() {
 		return faceUp;
 	}
 	/**
+	 * Set the face up status of the card
 	 * @param faceUp the faceUp to set
 	 */
 	public void setFaceUp(boolean faceUp) {
 		this.faceUp = faceUp;
 	}
 	
-	/**
-	 * @return true if the card is the same suit
-	 */
-	public boolean isSameSuit(Card c) {
-		return this.suit == c.getSuit();
-	}
 
 	/**
 	 * Print out the cards
+	 * @return a string include the information of the card
 	 */
 	public String toString() {
 		String description;
