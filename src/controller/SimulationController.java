@@ -9,7 +9,6 @@ import entity.TableTop;
  */
 public class SimulationController {
 
-	public static long timeToPlay;
 	
 	public static class StaticSimulationController{
 		
@@ -89,7 +88,7 @@ public class SimulationController {
 		 * @param games
 		 * @return the average move time in double
 		 */
-		public static double getAverageMoveTime(ArrayList<TableTop> games) {
+		public static double getAverageMoveTime(ArrayList<TableTop> games, long timeToPlay) {
 			return (double) getTotalMoves(games)/  timeToPlay;
 		}
 		/**
@@ -98,10 +97,12 @@ public class SimulationController {
 		 */
 		public static ArrayList<TableTop> startSimulation(int games) {
 			ArrayList<TableTop> results = new ArrayList<TableTop>();
+			
 			for (int i = 0; i < games; i ++) {
 				TableTop gameBoard =  StrategyController.StaticStrategyController.playGame(3);			
 				results.add(gameBoard);
 			}
+	
 			return results;
 
 
@@ -124,14 +125,13 @@ public class SimulationController {
 		public static void main(String[] args) {
 
 			long start = System.currentTimeMillis();
-			ArrayList<TableTop> allGames = startSimulation(1000);
-
+			ArrayList<TableTop> allGames = startSimulation(Integer.parseInt(args[0]));
 			long end = System.currentTimeMillis();
-			timeToPlay = end - start;
+			long timeToPlay = end - start;
 			
 			String report = "Win Percentage: " + getWinPercentage(allGames) + "\n"
 					+ "Average turns in winnable games: " + getAverageMovesWinnable(allGames) + "\n"
-					+ "Average move time over all games: " + getAverageMoveTime(allGames) + "\n";
+					+ "Average move time over all games: " + getAverageMoveTime(allGames, timeToPlay) + "\n";
 
 			System.out.println(report);
 

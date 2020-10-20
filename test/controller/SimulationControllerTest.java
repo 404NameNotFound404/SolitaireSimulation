@@ -115,18 +115,23 @@ public class SimulationControllerTest {
 	public void testGetAverageMoveTime() {
 		ArrayList<TableTop> games2 = new ArrayList<TableTop>();
 		
+		long start = System.currentTimeMillis();
 		TableTop gameboard4 = StrategyController.StaticStrategyController.playGame(1);
 		TableTop gameboard5 = StrategyController.StaticStrategyController.playGame(2);
 		TableTop gameboard6 = StrategyController.StaticStrategyController.playGame(1);
+		long end = System.currentTimeMillis();
+		long timeToPlay = end - start;
+		
 		gameboard4.setMoves(38);
 		gameboard5.setMoves(32);
 		gameboard6.setMoves(32);
 		
+		double averageTime = (double) (38 + 32+ 32) / timeToPlay;
 		
 		games2.add(gameboard4);
 		games2.add(gameboard5);
 		games2.add(gameboard6);
-		assertEquals(SimulationController.StaticSimulationController.getAverageMoveTime(games2), averageTime);
+		assertTrue(SimulationController.StaticSimulationController.getAverageMoveTime(games2, timeToPlay) == averageTime);
 	}
 
 	
@@ -151,13 +156,12 @@ public class SimulationControllerTest {
 		int games = 10;
 		SimulationController.StaticSimulationController cn = null;
 		ArrayList<TableTop> tables = cn.startSimulation(games);
-		double time = 0;
-		double turns = 0;
+		double moves = 0;
 		for (TableTop tab : tables)
 		{
-			turns = turns + tab.getTurns();
+			moves = moves + tab.getMoves();
 		}
-		assertNotEquals(0, turns);
+		assertNotEquals(0, moves);
 			
 	}
 }
