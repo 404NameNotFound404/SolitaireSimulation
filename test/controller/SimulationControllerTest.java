@@ -20,7 +20,7 @@ import entity.TableTop;
 public class SimulationControllerTest {
 	
 	public ArrayList<TableTop> games = new ArrayList<TableTop>();
-	public int totalTurns, averageTurns;
+	public int totalTurns, averageTurns, totalMoves;
 	public long totalTime, averageTime;
 	
 	/**
@@ -44,12 +44,11 @@ public class SimulationControllerTest {
 		totalTurns = 4 + 5 + 6;
 		averageTurns = totalTurns/3;
 		
-//		gameboard1.setTime(7);
-//		gameboard2.setTime(8);
-//		gameboard3.setTime(9);
+		gameboard1.setMoves(7);
+		gameboard2.setMoves(8);
+		gameboard3.setMoves(9);
 		
-		totalTime = 9 + 7 + 8;
-		averageTime = totalTime /3;
+		totalMoves = 9 + 7 + 8;
 		
 		games.add(gameboard1);
 		games.add(gameboard2);
@@ -93,17 +92,45 @@ public class SimulationControllerTest {
 	
 	@Test
 	public void testGetAverageMovesWinnable() {
-		//TODO
+		ArrayList<TableTop> games2 = new ArrayList<TableTop>();
+		
+		TableTop gameboard4 = StrategyController.StaticStrategyController.playGame(1);
+		TableTop gameboard5 = StrategyController.StaticStrategyController.playGame(2);
+		TableTop gameboard6 = StrategyController.StaticStrategyController.playGame(1);
+		gameboard4.setMoves(38);
+		gameboard5.setMoves(32);
+		gameboard6.setMoves(32);
+		
+		
+		games2.add(gameboard4);
+		games2.add(gameboard5);
+		games2.add(gameboard6);
+		
+		assertEquals(SimulationController.StaticSimulationController.getAverageMovesWinnable(games2), 35);
+		
 	}
 	
 	@Test
 	public void testGetTotalMoves() {
-		//TODO
+		assertTrue(SimulationController.StaticSimulationController.getTotalMoves(games)== totalMoves);
 	}
 	
 	@Test
 	public void testGetAverageMoveTime() {
-		//TODO
+		ArrayList<TableTop> games2 = new ArrayList<TableTop>();
+		
+		TableTop gameboard4 = StrategyController.StaticStrategyController.playGame(1);
+		TableTop gameboard5 = StrategyController.StaticStrategyController.playGame(2);
+		TableTop gameboard6 = StrategyController.StaticStrategyController.playGame(1);
+		gameboard4.setMoves(38);
+		gameboard5.setMoves(32);
+		gameboard6.setMoves(32);
+		
+		
+		games2.add(gameboard4);
+		games2.add(gameboard5);
+		games2.add(gameboard6);
+		assertEquals(SimulationController.StaticSimulationController.getAverageMoveTime(games2), averageTime);
 	}
 
 	
