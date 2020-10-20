@@ -95,6 +95,7 @@ public class ThreadClass {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
+		
 
 		numGame = Integer.parseInt(args[0]);
 		Thread[] threads = new Thread[numGame];
@@ -120,6 +121,7 @@ public class ThreadClass {
 		System.out.println("Average turns in winnable games: " + MyRunnable.getAverageMovesWinnable(allGames));
 
 		System.out.println("Average move time over all games: " + MyRunnable.getAverageMoveTime(allGames));
+		
 
 	}
 

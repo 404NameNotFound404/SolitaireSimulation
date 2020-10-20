@@ -40,7 +40,7 @@ public class StrategyControllerTest {
  		TableTop gameBoard2 = StrategyController.StaticStrategyController.playGame(1);
  		ArrayList<TableTop> games = new ArrayList<TableTop>();
  		games.add(gameBoard2);
- 		assertTrue(SimulationController.StaticStrategyController.getWinPercentage(games)== 1.0);
+ 		assertTrue(SimulationController.StaticSimulationController.getWinPercentage(games)== 1.0);
  		
 	}
  	
@@ -49,7 +49,7 @@ public class StrategyControllerTest {
  		TableTop gameBoard2 = StrategyController.StaticStrategyController.playGame(2);
  		ArrayList<TableTop> games = new ArrayList<TableTop>();
  		games.add(gameBoard2);
- 		assertTrue(SimulationController.StaticStrategyController.getWinPercentage(games)==0.0);
+ 		assertTrue(SimulationController.StaticSimulationController.getWinPercentage(games)==0.0);
 	}
  	
  	
