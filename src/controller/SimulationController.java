@@ -90,7 +90,7 @@ public class SimulationController {
 		 * @return the average move time in double
 		 */
 		public static double getAverageMoveTime(ArrayList<TableTop> games) {
-			return (double) timeToPlay/ getTotalMoves(games);
+			return (double) getTotalMoves(games)/  timeToPlay;
 		}
 		/**
 		 * Start the simulation
