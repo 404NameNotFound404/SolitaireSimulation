@@ -124,18 +124,18 @@ public class SimulationController {
 		public static void main(String[] args) {
 
 			long start = System.currentTimeMillis();
-			ArrayList<TableTop> allGames = startSimulation(Integer.parseInt(args[0]));
+			ArrayList<TableTop> allGames = startSimulation(1000);
 
 			long end = System.currentTimeMillis();
 			timeToPlay = end - start;
-
-			System.out.println("Win Percentage: " + getWinPercentage(allGames));
-
-			System.out.println("Average turns in winnable games: " + getAverageMovesWinnable(allGames));
-
-			System.out.println("Average move time over all games: " + getAverageMoveTime(allGames));
-
 			
+			String report = "Win Percentage: " + getWinPercentage(allGames) + "\n"
+					+ "Average turns in winnable games: " + getAverageMovesWinnable(allGames) + "\n"
+					+ "Average move time over all games: " + getAverageMoveTime(allGames) + "\n";
+
+			System.out.println(report);
+
+			new ReportController().writeToFile("statistics", report);
 
 
 
