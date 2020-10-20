@@ -82,7 +82,7 @@ public class SimulationControllerTest {
 		games2.add(gameboard4);
 		games2.add(gameboard5);
 		
-		assertEquals(SimulationController.StaticSimulationController.getWinPercentage(games2), 0.5);
+		assertTrue(SimulationController.StaticSimulationController.getWinPercentage(games2)==0.5);
 		
 	}
 	
@@ -102,7 +102,7 @@ public class SimulationControllerTest {
 		games2.add(gameboard5);
 		games2.add(gameboard6);
 		
-		assertEquals(SimulationController.StaticSimulationController.getAverageMovesWinnable(games2), 35);
+		assertTrue(SimulationController.StaticSimulationController.getAverageMovesWinnable(games2) == 35);
 		
 	}
 	
@@ -136,12 +136,12 @@ public class SimulationControllerTest {
 		double[] list = {11.0,11.0,11.0,11.0};
 		double mean = 11.0;
 		double SD = SimulationController.StaticSimulationController.standardDev(list, mean);
-		assertEquals(SD, 0.0);
+		assertTrue(SD ==0.0);
 		
 		double[] list2 = {1,2,3,4,5,6};
 		mean = 3.5;
 		double SD2 = SimulationController.StaticSimulationController.standardDev(list2, mean);
-		assertEquals(SD2, 1.707825127659933);
+		assertTrue(SD2== 1.707825127659933);
 	}
 	
 	@SuppressWarnings("static-access")
