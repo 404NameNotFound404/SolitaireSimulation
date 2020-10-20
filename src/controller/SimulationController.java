@@ -11,7 +11,7 @@ public class SimulationController {
 
 	public static long timeToPlay;
 	
-	public static class StaticStrategyController{
+	public static class StaticSimulationController{
 		
 		
 		/**

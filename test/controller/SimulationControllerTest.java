@@ -63,7 +63,7 @@ public class SimulationControllerTest {
 		TableTop gameboard4 = StrategyController.StaticStrategyController.playGame(2);
 		System.out.println(gameboard4.checkForWin());
 		games2.add(gameboard4);
-		assertTrue(SimulationController.StaticStrategyController.getWins(games2)== 0);
+		assertTrue(SimulationController.StaticSimulationController.getWins(games2)== 0);
 
 	}
 	
@@ -72,7 +72,7 @@ public class SimulationControllerTest {
 		ArrayList<TableTop> games2 = new ArrayList<TableTop>();
 		TableTop gameboard4 = StrategyController.StaticStrategyController.playGame(1);
 		games2.add(gameboard4);
-		assertTrue(SimulationController.StaticStrategyController.getWins(games2)== 1);
+		assertTrue(SimulationController.StaticSimulationController.getWins(games2)== 1);
 		
 	}
 		
@@ -87,7 +87,7 @@ public class SimulationControllerTest {
 		games2.add(gameboard4);
 		games2.add(gameboard5);
 		
-		assertEquals(SimulationController.StaticStrategyController.getWinPercentage(games2), 0.5);
+		assertEquals(SimulationController.StaticSimulationController.getWinPercentage(games2), 0.5);
 		
 	}
 	
@@ -112,12 +112,12 @@ public class SimulationControllerTest {
 	{
 		double[] list = {11.0,11.0,11.0,11.0};
 		double mean = 11.0;
-		double SD = SimulationController.StaticStrategyController.standardDev(list, mean);
+		double SD = SimulationController.StaticSimulationController.standardDev(list, mean);
 		assertEquals(SD, 0.0);
 		
 		double[] list2 = {1,2,3,4,5,6};
 		mean = 3.5;
-		double SD2 = SimulationController.StaticStrategyController.standardDev(list2, mean);
+		double SD2 = SimulationController.StaticSimulationController.standardDev(list2, mean);
 		assertEquals(SD2, 1.707825127659933);
 	}
 	
@@ -126,7 +126,7 @@ public class SimulationControllerTest {
 	public void testStartSimulation()
 	{
 		int games = 10;
-		SimulationController.StaticStrategyController cn = null;
+		SimulationController.StaticSimulationController cn = null;
 		ArrayList<TableTop> tables = cn.startSimulation(games);
 		double time = 0;
 		double turns = 0;
