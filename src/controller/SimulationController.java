@@ -88,7 +88,8 @@ public class SimulationController {
 		 * @param games
 		 * @return the average move time in double
 		 */
-		public static double getAverageMoveTime(ArrayList<TableTop> games, long timeToPlay) {
+		public static double getAverageMoveTime(ArrayList<TableTop> games, double timeToPlay) {
+			
 			return (double) getTotalMoves(games)/  timeToPlay;
 		}
 		/**
@@ -127,15 +128,16 @@ public class SimulationController {
 			long start = System.currentTimeMillis();
 			ArrayList<TableTop> allGames = startSimulation(Integer.parseInt(args[0]));
 			long end = System.currentTimeMillis();
-			long timeToPlay = end - start;
+			double timeToPlay = (double) (end - start) / 1000;
 			
-			String report = "Win Percentage: " + getWinPercentage(allGames) + "\n"
+			String report = "Number of games: " + Integer.parseInt(args[0]) + "\n"
+					+ "Win Percentage: " + getWinPercentage(allGames) + "\n"
 					+ "Average turns in winnable games: " + getAverageMovesWinnable(allGames) + "\n"
-					+ "Average move time over all games: " + getAverageMoveTime(allGames, timeToPlay) + "\n";
+					+ "Average move time over all games (moves/second): " + getAverageMoveTime(allGames, timeToPlay) + "\n";
 
 			System.out.println(report);
 
-			new ReportController().writeToFile("statistics", report);
+			new ReportController().writeToFile("Linear simulation statistics", report);
 
 
 

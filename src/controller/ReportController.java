@@ -37,6 +37,7 @@ public class ReportController {
 			Scanner scanner = new Scanner(new File("strategyReports/" +fileName));
 			while(scanner.hasNext()) {
 				numEnteries += 1.0;
+				String numGame = scanner.nextLine();
 				String winPercentage = scanner.nextLine();
 				winPercent += getNumFromLine(winPercentage);
 				String averageTurns = scanner.nextLine();
@@ -44,7 +45,7 @@ public class ReportController {
 				String averageMoveTime = scanner.nextLine();
 				aveMoveTime += getNumFromLine(averageMoveTime);
 				entryDelimiter = scanner.nextLine();
-				fileContents += winPercentage + "\n" + averageTurns + "\n" + averageMoveTime + "\n" + 
+				fileContents += numGame + "\n" + winPercentage + "\n" + averageTurns + "\n" + averageMoveTime + "\n" + 
 						"--------------------------------------------\n";
 			}
 			scanner.close();
@@ -55,9 +56,9 @@ public class ReportController {
 		
 		String[] newEntery = contentsToAdd.split("\n");
 		
-		winPercent += getNumFromLine(newEntery[0]);
-		aveTurns += getNumFromLine(newEntery[1]);
-		aveMoveTime += getNumFromLine(newEntery[2]);
+		winPercent += getNumFromLine(newEntery[1]);
+		aveTurns += getNumFromLine(newEntery[2]);
+		aveMoveTime += getNumFromLine(newEntery[3]);
 		
 		fileContents += contentsToAdd + "======================================\n";
 		

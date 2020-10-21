@@ -105,6 +105,7 @@ public class StrategyController {
 					if (!gameBoard.getDrawPile().getCardStack().isEmpty()) {
 						//Draw card from Deck Card to Talon
 						gameBoard.moveToTalon();
+						moves++;
 					}
 
 					check = true;
@@ -118,13 +119,11 @@ public class StrategyController {
 
 							//Check if the card can go into any of the foundation stacks
 							if(gameBoard.moveFoundation(gameBoard.getTalon().getCardStack())) {
-								moves++;
 								continue;
 							}
 
 							//Check if the card can go into any of the Tableaus
 							if(gameBoard.moveCardTableau(gameBoard.getTalon().getCardStack())){
-								moves++;
 							}
 
 						}

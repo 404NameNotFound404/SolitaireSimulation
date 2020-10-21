@@ -56,7 +56,6 @@ public class SimulationControllerTest {
 	public void testGetWinsNone() {
 		ArrayList<TableTop> games2 = new ArrayList<TableTop>();
 		TableTop gameboard4 = StrategyController.StaticStrategyController.playGame(2);
-		System.out.println(gameboard4.checkForWin());
 		games2.add(gameboard4);
 		assertTrue(SimulationController.StaticSimulationController.getWins(games2)== 0);
 

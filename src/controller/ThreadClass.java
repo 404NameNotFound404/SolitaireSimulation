@@ -13,19 +13,21 @@ public class ThreadClass {
 
 	public static int numGame;
 
-	public static long timeToPlay;
-
 	public static ArrayList<TableTop> allGames = new ArrayList<TableTop>();
 
 	public static class MyRunnable implements Runnable {
 
 		@Override
 		public void run() {
-			TableTop t = StrategyController.StaticStrategyController.playGame(3);
-			allGames.add(t);
+
+			for (int i = 0; i < 44; i++) {
+				TableTop t = StrategyController.StaticStrategyController.playGame(3);
+				allGames.add(t);
+			}
+
 
 		}
-		
+
 		/**
 		 * Get the win percentage
 		 * @return the win percentage in double
@@ -81,13 +83,13 @@ public class ThreadClass {
 			}
 			return moves;
 		}
-		
+
 		/**
 		 * Get the average move time over all games played
 		 * @param games
 		 * @return the average move time in double
 		 */
-		public static double getAverageMoveTime(ArrayList<TableTop> games) {
+		public static double getAverageMoveTime(ArrayList<TableTop> games, double timeToPlay) {
 			return  (double) getTotalMoves(games)/  timeToPlay;
 		}
 
@@ -95,15 +97,17 @@ public class ThreadClass {
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		
+
 
 		numGame = Integer.parseInt(args[0]);
-		Thread[] threads = new Thread[numGame];
+
+		Thread[] threads = new Thread[numGame/44];
+
 
 		//record time in millisecond
 		long start = System.currentTimeMillis();
 
-		for (int i =0; i < numGame; i ++)
+		for (int i =0; i < numGame/44; i ++)
 		{
 			Thread thread = new Thread (new MyRunnable());
 			thread.start();
@@ -112,16 +116,20 @@ public class ThreadClass {
 
 
 		long end = System.currentTimeMillis();
-		timeToPlay = end - start;
+		double timeToPlay = (double)(end - start) / 1000;
 
 
+		String report = "Number of games: " + numGame + "\n"
+				+ "Win Percentage: " + MyRunnable.getWinPercentage(allGames) + "\n"
+				+ "Average turns in winnable games: " + MyRunnable.getAverageMovesWinnable(allGames) + "\n"
+				+ "Average move time over all games (moves/second): " + MyRunnable.getAverageMoveTime(allGames, timeToPlay) + "\n";
 
-		System.out.println("Win Percentage: " + MyRunnable.getWinPercentage(allGames));
+		System.out.println(report);
 
-		System.out.println("Average turns in winnable games: " + MyRunnable.getAverageMovesWinnable(allGames));
 
-		System.out.println("Average move time over all games: " + MyRunnable.getAverageMoveTime(allGames));
-		
+		new ReportController().writeToFile("Thread class statistic", report);
+
+
 
 	}
 

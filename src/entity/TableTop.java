@@ -216,7 +216,7 @@ public class TableTop {
 			talon.flipTopCard();
 		}
 		else {
-			System.out.println("Talon is EMPTY");
+			System.out.println("Deck is EMPTY");
 		}
 	}
 
