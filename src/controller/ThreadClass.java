@@ -20,7 +20,7 @@ public class ThreadClass {
 		@Override
 		public void run() {
 
-			for (int i = 0; i < 44; i++) {
+			for (int i = 0; i < numGame/44; i++) {
 				TableTop t = StrategyController.StaticStrategyController.playGame(3);
 				allGames.add(t);
 			}
@@ -51,6 +51,10 @@ public class ThreadClass {
 
 			}
 			return (double) moves/getWins(games);
+		}
+		
+		public static double getTimePerGame(ArrayList<TableTop> games, double timeToPlay) {
+			return (double) timeToPlay/games.size(); 
 		}
 
 		/**
@@ -107,7 +111,7 @@ public class ThreadClass {
 		//record time in millisecond
 		long start = System.currentTimeMillis();
 
-		for (int i =0; i < numGame/44; i ++)
+		for (int i =0; i < 44; i ++)
 		{
 			Thread thread = new Thread (new MyRunnable());
 			thread.start();
@@ -125,6 +129,7 @@ public class ThreadClass {
 				+ "Average move time over all games (moves/second): " + MyRunnable.getAverageMoveTime(allGames, timeToPlay) + "\n";
 
 		System.out.println(report);
+		System.out.println("Time per game: " + MyRunnable.getTimePerGame(allGames, timeToPlay));
 
 
 		new ReportController().writeToFile("Thread class statistic", report);

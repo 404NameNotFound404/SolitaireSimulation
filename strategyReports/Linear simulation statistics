@@ -157,4 +157,19 @@ Number of games: 1024
 Win Percentage: 0.271484375
 Average turns in winnable games: 36.830935251798564
 Average move time over all games (moves/second): 176360.99585062242
+--------------------------------------------
+Number of games: 10000
+Win Percentage: 0.228
+Average turns in winnable games: 36.963157894736845
+Average move time over all games (moves/second): 344559.4059405941
+--------------------------------------------
+Number of games: 100000
+Win Percentage: 0.23544
+Average turns in winnable games: 36.810907237512744
+Average move time over all games (moves/second): 504301.9460896894
+--------------------------------------------
+Number of games: 500000
+Win Percentage: 0.234154
+Average turns in winnable games: 36.77964074925049
+Average move time over all games (moves/second): 521458.1407549904
 ======================================
