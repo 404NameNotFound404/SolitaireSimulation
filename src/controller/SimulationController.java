@@ -118,6 +118,10 @@ public class SimulationController {
 			int g = games.size();
 			return (double) w/(double) g;
 		}
+		
+		public static double getTimePerGame(ArrayList<TableTop> games, double timeToPlay) {
+			return (double) timeToPlay/games.size(); 
+		}
 
 
 
@@ -134,6 +138,8 @@ public class SimulationController {
 					+ "Win Percentage: " + getWinPercentage(allGames) + "\n"
 					+ "Average turns in winnable games: " + getAverageMovesWinnable(allGames) + "\n"
 					+ "Average move time over all games (moves/second): " + getAverageMoveTime(allGames, timeToPlay) + "\n";
+			
+			System.out.println("Time per game: " + getTimePerGame(allGames, timeToPlay));
 
 			System.out.println(report);
 

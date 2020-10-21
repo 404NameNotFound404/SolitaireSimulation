@@ -20,7 +20,7 @@ public class ThreadClass {
 		@Override
 		public void run() {
 
-			for (int i = 0; i < numGame/44; i++) {
+			for (int i = 0; i < 70; i++) {
 				TableTop t = StrategyController.StaticStrategyController.playGame(3);
 				allGames.add(t);
 			}
@@ -103,15 +103,15 @@ public class ThreadClass {
 	public static void main(String[] args) throws InterruptedException {
 
 
-		numGame = Integer.parseInt(args[0]);
+		//numGame = Integer.parseInt(args[0]);
 
-		Thread[] threads = new Thread[numGame/44];
+		int numThread = Integer.parseInt(args[0]);
 
 
 		//record time in millisecond
 		long start = System.currentTimeMillis();
 
-		for (int i =0; i < 44; i ++)
+		for (int i =0; i < numThread; i ++)
 		{
 			Thread thread = new Thread (new MyRunnable());
 			thread.start();
