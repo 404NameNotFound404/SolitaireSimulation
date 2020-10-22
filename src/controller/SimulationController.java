@@ -143,7 +143,7 @@ public class SimulationController {
 
 			System.out.println(report);
 
-			new ReportController().writeToFile("Linear simulation statistics", report);
+			new ReportController().writeToFile("Strategy 1", report);
 
 
 

@@ -132,7 +132,7 @@ public class ThreadClass {
 		System.out.println("Time per game: " + MyRunnable.getTimePerGame(allGames, timeToPlay));
 
 
-		new ReportController().writeToFile("Thread class statistic", report);
+		new ReportController().writeToFile("Thread class statistic 1", report);
 
 
 
